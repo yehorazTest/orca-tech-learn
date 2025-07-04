@@ -22,7 +22,7 @@ const App = () => (
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <Router>
+            <Router basename={import.meta.env.BASE_URL}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
