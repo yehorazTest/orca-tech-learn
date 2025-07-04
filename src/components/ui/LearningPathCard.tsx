@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, Users, Star, TrendingUp } from 'lucide-react';
+import { Clock, Star, TrendingUp } from 'lucide-react';
 import { LearningPath } from '../../types/learningPath';
 import { Card } from '@/components/ui/card';
 
@@ -21,9 +21,7 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
     duration,
     gradient,
     isPopular,
-    isNew,
-    completionRate,
-    studentsEnrolled
+    isNew
   } = learningPath;
 
   const getDifficultyColor = (level: string) => {
@@ -79,34 +77,13 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
               <Clock className="w-4 h-4" />
               {duration}
             </div>
-            {studentsEnrolled && (
-              <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
-                {studentsEnrolled.toLocaleString()} students
-              </div>
-            )}
           </div>
 
-          {/* Difficulty and Progress */}
+          {/* Difficulty */}
           <div className="flex items-center justify-between">
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(difficulty)}`}>
               {difficulty}
             </span>
-            
-            {completionRate && (
-              <div className="text-right">
-                <div className="text-xs text-slate-400 mb-1">Completion Rate</div>
-                <div className="flex items-center gap-2">
-                  <div className="w-16 h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full bg-gradient-to-r ${gradient} transition-all duration-1000`}
-                      style={{ width: `${completionRate}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-slate-300 font-medium">{completionRate}%</span>
-                </div>
-              </div>
-            )}
           </div>
         </div>
 

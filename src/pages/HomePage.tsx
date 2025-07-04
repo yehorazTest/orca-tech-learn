@@ -4,22 +4,22 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import LearningPathCard from '../components/ui/LearningPathCard';
 import { learningPaths } from '../data/learningPaths';
-import { BookOpen, Users, Star, TrendingUp } from 'lucide-react';
+import { BookOpen, Star, TrendingUp, Target } from 'lucide-react';
 
 const HomePage = () => {
   const stats = [
-    { label: 'Learning Paths', value: '6', icon: BookOpen },
-    { label: 'Active Students', value: '10K+', icon: Users },
+    { label: 'Learning Paths', value: '12', icon: BookOpen },
+    { label: 'Skill Levels', value: '3', icon: Target },
     { label: 'Resources', value: '150+', icon: Star },
-    { label: 'Success Rate', value: '95%', icon: TrendingUp },
+    { label: 'Industry Focus', value: '100%', icon: TrendingUp },
   ];
 
   return (
     <>
       <Helmet>
         <title>ORCATech Learning Platform - Master Tech Skills</title>
-        <meta name="description" content="Transform your career with ORCATech's comprehensive learning paths in DevOps, Python, Java, Web Development, Cloud Computing, and Cybersecurity." />
-        <meta name="keywords" content="tech learning, devops, python, java, web development, cloud computing, cybersecurity, programming courses" />
+        <meta name="description" content="Transform your career with ORCATech's comprehensive learning paths in DevOps, Python, Java, and Cloud Computing across Beginner, Intermediate, and Professional levels." />
+        <meta name="keywords" content="tech learning, devops, python, java, cloud computing, programming courses, professional development" />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">
@@ -42,8 +42,8 @@ const HomePage = () => {
               </h1>
               
               <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed">
-                Transform your career with cutting-edge learning paths designed by industry experts. 
-                From DevOps to Cybersecurity, we've got your journey covered.
+                Access curated learning paths designed by industry experts. 
+                From beginner to professional level across DevOps, Python, Java, and Cloud Computing.
               </p>
               
               <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -51,7 +51,7 @@ const HomePage = () => {
                   🚀 Hands-on Labs
                 </div>
                 <div className="px-6 py-3 bg-purple-500/20 rounded-full border border-purple-500/30 text-purple-300">
-                  📊 Progress Tracking
+                  📊 Structured Learning
                 </div>
                 <div className="px-6 py-3 bg-cyan-500/20 rounded-full border border-cyan-500/30 text-cyan-300">
                   🎯 Industry-Focused
@@ -86,8 +86,8 @@ const HomePage = () => {
                 Choose Your Learning Path
               </h2>
               <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Structured learning experiences designed to take you from beginner to expert. 
-                Each path includes hands-on labs, real-world projects, and industry certifications.
+                Structured learning experiences designed to take you from beginner to professional. 
+                Each path includes hands-on labs, real-world projects, and industry-relevant skills.
               </p>
             </div>
 
@@ -106,8 +106,8 @@ const HomePage = () => {
               Ready to Start Learning?
             </h2>
             <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of students who have transformed their careers with ORCATech. 
-              Your journey to tech mastery starts here.
+              Explore our comprehensive learning paths and take your tech skills to the next level. 
+              Your journey to professional mastery starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105">
