@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     react(),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
-  base: '/orca-tech-learn/',
+  base: '/learn-and-earn/',
   server: {
     host: "::",
     port: 8080
