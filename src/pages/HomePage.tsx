@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
-import { BookOpen, Star, TrendingUp, Target } from 'lucide-react';
+import { BookOpen, Star, TrendingUp, Target, Users, Award, Code, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HomePage = () => {
@@ -14,6 +14,29 @@ const HomePage = () => {
     { label: 'Individual Courses', value: courses.length.toString(), icon: Target },
     { label: 'Resources', value: '50+', icon: Star },
     { label: 'Industry Focus', value: '100%', icon: TrendingUp },
+  ];
+
+  const features = [
+    {
+      icon: Code,
+      title: 'Hands-on Labs',
+      description: 'Practice with real-world scenarios and interactive coding exercises'
+    },
+    {
+      icon: Users,
+      title: 'Expert-Led Content',
+      description: 'Learn from industry professionals with years of experience'
+    },
+    {
+      icon: Award,
+      title: 'Structured Learning',
+      description: 'Follow carefully designed paths from beginner to professional level'
+    },
+    {
+      icon: Zap,
+      title: 'Fast-Track Career',
+      description: 'Accelerate your professional growth with focused, practical skills'
+    }
   ];
 
   return (
@@ -80,6 +103,69 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Features Section */}
+        <section className="py-20 px-4">
+          <div className="container mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                Why Choose ORCATech?
+              </h2>
+              <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+                We provide comprehensive, industry-focused learning experiences designed to accelerate your tech career.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {features.map((feature, index) => (
+                <div key={index} className="text-center p-6 rounded-lg bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-colors">
+                  <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg mb-4">
+                    <feature.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
+                  <p className="text-slate-400">{feature.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Learning Approach Section */}
+        <section className="py-20 px-4 bg-gradient-to-r from-slate-900/50 to-slate-800/50">
+          <div className="container mx-auto">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+                Two Ways to Learn
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="p-8 rounded-lg bg-blue-900/20 border border-blue-500/30">
+                  <div className="text-4xl mb-4">🎯</div>
+                  <h3 className="text-2xl font-semibold text-white mb-4">Learning Paths</h3>
+                  <p className="text-slate-300 mb-6">
+                    Structured journeys from beginner to professional level. Follow our carefully designed curriculum to master entire technology stacks.
+                  </p>
+                  <ul className="text-slate-300 text-left space-y-2 mb-6">
+                    <li>• Progressive skill building</li>
+                    <li>• Career-focused outcomes</li>
+                    <li>• Comprehensive coverage</li>
+                  </ul>
+                </div>
+                <div className="p-8 rounded-lg bg-purple-900/20 border border-purple-500/30">
+                  <div className="text-4xl mb-4">📚</div>
+                  <h3 className="text-2xl font-semibold text-white mb-4">Individual Courses</h3>
+                  <p className="text-slate-300 mb-6">
+                    Target specific skills and technologies. Perfect for professionals looking to fill knowledge gaps or learn new tools quickly.
+                  </p>
+                  <ul className="text-slate-300 text-left space-y-2 mb-6">
+                    <li>• Focused learning objectives</li>
+                    <li>• Flexible scheduling</li>
+                    <li>• Immediate application</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="py-20 px-4 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
           <div className="container mx-auto text-center">
@@ -97,7 +183,7 @@ const HomePage = () => {
                 </Button>
               </Link>
               <Link to="/courses">
-                <Button variant="outline" className="px-8 py-4 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:text-white transition-all duration-300">
+                <Button className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
                   Browse Individual Courses
                 </Button>
               </Link>
