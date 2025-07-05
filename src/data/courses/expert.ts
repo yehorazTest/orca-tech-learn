@@ -26,7 +26,7 @@ export const expertCourses: Course[] = [
     title: 'ArgoCD Expert',
     description: 'Master GitOps with ArgoCD including advanced deployment strategies and multi-environment management',
     longDescription: 'Deep dive into GitOps practices with ArgoCD. Learn advanced deployment patterns, multi-environment management, security configurations, and enterprise GitOps workflows.',
-    icon: '🔄',
+    icon: '🐙',
     iconColor: 'text-orange-400',
     difficulty: 'Advanced',
     duration: '6-8 weeks',
