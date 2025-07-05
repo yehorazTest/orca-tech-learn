@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import HomePage from "./pages/HomePage";
 import LearningPathPage from "./pages/LearningPathPage";
+import LearningPathDetailPage from "./pages/LearningPathDetailPage";
+import CoursePage from "./pages/CoursePage";
 import AboutPage from "./pages/AboutPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
@@ -25,7 +27,8 @@ const App = () => (
             <Router basename={import.meta.env.BASE_URL}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
+                <Route path="/learning-path/:pathId" element={<LearningPathDetailPage />} />
+                <Route path="/course/:courseId" element={<CoursePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>

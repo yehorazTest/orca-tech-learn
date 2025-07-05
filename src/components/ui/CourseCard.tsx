@@ -1,28 +1,40 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Star, TrendingUp } from 'lucide-react';
-import { LearningPath } from '../../types/learningPath';
+import { Course } from '../../types/learningPath';
 import { Card } from '@/components/ui/card';
 
-interface LearningPathCardProps {
-  learningPath: LearningPath;
+interface CourseCardProps {
+  course: Course;
   className?: string;
 }
 
-const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, className = '' }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
   const {
     id,
     title,
     description,
     icon,
     iconColor,
+    difficulty,
+    duration,
     gradient,
     isPopular,
     isNew
-  } = learningPath;
+  } = course;
+
+  const getDifficultyColor = (level: string) => {
+    switch (level) {
+      case 'Beginner': return 'text-green-400 bg-green-400/10';
+      case 'Intermediate': return 'text-yellow-400 bg-yellow-400/10';
+      case 'Advanced': return 'text-red-400 bg-red-400/10';
+      default: return 'text-gray-400 bg-gray-400/10';
+    }
+  };
 
   return (
-    <Link to={`/learning-path/${id}`} className="block group">
+    <Link to={`/course/${id}`} className="block group">
       <Card className={`relative overflow-hidden bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-all duration-300 group-hover:transform group-hover:scale-[1.02] ${className}`}>
         {/* Background Gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
@@ -63,17 +75,15 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
           <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
             <div className="flex items-center gap-1">
               <Clock className="w-4 h-4" />
-              {learningPath.estimatedHours} hours
+              {duration}
             </div>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {learningPath.tags.slice(0, 3).map((tag, index) => (
-              <span key={index} className="px-2 py-1 bg-slate-800 text-slate-400 rounded text-xs">
-                {tag}
-              </span>
-            ))}
+          {/* Difficulty */}
+          <div className="flex items-center justify-between">
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(difficulty)}`}>
+              {difficulty}
+            </span>
           </div>
         </div>
 
@@ -84,4 +94,4 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
   );
 };
 
-export default LearningPathCard;
+export default CourseCard;

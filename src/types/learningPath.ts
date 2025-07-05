@@ -1,5 +1,5 @@
 
-export interface LearningPath {
+export interface Course {
   id: string;
   title: string;
   description: string;
@@ -17,8 +17,23 @@ export interface LearningPath {
   tags: string[];
   isPopular?: boolean;
   isNew?: boolean;
-  completionRate?: number;
-  studentsEnrolled?: number;
+  lastUpdated: Date;
+}
+
+export interface LearningPath {
+  id: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  icon: string;
+  iconColor: string;
+  gradient: string;
+  category: string;
+  estimatedHours: number;
+  courseIds: string[]; // IDs of courses required for this path
+  tags: string[];
+  isPopular?: boolean;
+  isNew?: boolean;
   lastUpdated: Date;
 }
 

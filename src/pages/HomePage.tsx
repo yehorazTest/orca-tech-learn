@@ -3,14 +3,16 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import LearningPathCard from '../components/ui/LearningPathCard';
+import CourseCard from '../components/ui/CourseCard';
 import { learningPaths } from '../data/learningPaths';
+import { courses } from '../data/courses';
 import { BookOpen, Star, TrendingUp, Target } from 'lucide-react';
 
 const HomePage = () => {
   const stats = [
-    { label: 'Learning Paths', value: '12', icon: BookOpen },
-    { label: 'Skill Levels', value: '3', icon: Target },
-    { label: 'Resources', value: '150+', icon: Star },
+    { label: 'Learning Paths', value: learningPaths.length.toString(), icon: BookOpen },
+    { label: 'Individual Courses', value: courses.length.toString(), icon: Target },
+    { label: 'Resources', value: '50+', icon: Star },
     { label: 'Industry Focus', value: '100%', icon: TrendingUp },
   ];
 
@@ -42,7 +44,7 @@ const HomePage = () => {
               </h1>
               
               <p className="text-xl md:text-2xl text-slate-300 mb-8 leading-relaxed">
-                Access curated learning paths designed by industry experts. 
+                Choose from structured learning paths for career development or individual courses for specific skills. 
                 From beginner to professional level across DevOps, Python, Java, and Cloud Computing.
               </p>
               
@@ -83,17 +85,38 @@ const HomePage = () => {
           <div className="container mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Choose Your Learning Path
+                Career Learning Paths
               </h2>
               <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Structured learning experiences designed to take you from beginner to professional. 
-                Each path includes hands-on labs, real-world projects, and industry-relevant skills.
+                Structured career development paths that combine multiple courses to help you master a complete skill set. 
+                Perfect for achieving specific career goals and professional certifications.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
+              {learningPaths.map((path) => (
+                <LearningPathCard key={path.id} learningPath={path} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Individual Courses Section */}
+        <section className="py-20 px-4 bg-slate-900/30">
+          <div className="container mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Individual Courses
+              </h2>
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+                Focus on specific technologies and skills with our individual courses. 
+                Each course provides deep expertise in a particular area and can be taken independently.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {learningPaths.map((path) => (
-                <LearningPathCard key={path.id} learningPath={path} />
+              {courses.map((course) => (
+                <CourseCard key={course.id} course={course} />
               ))}
             </div>
           </div>
@@ -106,15 +129,15 @@ const HomePage = () => {
               Ready to Start Learning?
             </h2>
             <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-              Explore our comprehensive learning paths and take your tech skills to the next level. 
+              Choose a structured learning path for career development or dive into individual courses for specific skills. 
               Your journey to professional mastery starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105">
-                Browse Learning Paths
+                Explore Learning Paths
               </button>
               <button className="px-8 py-4 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:text-white transition-all duration-300">
-                Learn More About Us
+                Browse Individual Courses
               </button>
             </div>
           </div>
