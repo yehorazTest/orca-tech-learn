@@ -1,16 +1,32 @@
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, Clock, Star, ExternalLink, Play } from 'lucide-react';
+import { ArrowLeft, Clock, Star, ExternalLink, Play, Search, X } from 'lucide-react';
 import Header from '../components/layout/Header';
 import { courses } from '../data/courses';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const CoursePage = () => {
   const { courseId } = useParams<{ courseId: string }>();
+  const [filterQuery, setFilterQuery] = useState('');
   const course = courses.find(c => c.id === courseId);
+
+  // Filter resources based on search query
+  const filteredResources = useMemo(() => {
+    if (!course || !filterQuery.trim()) {
+      return course?.resources || [];
+    }
+
+    const query = filterQuery.toLowerCase();
+    return course.resources.filter(resource => 
+      resource.title.toLowerCase().includes(query) ||
+      resource.description.toLowerCase().includes(query) ||
+      resource.tags.some(tag => tag.toLowerCase().includes(query))
+    );
+  }, [course, filterQuery]);
 
   if (!course) {
     return (
@@ -43,6 +59,10 @@ const CoursePage = () => {
       case 'Quiz': return '❓';
       default: return '📄';
     }
+  };
+
+  const clearFilter = () => {
+    setFilterQuery('');
   };
 
   return (
@@ -130,73 +150,118 @@ const CoursePage = () => {
         <section className="py-12 px-4">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-8">Learning Resources</h2>
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-3xl font-bold text-white">Learning Resources</h2>
+                {course.resources.length > 0 && (
+                  <div className="text-sm text-slate-400">
+                    {filteredResources.length} of {course.resources.length} resources
+                    {filterQuery && ` matching "${filterQuery}"`}
+                  </div>
+                )}
+              </div>
+
+              {/* Filter Bar */}
+              {course.resources.length > 0 && (
+                <div className="mb-6">
+                  <div className="relative max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+                    <Input
+                      type="text"
+                      placeholder="Filter resources..."
+                      value={filterQuery}
+                      onChange={(e) => setFilterQuery(e.target.value)}
+                      className="pl-10 pr-10 bg-slate-800 border-slate-700 text-white placeholder-slate-400 focus:ring-blue-500 focus:border-blue-500"
+                    />
+                    {filterQuery && (
+                      <button
+                        onClick={clearFilter}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
               
               {course.resources.length > 0 ? (
-                <div className="space-y-6">
-                  {course.resources.map((resource, index) => (
-                    <Card key={resource.id} className="p-6 bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-colors">
-                      <div className="flex items-start gap-4">
-                        <div className="text-2xl">{getTypeIcon(resource.type)}</div>
-                        <div className="flex-1">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <h3 className="text-xl font-semibold text-white mb-2">
-                                {resource.title}
-                              </h3>
-                              <p className="text-slate-300 mb-3">
-                                {resource.description}
-                              </p>
-                            </div>
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium border ml-4 ${getDifficultyColor(resource.difficulty)}`}>
-                              {resource.difficulty}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
-                            <span className="flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              {resource.duration}
-                            </span>
-                            <span>{resource.type}</span>
-                            {resource.rating && (
-                              <span className="flex items-center gap-1">
-                                <Star className="w-4 h-4 text-yellow-400" />
-                                {resource.rating}
+                filteredResources.length > 0 ? (
+                  <div className="space-y-6">
+                    {filteredResources.map((resource, index) => (
+                      <Card key={resource.id} className="p-6 bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-colors">
+                        <div className="flex items-start gap-4">
+                          <div className="text-2xl">{getTypeIcon(resource.type)}</div>
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-3">
+                              <div>
+                                <h3 className="text-xl font-semibold text-white mb-2">
+                                  {resource.title}
+                                </h3>
+                                <p className="text-slate-300 mb-3">
+                                  {resource.description}
+                                </p>
+                              </div>
+                              <span className={`px-3 py-1 rounded-full text-sm font-medium border ml-4 ${getDifficultyColor(resource.difficulty)}`}>
+                                {resource.difficulty}
                               </span>
-                            )}
-                          </div>
-
-                          {resource.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {resource.tags.map((tag, tagIndex) => (
-                                <span key={tagIndex} className="px-2 py-1 bg-slate-800 text-slate-400 rounded text-xs">
-                                  {tag}
-                                </span>
-                              ))}
                             </div>
-                          )}
 
-                          <Button 
-                            asChild
-                            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
-                          >
-                            <a 
-                              href={resource.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2"
+                            <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                {resource.duration}
+                              </span>
+                              <span>{resource.type}</span>
+                              {resource.rating && (
+                                <span className="flex items-center gap-1">
+                                  <Star className="w-4 h-4 text-yellow-400" />
+                                  {resource.rating}
+                                </span>
+                              )}
+                            </div>
+
+                            {resource.tags.length > 0 && (
+                              <div className="flex flex-wrap gap-2 mb-4">
+                                {resource.tags.map((tag, tagIndex) => (
+                                  <span key={tagIndex} className="px-2 py-1 bg-slate-800 text-slate-400 rounded text-xs">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            <Button 
+                              asChild
+                              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
                             >
-                              <Play className="w-4 h-4" />
-                              Start {resource.type}
-                              <ExternalLink className="w-4 h-4" />
-                            </a>
-                          </Button>
+                              <a 
+                                href={resource.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-2"
+                              >
+                                <Play className="w-4 h-4" />
+                                Start {resource.type}
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <Card className="p-12 bg-slate-900/50 border-slate-800 text-center">
+                    <div className="text-4xl mb-4">🔍</div>
+                    <h3 className="text-xl font-semibold text-white mb-3">No Resources Found</h3>
+                    <p className="text-slate-300 mb-4">
+                      No resources match your search for "{filterQuery}". Try a different search term.
+                    </p>
+                    <Button onClick={clearFilter} variant="outline" className="border-slate-700 text-slate-300 hover:bg-slate-800">
+                      Clear Filter
+                    </Button>
+                  </Card>
+                )
               ) : (
                 <Card className="p-12 bg-slate-900/50 border-slate-800 text-center">
                   <div className="text-4xl mb-4">🚧</div>

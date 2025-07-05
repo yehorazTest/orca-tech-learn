@@ -90,7 +90,10 @@ export interface SearchFilters {
 }
 
 export interface SearchResult {
-  resource: Resource;
-  score?: number;
-  highlights?: string[];
+  id: string;
+  title: string;
+  description: string;
+  type: 'path' | 'course';
+  url: string;
+  tags: string[];
 }
