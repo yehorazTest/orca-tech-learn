@@ -16,8 +16,14 @@ import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
+import { useScrollToTop } from "./hooks/useScrollToTop";
 
 const queryClient = new QueryClient();
+
+const ScrollToTopWrapper = ({ children }: { children: React.ReactNode }) => {
+  useScrollToTop();
+  return <>{children}</>;
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -28,16 +34,18 @@ const App = () => (
             <Toaster />
             <Sonner />
             <Router basename={import.meta.env.BASE_URL}>
-              <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/learning-paths" element={<LearningPathsPage />} />
-                <Route path="/courses" element={<CoursesPage />} />
-                <Route path="/learning-path/:pathId" element={<LearningPathDetailPage />} />
-                <Route path="/course/:courseId" element={<CoursePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
+              <ScrollToTopWrapper>
+                <Routes>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/learning-paths" element={<LearningPathsPage />} />
+                  <Route path="/courses" element={<CoursesPage />} />
+                  <Route path="/learning-path/:pathId" element={<LearningPathDetailPage />} />
+                  <Route path="/course/:courseId" element={<CoursePage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<ContactPage />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </ScrollToTopWrapper>
             </Router>
           </TooltipProvider>
         </SearchProvider>
