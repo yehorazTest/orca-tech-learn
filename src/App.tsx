@@ -10,6 +10,7 @@ import LearningPathPage from "./pages/LearningPathPage";
 import LearningPathDetailPage from "./pages/LearningPathDetailPage";
 import CoursePage from "./pages/CoursePage";
 import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
@@ -30,6 +31,7 @@ const App = () => (
                 <Route path="/learning-path/:pathId" element={<LearningPathDetailPage />} />
                 <Route path="/course/:courseId" element={<CoursePage />} />
                 <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<ContactPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Router>

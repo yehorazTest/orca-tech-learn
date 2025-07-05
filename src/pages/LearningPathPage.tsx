@@ -2,10 +2,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, Clock, Users, Star, ExternalLink, Play } from 'lucide-react';
+import { ArrowLeft, Clock, Users, CheckCircle, BookOpen } from 'lucide-react';
 import Header from '../components/layout/Header';
+import CourseCard from '../components/ui/CourseCard';
 import { learningPaths } from '../data/learningPaths';
-import { Card } from '@/components/ui/card';
+import { courses } from '../data/courses';
 import { Button } from '@/components/ui/button';
 
 const LearningPathPage = () => {
@@ -16,209 +17,121 @@ const LearningPathPage = () => {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Learning Path Not Found</h1>
+          <h1 className="text-2xl font-bold text-white mb-4">Learning Path Not Found</h1>
           <Link to="/" className="text-blue-400 hover:text-blue-300">
-            ← Back to Learning Paths
+            Return to Home
           </Link>
         </div>
       </div>
     );
   }
 
-  const getDifficultyColor = (level: string) => {
-    switch (level) {
-      case 'Beginner': return 'text-green-400 bg-green-400/10 border-green-400/30';
-      case 'Intermediate': return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/30';
-      case 'Advanced': return 'text-red-400 bg-red-400/10 border-red-400/30';
-      default: return 'text-gray-400 bg-gray-400/10 border-gray-400/30';
-    }
-  };
-
-  const getTypeIcon = (type: string) => {
-    switch (type) {
-      case 'Lab': return '🧪';
-      case 'Tutorial': return '📚';
-      case 'Video': return '🎥';
-      case 'Project': return '🛠️';
-      case 'Quiz': return '❓';
-      default: return '📄';
-    }
-  };
+  const pathCourses = courses.filter(course => 
+    learningPath.courseIds.includes(course.id)
+  );
 
   return (
     <>
       <Helmet>
         <title>{learningPath.title} - ORCATech Learning Platform</title>
         <meta name="description" content={learningPath.longDescription} />
-        <meta name="keywords" content={learningPath.tags.join(', ')} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">
         <Header />
 
-        {/* Breadcrumb */}
-        <div className="border-b border-slate-800">
-          <div className="container mx-auto px-4 py-4">
+        {/* Hero Section */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto">
             <Link 
               to="/" 
-              className="inline-flex items-center text-slate-400 hover:text-white transition-colors"
+              className="inline-flex items-center text-slate-400 hover:text-white mb-8 transition-colors"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Learning Paths
             </Link>
-          </div>
-        </div>
 
-        {/* Hero Section */}
-        <section className="py-12 px-4">
-          <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-start gap-6 mb-8">
-                <div className={`text-6xl ${learningPath.iconColor}`}>
-                  {learningPath.icon}
-                </div>
-                <div className="flex-1">
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-medium border ${getDifficultyColor(learningPath.difficulty)}`}>
-                      {learningPath.difficulty}
-                    </span>
-                    <span className="px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm border border-slate-700">
-                      {learningPath.category}
-                    </span>
-                    {learningPath.isPopular && (
-                      <span className="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-sm border border-orange-500/30">
-                        Popular
-                      </span>
-                    )}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Main Content */}
+              <div className="lg:col-span-2">
+                <div className="flex items-start gap-6 mb-8">
+                  <div className={`text-6xl ${learningPath.iconColor} flex-shrink-0`}>
+                    {learningPath.icon}
                   </div>
-                  
-                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                    {learningPath.title}
-                  </h1>
-                  
-                  <p className="text-xl text-slate-300 leading-relaxed mb-6">
-                    {learningPath.longDescription}
-                  </p>
-
-                  <div className="flex flex-wrap gap-6 text-slate-400">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-5 h-5" />
-                      <span>{learningPath.duration}</span>
+                  <div>
+                    <h1 className="text-4xl font-bold text-white mb-4">
+                      {learningPath.title}
+                    </h1>
+                    <p className="text-xl text-slate-300 leading-relaxed mb-6">
+                      {learningPath.longDescription}
+                    </p>
+                    
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {learningPath.tags.map((tag, index) => (
+                        <span 
+                          key={index}
+                          className="px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
-                    {learningPath.studentsEnrolled && (
-                      <div className="flex items-center gap-2">
-                        <Users className="w-5 h-5" />
-                        <span>{learningPath.studentsEnrolled.toLocaleString()} students</span>
-                      </div>
-                    )}
-                    {learningPath.completionRate && (
-                      <div className="flex items-center gap-2">
-                        <Star className="w-5 h-5" />
-                        <span>{learningPath.completionRate}% completion rate</span>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Prerequisites */}
-              {learningPath.prerequisites.length > 0 && (
-                <Card className="p-6 bg-slate-900/50 border-slate-800 mb-8">
-                  <h3 className="text-lg font-semibold text-white mb-3">Prerequisites</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {learningPath.prerequisites.map((prereq, index) => (
-                      <span key={index} className="px-3 py-1 bg-slate-800 text-slate-300 rounded-full text-sm border border-slate-700">
-                        {prereq}
-                      </span>
-                    ))}
+              {/* Sidebar */}
+              <div className="lg:col-span-1">
+                <div className="bg-slate-900/50 rounded-lg p-6 border border-slate-800">
+                  <h3 className="text-xl font-semibold text-white mb-4">Path Overview</h3>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <Clock className="w-5 h-5 text-blue-400" />
+                      <div>
+                        <div className="text-white font-medium">{learningPath.estimatedHours} hours</div>
+                        <div className="text-slate-400 text-sm">Estimated time</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <BookOpen className="w-5 h-5 text-green-400" />
+                      <div>
+                        <div className="text-white font-medium">{pathCourses.length} courses</div>
+                        <div className="text-slate-400 text-sm">Total courses</div>
+                      </div>
+                    </div>
                   </div>
-                </Card>
-              )}
+
+                  <Button 
+                    className="w-full mt-6 bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
+                  >
+                    Start Learning Path
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Resources Section */}
-        <section className="py-12 px-4">
+        {/* Courses Section */}
+        <section className="py-12 px-4 bg-slate-900/30">
           <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-white mb-8">Learning Resources</h2>
-              
-              {learningPath.resources.length > 0 ? (
-                <div className="space-y-6">
-                  {learningPath.resources.map((resource, index) => (
-                    <Card key={resource.id} className="p-6 bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-colors">
-                      <div className="flex items-start gap-4">
-                        <div className="text-2xl">{getTypeIcon(resource.type)}</div>
-                        <div className="flex-1">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <h3 className="text-xl font-semibold text-white mb-2">
-                                {resource.title}
-                              </h3>
-                              <p className="text-slate-300 mb-3">
-                                {resource.description}
-                              </p>
-                            </div>
-                            <span className={`px-3 py-1 rounded-full text-sm font-medium border ml-4 ${getDifficultyColor(resource.difficulty)}`}>
-                              {resource.difficulty}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
-                            <span className="flex items-center gap-1">
-                              <Clock className="w-4 h-4" />
-                              {resource.duration}
-                            </span>
-                            <span>{resource.type}</span>
-                            {resource.rating && (
-                              <span className="flex items-center gap-1">
-                                <Star className="w-4 h-4 text-yellow-400" />
-                                {resource.rating}
-                              </span>
-                            )}
-                          </div>
-
-                          {resource.tags.length > 0 && (
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              {resource.tags.map((tag, tagIndex) => (
-                                <span key={tagIndex} className="px-2 py-1 bg-slate-800 text-slate-400 rounded text-xs">
-                                  {tag}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-
-                          <Button 
-                            asChild
-                            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
-                          >
-                            <a 
-                              href={resource.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2"
-                            >
-                              <Play className="w-4 h-4" />
-                              Start {resource.type}
-                              <ExternalLink className="w-4 h-4" />
-                            </a>
-                          </Button>
-                        </div>
-                      </div>
-                    </Card>
-                  ))}
+            <h2 className="text-3xl font-bold text-white mb-8">Courses in this Path</h2>
+            <p className="text-slate-300 mb-8">
+              Complete these courses in order to master the {learningPath.title} path:
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pathCourses.map((course, index) => (
+                <div key={course.id} className="relative">
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-sm z-10">
+                    {index + 1}
+                  </div>
+                  <CourseCard course={course} />
                 </div>
-              ) : (
-                <Card className="p-12 bg-slate-900/50 border-slate-800 text-center">
-                  <div className="text-4xl mb-4">🚧</div>
-                  <h3 className="text-xl font-semibold text-white mb-3">Resources Coming Soon</h3>
-                  <p className="text-slate-300">
-                    We're working hard to bring you comprehensive learning resources for this path. 
-                    Check back soon for updates!
-                  </p>
-                </Card>
-              )}
+              ))}
             </div>
           </div>
         </section>

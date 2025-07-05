@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { Target, Users, Award, Zap } from 'lucide-react';
 
@@ -102,35 +103,31 @@ const AboutPage = () => {
                 </p>
                 
                 <p className="text-lg text-slate-300 leading-relaxed">
-                  Today, ORCATech serves thousands of students worldwide, helping them transform their careers 
-                  and achieve their professional goals. We're proud to be part of their journey and committed 
-                  to continuously improving our platform.
+                  We're currently building our community and developing comprehensive learning paths that will help 
+                  aspiring technologists master the skills they need to succeed in their careers. Our goal is to 
+                  create the most practical and effective tech education platform available.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Stats Section */}
+        {/* Features Section */}
         <section className="py-16 px-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20">
           <div className="container mx-auto">
-            <h2 className="text-4xl font-bold text-white mb-12 text-center">Our Impact</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-12 text-center">What We Offer</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <div className="text-center">
-                <div className="text-4xl font-bold text-white mb-2">10,000+</div>
-                <div className="text-slate-400">Students Served</div>
+                <div className="text-4xl font-bold text-blue-400 mb-2">Hands-On Labs</div>
+                <div className="text-slate-400">Practical exercises and real-world scenarios</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white mb-2">95%</div>
-                <div className="text-slate-400">Success Rate</div>
+                <div className="text-4xl font-bold text-cyan-400 mb-2">Expert-Led</div>
+                <div className="text-slate-400">Curriculum designed by industry professionals</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white mb-2">150+</div>
-                <div className="text-slate-400">Learning Resources</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-white mb-2">24/7</div>
-                <div className="text-slate-400">Platform Access</div>
+                <div className="text-4xl font-bold text-purple-400 mb-2">Open Source</div>
+                <div className="text-slate-400">All learning materials available on GitHub</div>
               </div>
             </div>
           </div>
@@ -145,12 +142,20 @@ const AboutPage = () => {
               We'd love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300">
-                Contact Us
-              </button>
-              <button className="px-8 py-4 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:text-white transition-all duration-300">
-                Join Our Community
-              </button>
+              <Link to="/contact">
+                <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300">
+                  Contact Us
+                </button>
+              </Link>
+              <a 
+                href="https://github.com/study-ORCATech-cloud"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="px-8 py-4 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:text-white transition-all duration-300">
+                  Join Our Community
+                </button>
+              </a>
             </div>
           </div>
         </section>
