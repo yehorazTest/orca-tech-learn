@@ -72,13 +72,13 @@ const HomePage = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12 px-4">
-                <div className="px-4 md:px-6 py-2 md:py-3 bg-blue-500/10 rounded-full border border-blue-500/20 text-blue-300 text-sm md:text-base">
+                <div className="px-3 md:px-4 py-1 md:py-2 bg-blue-900/30 border border-blue-600/30 text-blue-300 text-xs md:text-sm font-medium inline-block rounded-md">
                   🚀 Hands-on Labs
                 </div>
-                <div className="px-4 md:px-6 py-2 md:py-3 bg-purple-500/10 rounded-full border border-purple-500/20 text-purple-300 text-sm md:text-base">
+                <div className="px-3 md:px-4 py-1 md:py-2 bg-purple-900/30 border border-purple-600/30 text-purple-300 text-xs md:text-sm font-medium inline-block rounded-md">
                   📊 Structured Learning
                 </div>
-                <div className="px-4 md:px-6 py-2 md:py-3 bg-cyan-500/10 rounded-full border border-cyan-500/20 text-cyan-300 text-sm md:text-base">
+                <div className="px-3 md:px-4 py-1 md:py-2 bg-cyan-900/30 border border-cyan-600/30 text-cyan-300 text-xs md:text-sm font-medium inline-block rounded-md">
                   🎯 Industry-Focused
                 </div>
               </div>
@@ -183,7 +183,7 @@ const HomePage = () => {
                 </Button>
               </Link>
               <Link to="/courses">
-                <Button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+                <Button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">
                   Browse Individual Courses
                 </Button>
               </Link>

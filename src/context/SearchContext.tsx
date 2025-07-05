@@ -1,6 +1,8 @@
 
 import React, { createContext, useContext, useState } from 'react';
 import { SearchFilters, SearchResult } from '../types/learningPath';
+import { learningPaths } from '../data/learningPaths';
+import { courses } from '../data/courses';
 
 interface SearchContextType {
   searchQuery: string;
@@ -31,11 +33,47 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const search = (query: string) => {
     setSearchQuery(query);
     setIsLoading(true);
-    // TODO: Implement actual search logic
-    setTimeout(() => {
+    
+    // Convert learning paths and courses to search-friendly format
+    const allItems: SearchResult[] = [
+      ...learningPaths.map(path => ({
+        id: path.id,
+        title: path.title,
+        description: path.description,
+        type: 'path' as const,
+        url: `/learning-path/${path.id}`,
+        tags: path.tags || []
+      })),
+      ...courses.map(course => ({
+        id: course.id,
+        title: course.title,
+        description: course.description,
+        type: 'course' as const,
+        url: `/course/${course.id}`,
+        tags: course.tags || []
+      }))
+    ];
+
+    // Simple search implementation
+    if (query.trim() === '') {
       setSearchResults([]);
       setIsLoading(false);
-    }, 500);
+      return;
+    }
+
+    const filteredResults = allItems.filter(item => {
+      const searchTerm = query.toLowerCase();
+      return (
+        item.title.toLowerCase().includes(searchTerm) ||
+        item.description.toLowerCase().includes(searchTerm) ||
+        item.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+      );
+    });
+
+    setTimeout(() => {
+      setSearchResults(filteredResults);
+      setIsLoading(false);
+    }, 200);
   };
 
   const updateFilters = (newFilters: Partial<SearchFilters>) => {
