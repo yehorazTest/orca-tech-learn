@@ -14,6 +14,25 @@ const ContactPage = () => {
     message: ''
   });
 
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    
+    // Try mailto first
+    const mailtoLink = 'mailto:orca.tech.work@gmail.com';
+    window.location.href = mailtoLink;
+    
+    // Provide fallback after a short delay
+    setTimeout(() => {
+      const gmailLink = 'https://mail.google.com/mail/?view=cm&fs=1&to=orca.tech.work@gmail.com';
+      const confirmed = window.confirm(
+        'If your email client didn\'t open, would you like to open Gmail in your browser instead?'
+      );
+      if (confirmed) {
+        window.open(gmailLink, '_blank');
+      }
+    }, 1000);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -24,11 +43,21 @@ const ContactPage = () => {
     );
     const mailtoLink = `mailto:orca.tech.work@gmail.com?subject=${subject}&body=${body}`;
     
-    // Open email client
+    // Try mailto first
     window.location.href = mailtoLink;
     
-    // Show success message
-    toast.success('Email client opened! Please send the email to complete your message.');
+    // Show success message and provide fallback
+    toast.success('Opening your email client...');
+    
+    setTimeout(() => {
+      const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=orca.tech.work@gmail.com&su=${subject}&body=${body}`;
+      const confirmed = window.confirm(
+        'If your email client didn\'t open, would you like to compose this message in Gmail instead?'
+      );
+      if (confirmed) {
+        window.open(gmailLink, '_blank');
+      }
+    }, 2000);
     
     // Reset form
     setFormData({ name: '', email: '', subject: '', message: '' });
@@ -81,12 +110,12 @@ const ContactPage = () => {
                     <div>
                       <h3 className="text-xl font-semibold text-white mb-2">Email Us</h3>
                       <p className="text-slate-300 mb-2">Send us an email and we'll get back to you soon.</p>
-                      <a 
-                        href="mailto:orca.tech.work@gmail.com"
-                        className="text-blue-400 hover:text-blue-300 transition-colors"
+                      <button 
+                        onClick={handleEmailClick}
+                        className="text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
                       >
                         orca.tech.work@gmail.com
-                      </a>
+                      </button>
                     </div>
                   </div>
 

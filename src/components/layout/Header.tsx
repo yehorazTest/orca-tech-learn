@@ -84,7 +84,7 @@ const Header = () => {
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center">
               <img 
-                src="/lovable-uploads/0610645c-9c17-4177-9dc5-717cd301dcdf.png" 
+                src="/lovable-uploads/orcatech-logo.png" 
                 alt="ORCATech Logo" 
                 className="w-8 h-8 object-contain"
               />
@@ -100,7 +100,19 @@ const Header = () => {
               to="/" 
               className={`transition-colors ${isActive('/') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
             >
+              Home
+            </Link>
+            <Link 
+              to="/learning-paths" 
+              className={`transition-colors ${isActive('/learning-paths') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
+            >
               Learning Paths
+            </Link>
+            <Link 
+              to="/courses" 
+              className={`transition-colors ${isActive('/courses') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
+            >
+              Courses
             </Link>
             <Link 
               to="/about" 
@@ -132,7 +144,7 @@ const Header = () => {
               
               {/* Search Results Dropdown */}
               {showResults && searchResults.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg max-h-80 overflow-y-auto z-50">
+                <div className="absolute top-full left-0 mt-2 bg-slate-800 border border-slate-700 rounded-lg shadow-lg max-h-80 overflow-y-auto z-50 w-96">
                   {searchResults.slice(0, 10).map((result, index) => (
                     <Link
                       key={`${result.type}-${result.id || index}`}
@@ -147,10 +159,10 @@ const Header = () => {
                           {result.icon || '📚'}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-white font-medium truncate">
+                          <div className="text-white font-medium">
                             {result.title}
                           </div>
-                          <div className="text-slate-400 text-sm truncate">
+                          <div className="text-slate-400 text-sm">
                             {result.type === 'lab' ? `Lab in ${result.courseName}` : 
                              result.type === 'course' ? 'Course' : 'Learning Path'}
                           </div>
@@ -183,7 +195,21 @@ const Header = () => {
                 className={`transition-colors ${isActive('/') ? 'text-blue-400' : 'text-slate-300'}`}
                 onClick={() => setIsMenuOpen(false)}
               >
+                Home
+              </Link>
+              <Link 
+                to="/learning-paths"
+                className={`transition-colors ${isActive('/learning-paths') ? 'text-blue-400' : 'text-slate-300'}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Learning Paths
+              </Link>
+              <Link 
+                to="/courses"
+                className={`transition-colors ${isActive('/courses') ? 'text-blue-400' : 'text-slate-300'}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Courses
               </Link>
               <Link 
                 to="/about"

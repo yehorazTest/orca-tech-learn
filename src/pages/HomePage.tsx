@@ -1,12 +1,12 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
-import LearningPathCard from '../components/ui/LearningPathCard';
-import CourseCard from '../components/ui/CourseCard';
 import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
 import { BookOpen, Star, TrendingUp, Target } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const HomePage = () => {
   const stats = [
@@ -80,48 +80,6 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Learning Paths Section */}
-        <section className="py-20 px-4">
-          <div className="container mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Career Learning Paths
-              </h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Structured career development paths that combine multiple courses to help you master a complete skill set. 
-                Perfect for achieving specific career goals and professional certifications.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-20">
-              {learningPaths.map((path) => (
-                <LearningPathCard key={path.id} learningPath={path} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Individual Courses Section */}
-        <section className="py-20 px-4 bg-slate-900/30">
-          <div className="container mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Individual Courses
-              </h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Focus on specific technologies and skills with our individual courses. 
-                Each course provides deep expertise in a particular area and can be taken independently.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {courses.map((course) => (
-                <CourseCard key={course.id} course={course} />
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* CTA Section */}
         <section className="py-20 px-4 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
           <div className="container mx-auto text-center">
@@ -133,12 +91,16 @@ const HomePage = () => {
               Your journey to professional mastery starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105">
-                Explore Learning Paths
-              </button>
-              <button className="px-8 py-4 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:text-white transition-all duration-300">
-                Browse Individual Courses
-              </button>
+              <Link to="/learning-paths">
+                <Button className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105">
+                  Explore Learning Paths
+                </Button>
+              </Link>
+              <Link to="/courses">
+                <Button variant="outline" className="px-8 py-4 border border-slate-600 text-slate-300 font-semibold rounded-lg hover:border-slate-500 hover:text-white transition-all duration-300">
+                  Browse Individual Courses
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
