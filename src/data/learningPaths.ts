@@ -51,7 +51,7 @@ export const learningPaths: LearningPath[] = [
     id: 'fullstack-developer',
     title: 'Full-Stack Developer',
     description: 'Complete full-stack development journey with Python backend and cloud deployment',
-    longDistance: 'Master both frontend and backend development with a focus on Python web frameworks and cloud deployment. Perfect for building modern web applications.',
+    longDescription: 'Master both frontend and backend development with a focus on Python web frameworks and cloud deployment. Perfect for building modern web applications.',
     icon: '🌐',
     iconColor: 'text-emerald-400',
     gradient: 'from-emerald-500 to-teal-500',

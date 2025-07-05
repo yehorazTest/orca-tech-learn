@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Clock, Star, TrendingUp } from 'lucide-react';
@@ -22,13 +23,13 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
   } = learningPath;
 
   return (
-    <Link to={`/learning-path/${id}`} className="block group">
-      <Card className={`relative overflow-hidden bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-all duration-300 group-hover:transform group-hover:scale-[1.02] ${className}`}>
+    <Link to={`/learning-path/${id}`} className="block group h-full">
+      <Card className={`relative overflow-hidden bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-all duration-300 group-hover:transform group-hover:scale-[1.02] h-full flex flex-col ${className}`}>
         {/* Background Gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
         
         {/* Badges */}
-        <div className="absolute top-4 right-4 flex gap-2">
+        <div className="absolute top-4 right-4 flex gap-2 z-10">
           {isPopular && (
             <span className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full">
               <TrendingUp className="w-3 h-3" />
@@ -43,13 +44,13 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
           )}
         </div>
 
-        <div className="p-6">
+        <div className="p-6 flex flex-col flex-1">
           {/* Header */}
           <div className="flex items-start gap-4 mb-4">
-            <div className={`text-4xl ${iconColor} group-hover:scale-110 transition-transform duration-300`}>
+            <div className={`text-4xl ${iconColor} group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
               {icon}
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
                 {title}
               </h3>
@@ -67,8 +68,8 @@ const LearningPathCard: React.FC<LearningPathCardProps> = ({ learningPath, class
             </div>
           </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
+          {/* Tags - pushed to bottom */}
+          <div className="flex flex-wrap gap-2 mt-auto">
             {learningPath.tags.slice(0, 3).map((tag, index) => (
               <span key={index} className="px-2 py-1 bg-slate-800 text-slate-400 rounded text-xs">
                 {tag}
