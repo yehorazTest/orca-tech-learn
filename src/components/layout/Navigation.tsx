@@ -28,6 +28,12 @@ const Navigation = () => {
         Courses
       </Link>
       <Link 
+        to="/projects" 
+        className={`transition-colors ${isActive('/projects') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
+      >
+        Projects
+      </Link>
+      <Link 
         to="/about" 
         className={`transition-colors ${isActive('/about') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
       >
