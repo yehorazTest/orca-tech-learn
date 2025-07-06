@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <title>ORCATech Learning Platform</title>
+    <link rel="icon" href="/lovable-uploads/ORCATech-logo-transparent.png" type="image/png">
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // MIT License
@@ -22,8 +23,10 @@
           (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
           l.hash
         );
+      } else {
+        // For custom domains, redirect to index.html to let React Router handle routing
+        window.location.replace('/');
       }
-      // For custom domains, do nothing - let the server handle routing
     </script>
   </head>
   <body>
