@@ -5,20 +5,11 @@ import { useSearch } from '../../context/SearchContext';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  
-  // Add error boundary for SearchProvider
-  let search;
-  try {
-    const searchContext = useSearch();
-    search = searchContext.search;
-  } catch (error) {
-    // Fallback when SearchProvider is not available
-    search = () => {};
-  }
+  const { search } = useSearch();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim() && search) {
+    if (searchQuery.trim()) {
       search(searchQuery);
     }
   };

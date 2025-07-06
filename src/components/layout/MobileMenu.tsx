@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
@@ -9,22 +8,13 @@ const MobileMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
+  const { search } = useSearch();
   
-  // Add error boundary for SearchProvider
-  let search;
-  try {
-    const searchContext = useSearch();
-    search = searchContext.search;
-  } catch (error) {
-    // Fallback when SearchProvider is not available
-    search = () => {};
-  }
-
   const isActive = (path: string) => location.pathname === path;
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchQuery.trim() && search) {
+    if (searchQuery.trim()) {
       search(searchQuery);
       setIsMenuOpen(false);
     }
