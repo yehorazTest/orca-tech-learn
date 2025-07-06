@@ -33,7 +33,7 @@ const App = () => (
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <Router basename={import.meta.env.BASE_URL}>
+            <Router>
               <ScrollToTopWrapper>
                 <Routes>
                   <Route path="/" element={<HomePage />} />
