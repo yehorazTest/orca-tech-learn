@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
+import { allProjects } from '../data/projects';
 import { BookOpen, Star, TrendingUp, Target, Users, Award, Code, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +13,7 @@ const HomePage = () => {
   const stats = [
     { label: 'Learning Paths', value: learningPaths.length.toString(), icon: BookOpen },
     { label: 'Individual Courses', value: courses.length.toString(), icon: Target },
-    { label: 'Resources', value: '50+', icon: Star },
+    { label: 'Practice Projects', value: allProjects.length.toString(), icon: Code },
     { label: 'Industry Focus', value: '100%', icon: TrendingUp },
   ];
 
@@ -67,8 +68,8 @@ const HomePage = () => {
               </h1>
               
               <p className="text-lg md:text-xl lg:text-2xl text-slate-300 mb-6 md:mb-8 leading-relaxed px-4">
-                Choose from structured learning paths for career development or individual courses for specific skills. 
-                From beginner to professional level across DevOps, Python, Java, and Cloud Computing.
+                Choose from structured learning paths for career development, individual courses for specific skills,
+                or hands-on projects to practice what you've learned with real-world solutions.
               </p>
               
               <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12 px-4">
@@ -134,9 +135,9 @@ const HomePage = () => {
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 md:mb-8">
-                Two Ways to Learn
+                Three Ways to Learn
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <div className="p-6 md:p-8 rounded-lg bg-blue-900/20 border border-blue-500/30">
                   <div className="text-3xl md:text-4xl mb-3 md:mb-4">🎯</div>
                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 md:mb-4">Learning Paths</h3>
@@ -161,6 +162,18 @@ const HomePage = () => {
                     <li>• Immediate application</li>
                   </ul>
                 </div>
+                <div className="p-6 md:p-8 rounded-lg bg-cyan-900/20 border border-cyan-500/30">
+                  <div className="text-3xl md:text-4xl mb-3 md:mb-4">🛠️</div>
+                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3 md:mb-4">Practice Projects</h3>
+                  <p className="text-slate-300 mb-4 md:mb-6 text-sm md:text-base">
+                    Apply your knowledge with real-world projects. Build practical solutions and create a portfolio to showcase your skills.
+                  </p>
+                  <ul className="text-slate-300 text-left space-y-1 md:space-y-2 mb-4 md:mb-6 text-sm md:text-base">
+                    <li>• Real-world scenarios</li>
+                    <li>• Portfolio building</li>
+                    <li>• Practical experience</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -173,8 +186,8 @@ const HomePage = () => {
               Ready to Start Learning?
             </h2>
             <p className="text-lg md:text-xl text-slate-300 mb-6 md:mb-8 max-w-2xl mx-auto px-4">
-              Choose a structured learning path for career development or dive into individual courses for specific skills. 
-              Your journey to professional mastery starts here.
+              Choose a structured learning path for career development, dive into individual courses for specific skills,
+              or practice with hands-on projects. Your journey to professional mastery starts here.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
               <Link to="/learning-paths">
@@ -185,6 +198,11 @@ const HomePage = () => {
               <Link to="/courses">
                 <Button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">
                   Browse Individual Courses
+                </Button>
+              </Link>
+              <Link to="/projects">
+                <Button className="w-full sm:w-auto px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105">
+                  Explore Practice Projects
                 </Button>
               </Link>
             </div>
