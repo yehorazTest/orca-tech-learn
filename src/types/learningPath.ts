@@ -63,6 +63,7 @@ export interface LearningPath {
   estimatedHours?: number;
   tags?: string[];
   courseIds?: string[];
+  lastUpdated?: Date;
 }
 
 // Search item interface for individual search results
