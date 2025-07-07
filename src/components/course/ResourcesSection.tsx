@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -21,6 +21,7 @@ interface ResourcesSectionProps {
 
 const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources, categories }) => {
   const [filterQuery, setFilterQuery] = useState('');
+  const [openSections, setOpenSections] = useState<{ [key: number]: boolean }>({});
 
   // If categories are provided, use them; otherwise use flat resources
   const hasCategories = categories && categories.length > 0;
@@ -60,6 +61,13 @@ const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources, categori
 
   const clearFilter = () => {
     setFilterQuery('');
+  };
+
+  const toggleSection = (index: number) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
   };
 
   return (
@@ -105,23 +113,33 @@ const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources, categori
               <div className="space-y-6">
                 {hasCategories ? (
                   // Render categorized resources with collapsible sections
-                  (filteredContent as ResourceCategory[]).map((category, index) => (
-                    <div key={index} className="space-y-4">
-                      <Collapsible defaultOpen={category.defaultOpen !== false}>
-                        <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-slate-800/50 rounded-lg border border-slate-700 hover:bg-slate-800 transition-colors text-left">
-                          <h3 className="text-xl font-semibold text-white">{category.title}</h3>
-                          <div className="text-sm text-slate-400">
-                            {category.resources.length} labs
-                          </div>
-                        </CollapsibleTrigger>
-                        <CollapsibleContent className="space-y-4 pt-4">
-                          {category.resources.map((resource) => (
-                            <ResourceCard key={resource.id} resource={resource} />
-                          ))}
-                        </CollapsibleContent>
-                      </Collapsible>
-                    </div>
-                  ))
+                  (filteredContent as ResourceCategory[]).map((category, index) => {
+                    const isOpen = openSections[index] || false;
+                    return (
+                      <div key={index} className="space-y-4">
+                        <Collapsible open={isOpen} onOpenChange={() => toggleSection(index)}>
+                          <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-slate-800/50 rounded-lg border border-slate-700 hover:bg-slate-800 transition-colors text-left group">
+                            <h3 className="text-xl font-semibold text-white">{category.title}</h3>
+                            <div className="flex items-center gap-3">
+                              <div className="text-sm text-slate-400">
+                                {category.resources.length} labs
+                              </div>
+                              {isOpen ? (
+                                <ChevronUp className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                              ) : (
+                                <ChevronDown className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                              )}
+                            </div>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="space-y-4 pt-4">
+                            {category.resources.map((resource) => (
+                              <ResourceCard key={resource.id} resource={resource} />
+                            ))}
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
+                    );
+                  })
                 ) : (
                   // Render flat resources
                   (filteredContent as Resource[]).map((resource) => (
