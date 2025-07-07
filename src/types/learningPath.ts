@@ -51,7 +51,7 @@ export interface LearningPath {
   id: string;
   title: string;
   description: string;
-  courses: Course[];
+  courses?: Course[]; // Make this optional since we use courseIds
   // Additional properties needed by components
   longDescription?: string;
   icon?: string;
