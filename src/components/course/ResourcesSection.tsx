@@ -4,28 +4,59 @@ import { Search, X } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Resource } from '../../types/learningPath';
 import ResourceCard from './ResourceCard';
 
-interface ResourcesSectionProps {
+interface ResourceCategory {
+  title: string;
   resources: Resource[];
+  defaultOpen?: boolean;
 }
 
-const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources }) => {
+interface ResourcesSectionProps {
+  resources: Resource[];
+  categories?: ResourceCategory[];
+}
+
+const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources, categories }) => {
   const [filterQuery, setFilterQuery] = useState('');
 
-  const filteredResources = useMemo(() => {
+  // If categories are provided, use them; otherwise use flat resources
+  const hasCategories = categories && categories.length > 0;
+  
+  const filteredContent = useMemo(() => {
     if (!filterQuery.trim()) {
-      return resources;
+      return hasCategories ? categories : resources;
     }
 
     const query = filterQuery.toLowerCase();
-    return resources.filter(resource => 
-      resource.title.toLowerCase().includes(query) ||
-      resource.description.toLowerCase().includes(query) ||
-      resource.tags.some(tag => tag.toLowerCase().includes(query))
-    );
-  }, [resources, filterQuery]);
+    
+    if (hasCategories) {
+      return categories!.map(category => ({
+        ...category,
+        resources: category.resources.filter(resource => 
+          resource.title.toLowerCase().includes(query) ||
+          resource.description.toLowerCase().includes(query) ||
+          resource.tags.some(tag => tag.toLowerCase().includes(query))
+        )
+      })).filter(category => category.resources.length > 0);
+    } else {
+      return resources.filter(resource => 
+        resource.title.toLowerCase().includes(query) ||
+        resource.description.toLowerCase().includes(query) ||
+        resource.tags.some(tag => tag.toLowerCase().includes(query))
+      );
+    }
+  }, [resources, categories, filterQuery, hasCategories]);
+
+  const totalResources = hasCategories 
+    ? categories!.reduce((sum, cat) => sum + cat.resources.length, 0)
+    : resources.length;
+
+  const filteredResourcesCount = hasCategories 
+    ? (filteredContent as ResourceCategory[]).reduce((sum, cat) => sum + cat.resources.length, 0)
+    : (filteredContent as Resource[]).length;
 
   const clearFilter = () => {
     setFilterQuery('');
@@ -37,16 +68,16 @@ const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources }) => {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold text-white">Learning Resources</h2>
-            {resources.length > 0 && (
+            {totalResources > 0 && (
               <div className="text-sm text-slate-400">
-                {filteredResources.length} of {resources.length} resources
+                {filteredResourcesCount} of {totalResources} resources
                 {filterQuery && ` matching "${filterQuery}"`}
               </div>
             )}
           </div>
 
           {/* Filter Bar */}
-          {resources.length > 0 && (
+          {totalResources > 0 && (
             <div className="mb-6">
               <div className="relative max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
@@ -69,12 +100,34 @@ const ResourcesSection: React.FC<ResourcesSectionProps> = ({ resources }) => {
             </div>
           )}
           
-          {resources.length > 0 ? (
-            filteredResources.length > 0 ? (
+          {totalResources > 0 ? (
+            filteredResourcesCount > 0 ? (
               <div className="space-y-6">
-                {filteredResources.map((resource) => (
-                  <ResourceCard key={resource.id} resource={resource} />
-                ))}
+                {hasCategories ? (
+                  // Render categorized resources with collapsible sections
+                  (filteredContent as ResourceCategory[]).map((category, index) => (
+                    <div key={index} className="space-y-4">
+                      <Collapsible defaultOpen={category.defaultOpen !== false}>
+                        <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-slate-800/50 rounded-lg border border-slate-700 hover:bg-slate-800 transition-colors text-left">
+                          <h3 className="text-xl font-semibold text-white">{category.title}</h3>
+                          <div className="text-sm text-slate-400">
+                            {category.resources.length} labs
+                          </div>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent className="space-y-4 pt-4">
+                          {category.resources.map((resource) => (
+                            <ResourceCard key={resource.id} resource={resource} />
+                          ))}
+                        </CollapsibleContent>
+                      </Collapsible>
+                    </div>
+                  ))
+                ) : (
+                  // Render flat resources
+                  (filteredContent as Resource[]).map((resource) => (
+                    <ResourceCard key={resource.id} resource={resource} />
+                  ))
+                )}
               </div>
             ) : (
               <Card className="p-12 bg-slate-900/50 border-slate-800 text-center">
