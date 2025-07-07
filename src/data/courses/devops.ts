@@ -6,6 +6,8 @@ export const devOpsCourses: Course[] = [
     title: 'DevOps Fundamentals',
     description: 'Learn the basics of DevOps practices, tools, and methodologies',
     longDescription: 'This comprehensive course introduces you to DevOps fundamentals, covering essential concepts like version control, continuous integration, containerization with Docker, and basic Kubernetes operations. Perfect for beginners looking to start their DevOps journey.',
+    icon: '⚙️',
+    iconColor: 'text-blue-400',
     level: 'Beginner',
     duration: '6 weeks',
     topics: [
@@ -267,6 +269,8 @@ export const devOpsCourses: Course[] = [
     title: 'DevOps Engineering',
     description: 'Intermediate DevOps practices with advanced automation and monitoring',
     longDescription: 'Build upon your DevOps foundation with advanced topics including GitOps with ArgoCD, advanced Helm templating, network policies, security practices, and comprehensive observability. This course prepares you for real-world DevOps engineering roles.',
+    icon: '⚙️',
+    iconColor: 'text-blue-400',
     level: 'Intermediate',
     duration: '8 weeks',
     topics: [
@@ -577,6 +581,8 @@ export const devOpsCourses: Course[] = [
     title: 'DevOps Architecture & Leadership',
     description: 'Advanced DevOps architecture patterns and enterprise practices',
     longDescription: 'Master enterprise-level DevOps practices including advanced GitOps patterns, service mesh architecture, comprehensive security frameworks, and full observability stacks. This course prepares you for senior DevOps and platform engineering roles.',
+    icon: '⚙️',
+    iconColor: 'text-blue-400',
     level: 'Professional',
     duration: '10 weeks',
     topics: [
