@@ -7,7 +7,7 @@ export const learningPaths: LearningPath[] = [
     title: 'DevOps Engineer',
     description: 'Complete learning path to become a DevOps Engineer with containerization, orchestration, and automation skills',
     longDescription: 'Master the complete DevOps workflow from basic version control to enterprise-level automation. This path covers Git, Docker, Kubernetes, CI/CD pipelines, infrastructure as code, monitoring, and security best practices.',
-    icon: 'clog',
+    icon: '🔧',
     iconColor: 'text-blue-400',
     gradient: 'from-blue-500 to-cyan-500',
     category: 'DevOps',
