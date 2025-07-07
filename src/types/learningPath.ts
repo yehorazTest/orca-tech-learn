@@ -65,6 +65,16 @@ export interface LearningPath {
   courseIds?: string[];
 }
 
+// Search item interface for individual search results
+export interface SearchItem {
+  id: string;
+  title: string;
+  description: string;
+  type: 'path' | 'course';
+  url: string;
+  tags: string[];
+}
+
 // Export additional types that are imported by other files
 export interface SearchFilters {
   category?: string;
@@ -87,4 +97,5 @@ export interface UserProgress {
   achievements: string[];
   totalHoursSpent: number;
   lastActivity: Date;
+  favorites: string[];
 }

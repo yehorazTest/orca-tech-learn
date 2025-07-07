@@ -1,12 +1,12 @@
 
 import React, { createContext, useContext, useState } from 'react';
-import { SearchFilters, SearchResult } from '../types/learningPath';
+import { SearchFilters, SearchItem } from '../types/learningPath';
 import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
 
 interface SearchContextType {
   searchQuery: string;
-  searchResults: SearchResult[];
+  searchResults: SearchItem[];
   filters: SearchFilters;
   isLoading: boolean;
   search: (query: string) => void;
@@ -26,7 +26,7 @@ export const useSearch = () => {
 
 export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
   const [filters, setFilters] = useState<SearchFilters>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +35,7 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     setIsLoading(true);
     
     // Convert learning paths and courses to search-friendly format
-    const allItems: SearchResult[] = [
+    const allItems: SearchItem[] = [
       ...learningPaths.map(path => ({
         id: path.id,
         title: path.title,
