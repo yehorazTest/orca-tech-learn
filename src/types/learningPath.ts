@@ -1,3 +1,4 @@
+
 export interface Resource {
   id: string;
   title: string;
@@ -5,6 +6,14 @@ export interface Resource {
   type: 'lab' | 'article' | 'video' | 'other';
   url: string;
   tags: string[];
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  duration?: string;
+  rating?: number;
+  estimatedMinutes?: number;
+  prerequisites?: string[];
+  isExternal?: boolean;
+  lastUpdated?: Date;
+  isInteractive?: boolean;
 }
 
 export interface ResourceCategory {
@@ -25,6 +34,17 @@ export interface Course {
   tags: string[];
   resources: Resource[];
   resourceCategories?: ResourceCategory[];
+  // Additional properties needed by components
+  icon?: string;
+  iconColor?: string;
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Professional';
+  color?: string;
+  gradient?: string;
+  category?: string;
+  isPopular?: boolean;
+  isNew?: boolean;
+  estimatedHours?: number;
+  lastUpdated?: Date;
 }
 
 export interface LearningPath {
@@ -32,4 +52,39 @@ export interface LearningPath {
   title: string;
   description: string;
   courses: Course[];
+  // Additional properties needed by components
+  longDescription?: string;
+  icon?: string;
+  iconColor?: string;
+  gradient?: string;
+  category?: string;
+  isPopular?: boolean;
+  isNew?: boolean;
+  estimatedHours?: number;
+  tags?: string[];
+  courseIds?: string[];
+}
+
+// Export additional types that are imported by other files
+export interface SearchFilters {
+  category?: string;
+  difficulty?: string;
+  duration?: string;
+  tags?: string[];
+}
+
+export interface SearchResult {
+  courses: Course[];
+  learningPaths: LearningPath[];
+  totalResults: number;
+}
+
+export interface UserProgress {
+  userId: string;
+  completedCourses: string[];
+  inProgressCourses: string[];
+  completedResources: string[];
+  achievements: string[];
+  totalHoursSpent: number;
+  lastActivity: Date;
 }
