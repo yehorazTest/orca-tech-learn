@@ -10,7 +10,6 @@ import LearningPathsPage from "./pages/LearningPathsPage";
 import CoursesPage from "./pages/CoursesPage";
 import ProjectsPage from "./pages/ProjectsPage";
 import LearningPathPage from "./pages/LearningPathPage";
-import LearningPathDetailPage from "./pages/LearningPathDetailPage";
 import CoursePage from "./pages/CoursePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -41,7 +40,7 @@ const App = () => (
                   <Route path="/learning-paths" element={<LearningPathsPage />} />
                   <Route path="/courses" element={<CoursesPage />} />
                   <Route path="/projects" element={<ProjectsPage />} />
-                  <Route path="/learning-path/:pathId" element={<LearningPathDetailPage />} />
+                  <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
                   <Route path="/course/:courseId" element={<CoursePage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contact" element={<ContactPage />} />
