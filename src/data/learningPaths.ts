@@ -1,4 +1,3 @@
-
 import { LearningPath } from '../types/learningPath';
 
 export const learningPaths: LearningPath[] = [
@@ -6,33 +5,64 @@ export const learningPaths: LearningPath[] = [
     id: 'devops-engineer',
     title: 'DevOps Engineer',
     description: 'Complete learning path to become a DevOps Engineer with containerization, orchestration, and automation skills',
-    longDescription: 'Master the complete DevOps workflow from basic programming and containerization to enterprise-level automation. This path combines Python programming, Docker containerization, Kubernetes orchestration, and cloud technologies to build comprehensive DevOps expertise.',
+    longDescription: 'Master the complete DevOps workflow from fundamental tools to enterprise-level automation. This comprehensive path combines essential development tools, system administration, containerization, orchestration, and cloud technologies to build complete DevOps expertise.',
     icon: '🥷',
     iconColor: 'text-blue-400',
     gradient: 'from-blue-500 to-cyan-500',
     category: 'DevOps',
-    estimatedHours: 420,
-    courseIds: ['python-beginner', 'kubernetes-beginner', 'kubernetes-intermediate', 'cloud-beginner', 'kubernetes-professional'],
+    estimatedHours: 520,
+    courseIds: [
+      'git-github-fundamentals',
+      'sysadmin-beginner',
+      'docker-beginner',
+      'python-beginner',
+      'docker-intermediate',
+      'kubernetes-beginner',
+      'cicd-fundamentals',
+      'sysadmin-intermediate',
+      'cloud-beginner',
+      'kubernetes-intermediate',
+      'iac-fundamentals',
+      'sysadmin-professional',
+      'docker-professional',
+      'cloud-intermediate',
+      'kubernetes-professional',
+      'cloud-professional'
+    ],
     courseGroups: [
       {
         title: 'DevOps Fundamentals',
-        description: 'Learn the basics of DevOps practices, tools, and methodologies',
-        courseIds: ['python-beginner', 'kubernetes-beginner']
+        description: 'Essential tools and practices every DevOps engineer needs to know',
+        courseIds: ['git-github-fundamentals', 'sysadmin-beginner', 'docker-beginner', 'python-beginner']
       },
       {
         title: 'DevOps Engineering',
-        description: 'Intermediate DevOps practices with advanced automation and monitoring',
-        courseIds: ['kubernetes-intermediate', 'cloud-beginner']
+        description: 'Intermediate DevOps practices with automation, orchestration, and cloud integration',
+        courseIds: [
+          'docker-intermediate', 
+          'kubernetes-beginner', 
+          'cicd-fundamentals', 
+          'sysadmin-intermediate', 
+          'cloud-beginner', 
+          'kubernetes-intermediate', 
+          'iac-fundamentals'
+        ]
       },
       {
         title: 'DevOps Architecture & Leadership',
-        description: 'Advanced DevOps architecture patterns and enterprise practices',
-        courseIds: ['kubernetes-professional']
+        description: 'Advanced DevOps architecture patterns, enterprise practices, and leadership skills',
+        courseIds: [
+          'sysadmin-professional', 
+          'docker-professional', 
+          'cloud-intermediate', 
+          'kubernetes-professional', 
+          'cloud-professional'
+        ]
       }
     ],
-    tags: ['Python', 'Docker', 'Kubernetes', 'CI/CD', 'Cloud', 'Automation'],
+    tags: ['Git', 'Linux', 'Docker', 'Kubernetes', 'Python', 'CI/CD', 'Cloud', 'IaC', 'Automation'],
     isPopular: true,
-    lastUpdated: new Date('2024-01-15')
+    lastUpdated: new Date('2024-01-25')
   },
   {
     id: 'python-developer',
