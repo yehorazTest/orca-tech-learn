@@ -11,8 +11,8 @@ export const learningPaths: LearningPath[] = [
     iconColor: 'text-blue-400',
     gradient: 'from-blue-500 to-cyan-500',
     category: 'DevOps',
-    estimatedHours: 300,
-    courseIds: ['devops-beginner', 'devops-intermediate', 'devops-professional'],
+    estimatedHours: 420,
+    courseIds: ['devops-beginner', 'devops-intermediate', 'kubernetes-beginner', 'kubernetes-intermediate', 'devops-professional'],
     tags: ['Docker', 'Kubernetes', 'CI/CD', 'Infrastructure', 'Automation'],
     isPopular: true,
     lastUpdated: new Date('2024-01-15')
@@ -55,9 +55,9 @@ export const learningPaths: LearningPath[] = [
     iconColor: 'text-cyan-400',
     gradient: 'from-cyan-500 to-blue-500',
     category: 'Cloud',
-    estimatedHours: 370,
-    courseIds: ['devops-beginner', 'cloud-beginner', 'cloud-intermediate', 'cloud-professional', 'devops-intermediate'],
-    tags: ['Cloud Architecture', 'AWS', 'Azure', 'DevOps', 'Enterprise'],
+    estimatedHours: 550,
+    courseIds: ['devops-beginner', 'cloud-beginner', 'cloud-intermediate', 'kubernetes-beginner', 'kubernetes-intermediate', 'cloud-professional', 'devops-intermediate'],
+    tags: ['Cloud Architecture', 'AWS', 'Azure', 'DevOps', 'Enterprise', 'Kubernetes'],
     isPopular: true,
     lastUpdated: new Date('2024-01-05')
   },
@@ -87,6 +87,21 @@ export const learningPaths: LearningPath[] = [
     estimatedHours: 395,
     courseIds: ['sysadmin-beginner', 'sysadmin-intermediate', 'sysadmin-professional', 'cloud-beginner', 'cloud-intermediate'],
     tags: ['System Administration', 'Cloud Infrastructure', 'Linux', 'Enterprise', 'Hybrid Cloud'],
+    isNew: true,
+    lastUpdated: new Date('2024-01-25')
+  },
+  {
+    id: 'kubernetes-specialist',
+    title: 'Kubernetes Specialist',
+    description: 'Complete Kubernetes mastery from fundamentals to expert-level enterprise operations',
+    longDescription: 'Master Kubernetes from basic concepts to expert-level operations. Learn container orchestration, GitOps, service mesh, advanced security, and production-grade observability for enterprise environments.',
+    icon: '☸️',
+    iconColor: 'text-blue-400',
+    gradient: 'from-blue-500 to-purple-500',
+    category: 'DevOps',
+    estimatedHours: 180,
+    courseIds: ['kubernetes-beginner', 'kubernetes-intermediate', 'kubernetes-professional'],
+    tags: ['Kubernetes', 'Container Orchestration', 'GitOps', 'Service Mesh', 'Enterprise'],
     isNew: true,
     lastUpdated: new Date('2024-01-25')
   }

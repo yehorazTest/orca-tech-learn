@@ -5,6 +5,7 @@ import { programmingCourses } from './programming';
 import { webCourses } from './web';
 import { cloudCourses } from './cloud';
 import { expertCourses } from './expert';
+import { kubernetesCourses } from './kubernetes';
 
 // All courses including both core and expert courses
 export const courses: Course[] = [
@@ -12,6 +13,7 @@ export const courses: Course[] = [
   ...programmingCourses,
   ...webCourses,
   ...cloudCourses,
+  ...kubernetesCourses,
   ...expertCourses
 ];
 
@@ -20,7 +22,8 @@ export const coreCourses: Course[] = [
   ...devOpsCourses,
   ...programmingCourses,
   ...webCourses,
-  ...cloudCourses
+  ...cloudCourses,
+  ...kubernetesCourses
 ];
 
 // Expert courses
