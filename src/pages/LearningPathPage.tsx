@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
@@ -7,15 +7,16 @@ import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
 import LearningPathHero from '../components/learning-path/LearningPathHero';
 import LearningPathSidebar from '../components/learning-path/LearningPathSidebar';
-import CourseFilters from '../components/learning-path/CourseFilters';
 import CourseGroupSection from '../components/learning-path/CourseGroupSection';
 import LearningPathNotFound from '../components/learning-path/LearningPathNotFound';
-import { useLearningPathFilters } from '../hooks/useLearningPathFilters';
+import { Input } from '@/components/ui/input';
+import { Search } from 'lucide-react';
 
 const LearningPathPage = () => {
   const { pathId } = useParams<{ pathId: string }>();
   const learningPath = learningPaths.find(path => path.id === pathId);
   const [openSections, setOpenSections] = React.useState<{ [key: number]: boolean }>({});
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Handle case where learning path is not found
   if (!learningPath) {
@@ -26,23 +27,16 @@ const LearningPathPage = () => {
     learningPath.courseIds.includes(course.id)
   );
 
-  // Get all courses in this learning path
-  const allCourses = courses.filter(course => 
-    learningPath?.courseIds.includes(course.id) || 
-    learningPath?.courseGroups?.some(group => group.courseIds.includes(course.id))
-  );
-
-  // Initialize filters
-  const {
-    filters,
-    setFilters,
-    uniqueDifficulties,
-    uniqueCategories,
-    uniqueTags,
-    filterCourses,
-    resetFilters,
-    hasActiveFilters
-  } = useLearningPathFilters(allCourses);
+  // Simple filter function like courses page
+  const filterCourses = (coursesToFilter: typeof courses) => {
+    if (!searchTerm) return coursesToFilter;
+    
+    return coursesToFilter.filter(course =>
+      course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      course.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  };
 
   const toggleSection = (index: number) => {
     setOpenSections(prev => ({
@@ -87,16 +81,19 @@ const LearningPathPage = () => {
               Complete these courses in order to master the {learningPath.title} path:
             </p>
 
-            {/* Filter Section */}
-            <CourseFilters 
-              filters={filters}
-              setFilters={setFilters}
-              uniqueDifficulties={uniqueDifficulties}
-              uniqueCategories={uniqueCategories}
-              uniqueTags={uniqueTags}
-              hasActiveFilters={hasActiveFilters}
-              onResetFilters={resetFilters}
-            />
+            {/* Search Bar */}
+            <div className="max-w-md mx-auto mb-8">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+                <Input
+                  type="text"
+                  placeholder="Search courses..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-400"
+                />
+              </div>
+            </div>
             
             {learningPath.courseGroups ? (
               // Render grouped courses with collapsible sections
@@ -110,7 +107,7 @@ const LearningPathPage = () => {
             ) : (
               // Render flat courses (fallback for paths without groups)
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {pathCourses.map((course, index) => (
+                {filterCourses(pathCourses).map((course, index) => (
                   <div key={course.id} className="relative">
                     <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-sm z-10">
                       {index + 1}
