@@ -3,28 +3,85 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import CourseCard from '../components/ui/CourseCard';
-import { coreCourses, expertCourses } from '../data/courses';
+import { courses } from '../data/courses';
+import { programmingCourses } from '../data/courses/programming';
+import { webCourses } from '../data/courses/web';
+import { cloudCourses } from '../data/courses/cloud';
+import { kubernetesCourses } from '../data/courses/kubernetes';
+import { dockerCourses } from '../data/courses/docker';
+import { gitCourses } from '../data/courses/git';
+import { sysadminCourses } from '../data/courses/sysadmin';
+import { cicdCourses } from '../data/courses/cicd';
+import { iacCourses } from '../data/courses/iac';
+import { expertCourses } from '../data/courses/expert';
 import { Input } from '@/components/ui/input';
 import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 const CoursesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [isCoreSectionOpen, setIsCoreSectionOpen] = useState(true);
-  const [isExpertSectionOpen, setIsExpertSectionOpen] = useState(true);
+  const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
+    'software-development': true,
+    'web-development': true,
+    'cloud-computing': true,
+    'devops-infrastructure': true,
+    'expert-specializations': true
+  });
 
-  const filterCourses = (courses: typeof coreCourses) => {
-    if (!searchTerm) return courses;
+  const filterCourses = (coursesToFilter: typeof courses) => {
+    if (!searchTerm) return coursesToFilter;
     
-    return courses.filter(course =>
+    return coursesToFilter.filter(course =>
       course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       course.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       course.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
     );
   };
 
-  const filteredCoreCourses = filterCourses(coreCourses);
-  const filteredExpertCourses = filterCourses(expertCourses);
+  const toggleSection = (sectionId: string) => {
+    setOpenSections(prev => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }));
+  };
+
+  const courseCategories = [
+    {
+      id: 'software-development',
+      title: 'Software Development',
+      description: 'Master programming languages and software development fundamentals',
+      courses: programmingCourses,
+      icon: '💻'
+    },
+    {
+      id: 'web-development',
+      title: 'Web Development',
+      description: 'Build modern web applications with React and frontend technologies',
+      courses: webCourses,
+      icon: '🌐'
+    },
+    {
+      id: 'cloud-computing',
+      title: 'Cloud Computing',
+      description: 'Learn cloud platforms, services, and cloud-native architectures',
+      courses: cloudCourses,
+      icon: '☁️'
+    },
+    {
+      id: 'devops-infrastructure',
+      title: 'DevOps & Infrastructure',
+      description: 'Master containerization, orchestration, CI/CD, and infrastructure automation',
+      courses: [...dockerCourses, ...kubernetesCourses, ...gitCourses, ...sysadminCourses, ...cicdCourses, ...iacCourses],
+      icon: '🔧'
+    },
+    {
+      id: 'expert-specializations',
+      title: 'Expert Specializations',
+      description: 'Advanced courses for specialized skills and deep expertise',
+      courses: expertCourses,
+      icon: '🎯'
+    }
+  ];
 
   return (
     <>
@@ -61,65 +118,60 @@ const CoursesPage = () => {
           </div>
         </section>
 
-        {/* Core Courses Section */}
-        <section className="py-16 px-4">
-          <div className="container mx-auto">
-            <Collapsible open={isCoreSectionOpen} onOpenChange={setIsCoreSectionOpen}>
-              <CollapsibleTrigger className="w-full">
-                <div className="text-center mb-12 group">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <h2 className="text-3xl font-bold text-white">Core Courses</h2>
-                    {isCoreSectionOpen ? (
-                      <ChevronUp className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
-                    ) : (
-                      <ChevronDown className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
-                    )}
-                  </div>
-                  <p className="text-slate-300 max-w-2xl mx-auto">
-                    Comprehensive learning paths from beginner to professional level across different technologies
-                  </p>
-                </div>
-              </CollapsibleTrigger>
+        {/* Course Categories */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto space-y-12">
+            {courseCategories.map((category) => {
+              const filteredCourses = filterCourses(category.courses);
               
-              <CollapsibleContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                  {filteredCoreCourses.map((course) => (
-                    <CourseCard key={course.id} course={course} />
-                  ))}
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-          </div>
-        </section>
+              // Hide empty categories when searching
+              if (searchTerm && filteredCourses.length === 0) {
+                return null;
+              }
 
-        {/* Expert Courses Section */}
-        <section className="py-16 px-4 bg-slate-900/30">
-          <div className="container mx-auto">
-            <Collapsible open={isExpertSectionOpen} onOpenChange={setIsExpertSectionOpen}>
-              <CollapsibleTrigger className="w-full">
-                <div className="text-center mb-12 group">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <h2 className="text-3xl font-bold text-white">Expert Courses</h2>
-                    {isExpertSectionOpen ? (
-                      <ChevronUp className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
-                    ) : (
-                      <ChevronDown className="w-6 h-6 text-slate-400 group-hover:text-white transition-colors" />
-                    )}
-                  </div>
-                  <p className="text-slate-300 max-w-2xl mx-auto">
-                    Advanced specialization courses for deep expertise in specific tools and technologies
-                  </p>
+              return (
+                <div key={category.id} className="bg-slate-900/30 rounded-lg p-8">
+                  <Collapsible 
+                    open={openSections[category.id]} 
+                    onOpenChange={() => toggleSection(category.id)}
+                  >
+                    <CollapsibleTrigger className="w-full">
+                      <div className="flex items-center justify-between mb-6 group">
+                        <div className="flex items-center gap-4">
+                          <div className="text-3xl">{category.icon}</div>
+                          <div className="text-left">
+                            <h2 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                              {category.title}
+                            </h2>
+                            <p className="text-slate-300 text-sm mt-1">
+                              {category.description}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-slate-400 text-sm">
+                            {filteredCourses.length} course{filteredCourses.length !== 1 ? 's' : ''}
+                          </span>
+                          {openSections[category.id] ? (
+                            <ChevronUp className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+                          )}
+                        </div>
+                      </div>
+                    </CollapsibleTrigger>
+                    
+                    <CollapsibleContent>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {filteredCourses.map((course) => (
+                          <CourseCard key={course.id} course={course} />
+                        ))}
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
                 </div>
-              </CollapsibleTrigger>
-              
-              <CollapsibleContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                  {filteredExpertCourses.map((course) => (
-                    <CourseCard key={course.id} course={course} />
-                  ))}
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
+              );
+            })}
           </div>
         </section>
       </div>
