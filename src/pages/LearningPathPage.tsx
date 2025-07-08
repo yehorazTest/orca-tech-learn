@@ -2,18 +2,24 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft, Clock, Users, CheckCircle, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Clock, Users, CheckCircle, BookOpen, ChevronDown, ChevronUp, Filter, X } from 'lucide-react';
 import Header from '../components/layout/Header';
 import CourseCard from '../components/ui/CourseCard';
 import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const LearningPathPage = () => {
   const { pathId } = useParams<{ pathId: string }>();
   const learningPath = learningPaths.find(path => path.id === pathId);
   const [openSections, setOpenSections] = React.useState<{ [key: number]: boolean }>({});
+  const [filters, setFilters] = React.useState({
+    difficulty: 'all',
+    category: 'all',
+    tag: 'all'
+  });
 
   if (!learningPath) {
     return (
@@ -38,6 +44,36 @@ const LearningPathPage = () => {
       [index]: !prev[index]
     }));
   };
+
+  // Get all unique values for filters
+  const allCourses = courses.filter(course => 
+    learningPath?.courseIds.includes(course.id) || 
+    learningPath?.courseGroups?.some(group => group.courseIds.includes(course.id))
+  );
+  
+  const uniqueDifficulties = [...new Set(allCourses.map(course => course.difficulty).filter(Boolean))];
+  const uniqueCategories = [...new Set(allCourses.map(course => course.category).filter(Boolean))];
+  const uniqueTags = [...new Set(allCourses.flatMap(course => course.tags))];
+
+  // Filter function
+  const filterCourses = (coursesToFilter: typeof courses) => {
+    return coursesToFilter.filter(course => {
+      const difficultyMatch = filters.difficulty === 'all' || course.difficulty === filters.difficulty;
+      const categoryMatch = filters.category === 'all' || course.category === filters.category;
+      const tagMatch = filters.tag === 'all' || course.tags.includes(filters.tag);
+      return difficultyMatch && categoryMatch && tagMatch;
+    });
+  };
+
+  const resetFilters = () => {
+    setFilters({
+      difficulty: 'all',
+      category: 'all',
+      tag: 'all'
+    });
+  };
+
+  const hasActiveFilters = Object.values(filters).some(filter => filter !== 'all');
 
   return (
     <>
@@ -131,6 +167,78 @@ const LearningPathPage = () => {
             <p className="text-slate-300 mb-8">
               Complete these courses in order to master the {learningPath.title} path:
             </p>
+
+            {/* Filter Section */}
+            <div className="mb-8 p-6 bg-slate-800/50 rounded-lg border border-slate-700">
+              <div className="flex items-center gap-4 mb-4">
+                <Filter className="w-5 h-5 text-slate-400" />
+                <h3 className="text-lg font-semibold text-white">Filter Courses</h3>
+                {hasActiveFilters && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={resetFilters}
+                    className="text-slate-400 hover:text-white"
+                  >
+                    <X className="w-4 h-4 mr-1" />
+                    Clear Filters
+                  </Button>
+                )}
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Difficulty Level
+                  </label>
+                  <Select value={filters.difficulty} onValueChange={(value) => setFilters(prev => ({ ...prev, difficulty: value }))}>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Levels</SelectItem>
+                      {uniqueDifficulties.map(difficulty => (
+                        <SelectItem key={difficulty} value={difficulty}>{difficulty}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Category
+                  </label>
+                  <Select value={filters.category} onValueChange={(value) => setFilters(prev => ({ ...prev, category: value }))}>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Categories</SelectItem>
+                      {uniqueCategories.map(category => (
+                        <SelectItem key={category} value={category}>{category}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-300 mb-2">
+                    Technology
+                  </label>
+                  <Select value={filters.tag} onValueChange={(value) => setFilters(prev => ({ ...prev, tag: value }))}>
+                    <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Technologies</SelectItem>
+                      {uniqueTags.slice(0, 10).map(tag => (
+                        <SelectItem key={tag} value={tag}>{tag}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
             
             {learningPath.courseGroups ? (
               // Render grouped courses with collapsible sections
@@ -139,6 +247,7 @@ const LearningPathPage = () => {
                   const groupCourses = courses.filter(course => 
                     group.courseIds.includes(course.id)
                   );
+                  const filteredGroupCourses = filterCourses(groupCourses);
                   const isOpen = openSections[groupIndex] || false;
                   
                   return (
@@ -151,7 +260,7 @@ const LearningPathPage = () => {
                           </div>
                           <div className="flex items-center gap-3">
                             <div className="text-sm text-slate-400">
-                              {groupCourses.length} courses
+                              {filteredGroupCourses.length} of {groupCourses.length} courses
                             </div>
                             {isOpen ? (
                               <ChevronUp className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
@@ -161,16 +270,22 @@ const LearningPathPage = () => {
                           </div>
                         </CollapsibleTrigger>
                         <CollapsibleContent className="space-y-4 pt-4">
-                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {groupCourses.map((course, courseIndex) => (
-                              <div key={course.id} className="relative">
-                                <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-sm z-10">
-                                  {courseIndex + 1}
+                          {filteredGroupCourses.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                              {filteredGroupCourses.map((course, courseIndex) => (
+                                <div key={course.id} className="relative">
+                                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-sm z-10">
+                                    {courseIndex + 1}
+                                  </div>
+                                  <CourseCard course={course} />
                                 </div>
-                                <CourseCard course={course} />
-                              </div>
-                            ))}
-                          </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-8">
+                              <p className="text-slate-400">No courses match the current filters.</p>
+                            </div>
+                          )}
                         </CollapsibleContent>
                       </Collapsible>
                     </div>
