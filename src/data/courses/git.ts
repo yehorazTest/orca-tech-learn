@@ -31,6 +31,8 @@ export const gitCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/git-labs/Basics/LAB01-Git-Setup-and-Config',
         tags: ['setup', 'configuration'],
+        difficulty: 'Beginner',
+        duration: '45 minutes',
         estimatedMinutes: 45
       },
       {
@@ -40,6 +42,8 @@ export const gitCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/git-labs/Basics/LAB02-First-Repository',
         tags: ['repository', 'commits'],
+        difficulty: 'Beginner',
+        duration: '1 hour',
         estimatedMinutes: 60
       },
       {
@@ -49,6 +53,8 @@ export const gitCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/git-labs/Basics/LAB03-Branching-Basics',
         tags: ['branching', 'merging'],
+        difficulty: 'Beginner',
+        duration: '1.25 hours',
         estimatedMinutes: 75
       },
       {
@@ -58,6 +64,8 @@ export const gitCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/git-labs/Collaboration/LAB01-GitHub-Workflow',
         tags: ['github', 'collaboration'],
+        difficulty: 'Intermediate',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       },
       {
@@ -67,6 +75,8 @@ export const gitCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/git-labs/Collaboration/LAB02-Pull-Requests',
         tags: ['pull-requests', 'code-review'],
+        difficulty: 'Intermediate',
+        duration: '1.33 hours',
         estimatedMinutes: 80
       }
     ],

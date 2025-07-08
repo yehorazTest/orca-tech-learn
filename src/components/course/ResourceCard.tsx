@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Star, Play, ExternalLink } from 'lucide-react';
+import { Clock, Play, ExternalLink } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Resource } from '../../types/learningPath';
@@ -21,11 +21,11 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
 
   const getTypeIcon = (type: string) => {
     switch (type) {
-      case 'Lab': return '🧪';
-      case 'Tutorial': return '📚';
-      case 'Video': return '🎥';
-      case 'Project': return '🛠️';
-      case 'Quiz': return '❓';
+      case 'lab': return '🧪';
+      case 'article': return '📚';
+      case 'video': return '🎥';
+      case 'project': return '🛠️';
+      case 'quiz': return '❓';
       default: return '📄';
     }
   };
@@ -55,12 +55,6 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
               {resource.duration}
             </span>
             <span>{resource.type}</span>
-            {resource.rating && (
-              <span className="flex items-center gap-1">
-                <Star className="w-4 h-4 text-yellow-400" />
-                {resource.rating}
-              </span>
-            )}
           </div>
 
           {resource.tags.length > 0 && (

@@ -33,6 +33,8 @@ export const cicdCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/Fundamentals/LAB01-CICD-Concepts',
         tags: ['concepts', 'principles'],
+        difficulty: 'Beginner',
+        duration: '1 hour',
         estimatedMinutes: 60
       },
       {
@@ -42,6 +44,8 @@ export const cicdCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/GitHub-Actions/LAB01-Actions-Introduction',
         tags: ['github-actions', 'pipeline'],
+        difficulty: 'Beginner',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       },
       {
@@ -51,6 +55,8 @@ export const cicdCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/Testing/LAB01-Automated-Testing',
         tags: ['testing', 'automation'],
+        difficulty: 'Intermediate',
+        duration: '1.25 hours',
         estimatedMinutes: 75
       },
       {
@@ -60,6 +66,8 @@ export const cicdCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/Deployment/LAB01-Deployment-Strategies',
         tags: ['deployment', 'strategies'],
+        difficulty: 'Intermediate',
+        duration: '1.75 hours',
         estimatedMinutes: 105
       },
       {
@@ -69,6 +77,8 @@ export const cicdCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/Jenkins/LAB01-Jenkins-Pipelines',
         tags: ['jenkins', 'pipelines'],
+        difficulty: 'Advanced',
+        duration: '2 hours',
         estimatedMinutes: 120
       }
     ],

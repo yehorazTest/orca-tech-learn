@@ -33,6 +33,8 @@ export const iacCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/iac-labs/Fundamentals/LAB01-IaC-Principles',
         tags: ['principles', 'concepts'],
+        difficulty: 'Beginner',
+        duration: '45 minutes',
         estimatedMinutes: 45
       },
       {
@@ -42,6 +44,8 @@ export const iacCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/iac-labs/Terraform/LAB01-Terraform-Basics',
         tags: ['terraform', 'fundamentals'],
+        difficulty: 'Beginner',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       },
       {
@@ -51,6 +55,8 @@ export const iacCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/iac-labs/Terraform/LAB02-State-Management',
         tags: ['terraform', 'state'],
+        difficulty: 'Intermediate',
+        duration: '1.25 hours',
         estimatedMinutes: 75
       },
       {
@@ -60,6 +66,8 @@ export const iacCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/iac-labs/CloudFormation/LAB01-CloudFormation-Intro',
         tags: ['cloudformation', 'aws'],
+        difficulty: 'Intermediate',
+        duration: '1.33 hours',
         estimatedMinutes: 80
       },
       {
@@ -69,6 +77,8 @@ export const iacCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/iac-labs/Modules/LAB01-Module-Design',
         tags: ['modules', 'reusability'],
+        difficulty: 'Intermediate',
+        duration: '1.67 hours',
         estimatedMinutes: 100
       }
     ],

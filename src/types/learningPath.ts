@@ -10,6 +10,10 @@ export interface Resource {
   duration: string;
   estimatedMinutes: number;
   isCompleted?: boolean;
+  prerequisites?: string[];
+  isExternal?: boolean;
+  lastUpdated?: Date;
+  isInteractive?: boolean;
 }
 
 export interface ResourceGroup {
@@ -64,4 +68,37 @@ export interface LearningPath {
   isPopular?: boolean;
   isNew?: boolean;
   lastUpdated: Date;
+}
+
+export interface SearchFilters {
+  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
+  category?: string;
+  tags?: string[];
+  duration?: string;
+}
+
+export interface SearchItem {
+  id: string;
+  title: string;
+  description: string;
+  type: 'course' | 'path' | 'resource';
+  url: string;
+  tags: string[];
+  category: string;
+  difficulty: string;
+}
+
+export interface UserProgress {
+  userId: string;
+  completedResources: string[];
+  favorites: string[];
+  lastAccessed: Date;
+  totalHours: number;
+  achievements: string[];
+  preferences: {
+    theme: 'light' | 'dark';
+    difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+    interests: string[];
+    notifications: boolean;
+  };
 }

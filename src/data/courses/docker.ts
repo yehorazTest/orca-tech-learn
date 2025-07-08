@@ -29,6 +29,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Basics/LAB01-Docker-Architecture',
         tags: ['architecture', 'fundamentals'],
+        difficulty: 'Beginner',
+        duration: '45 minutes',
         estimatedMinutes: 45
       },
       {
@@ -38,6 +40,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Basics/LAB02-First-Container',
         tags: ['hands-on', 'beginner'],
+        difficulty: 'Beginner',
+        duration: '30 minutes',
         estimatedMinutes: 30
       },
       {
@@ -47,6 +51,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Basics/LAB03-Docker-Images',
         tags: ['images', 'management'],
+        difficulty: 'Beginner',
+        duration: '1 hour',
         estimatedMinutes: 60
       }
     ],
@@ -86,6 +92,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Intermediate/LAB01-Multi-Stage-Builds',
         tags: ['optimization', 'dockerfile'],
+        difficulty: 'Intermediate',
+        duration: '1.25 hours',
         estimatedMinutes: 75
       },
       {
@@ -95,6 +103,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Intermediate/LAB02-Docker-Compose',
         tags: ['compose', 'orchestration'],
+        difficulty: 'Intermediate',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       },
       {
@@ -104,6 +114,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Intermediate/LAB03-Container-Security',
         tags: ['security', 'best-practices'],
+        difficulty: 'Intermediate',
+        duration: '1 hour',
         estimatedMinutes: 60
       }
     ],
@@ -143,6 +155,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Professional/LAB01-Enterprise-Deployment',
         tags: ['enterprise', 'production'],
+        difficulty: 'Advanced',
+        duration: '2 hours',
         estimatedMinutes: 120
       },
       {
@@ -152,6 +166,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Professional/LAB02-Production-Monitoring',
         tags: ['monitoring', 'troubleshooting'],
+        difficulty: 'Advanced',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       },
       {
@@ -161,6 +177,8 @@ export const dockerCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/docker-labs/Professional/LAB03-Container-Governance',
         tags: ['governance', 'compliance'],
+        difficulty: 'Advanced',
+        duration: '1.75 hours',
         estimatedMinutes: 105
       }
     ],
