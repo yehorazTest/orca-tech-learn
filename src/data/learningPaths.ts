@@ -6,14 +6,31 @@ export const learningPaths: LearningPath[] = [
     id: 'devops-engineer',
     title: 'DevOps Engineer',
     description: 'Complete learning path to become a DevOps Engineer with containerization, orchestration, and automation skills',
-    longDescription: 'Master the complete DevOps workflow from basic version control to enterprise-level automation. This path covers Git, Docker, Kubernetes, CI/CD pipelines, infrastructure as code, monitoring, and security best practices.',
+    longDescription: 'Master the complete DevOps workflow from basic programming and containerization to enterprise-level automation. This path combines Python programming, Docker containerization, Kubernetes orchestration, and cloud technologies to build comprehensive DevOps expertise.',
     icon: '🥷',
     iconColor: 'text-blue-400',
     gradient: 'from-blue-500 to-cyan-500',
     category: 'DevOps',
     estimatedHours: 420,
-    courseIds: ['devops-beginner', 'devops-intermediate', 'kubernetes-beginner', 'kubernetes-intermediate', 'devops-professional'],
-    tags: ['Docker', 'Kubernetes', 'CI/CD', 'Infrastructure', 'Automation'],
+    courseIds: ['python-beginner', 'kubernetes-beginner', 'kubernetes-intermediate', 'cloud-beginner', 'kubernetes-professional'],
+    courseGroups: [
+      {
+        title: 'DevOps Fundamentals',
+        description: 'Learn the basics of DevOps practices, tools, and methodologies',
+        courseIds: ['python-beginner', 'kubernetes-beginner']
+      },
+      {
+        title: 'DevOps Engineering',
+        description: 'Intermediate DevOps practices with advanced automation and monitoring',
+        courseIds: ['kubernetes-intermediate', 'cloud-beginner']
+      },
+      {
+        title: 'DevOps Architecture & Leadership',
+        description: 'Advanced DevOps architecture patterns and enterprise practices',
+        courseIds: ['kubernetes-professional']
+      }
+    ],
+    tags: ['Python', 'Docker', 'Kubernetes', 'CI/CD', 'Cloud', 'Automation'],
     isPopular: true,
     lastUpdated: new Date('2024-01-15')
   },
@@ -56,7 +73,7 @@ export const learningPaths: LearningPath[] = [
     gradient: 'from-cyan-500 to-blue-500',
     category: 'Cloud',
     estimatedHours: 550,
-    courseIds: ['devops-beginner', 'cloud-beginner', 'cloud-intermediate', 'kubernetes-beginner', 'kubernetes-intermediate', 'cloud-professional', 'devops-intermediate'],
+    courseIds: ['python-beginner', 'cloud-beginner', 'cloud-intermediate', 'kubernetes-beginner', 'kubernetes-intermediate', 'cloud-professional'],
     tags: ['Cloud Architecture', 'AWS', 'Azure', 'DevOps', 'Enterprise', 'Kubernetes'],
     isPopular: true,
     lastUpdated: new Date('2024-01-05')

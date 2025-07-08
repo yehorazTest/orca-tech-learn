@@ -1,4 +1,3 @@
-
 export interface Resource {
   id: string;
   title: string;
@@ -51,19 +50,22 @@ export interface LearningPath {
   id: string;
   title: string;
   description: string;
-  courses?: Course[]; // Make this optional since we use courseIds
-  // Additional properties needed by components
-  longDescription?: string;
-  icon?: string;
-  iconColor?: string;
-  gradient?: string;
-  category?: string;
+  longDescription: string;
+  icon: string;
+  iconColor: string;
+  gradient: string;
+  category: string;
+  estimatedHours: number;
+  courseIds: string[];
+  courseGroups?: Array<{
+    title: string;
+    description: string;
+    courseIds: string[];
+  }>;
+  tags: string[];
   isPopular?: boolean;
   isNew?: boolean;
-  estimatedHours?: number;
-  tags?: string[];
-  courseIds?: string[];
-  lastUpdated?: Date;
+  lastUpdated: Date;
 }
 
 // Search item interface for individual search results

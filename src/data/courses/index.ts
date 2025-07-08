@@ -1,6 +1,5 @@
 
 import { Course } from '../../types/learningPath';
-import { devOpsCourses } from './devops';
 import { programmingCourses } from './programming';
 import { webCourses } from './web';
 import { cloudCourses } from './cloud';
@@ -9,7 +8,6 @@ import { kubernetesCourses } from './kubernetes';
 
 // All courses including both core and expert courses
 export const courses: Course[] = [
-  ...devOpsCourses,
   ...programmingCourses,
   ...webCourses,
   ...cloudCourses,
@@ -19,7 +17,6 @@ export const courses: Course[] = [
 
 // Core courses (excluding expert courses)
 export const coreCourses: Course[] = [
-  ...devOpsCourses,
   ...programmingCourses,
   ...webCourses,
   ...cloudCourses,
