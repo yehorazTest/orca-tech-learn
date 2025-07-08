@@ -31,6 +31,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Basics/LAB01-Linux-Introduction',
         tags: ['linux', 'overview'],
+        difficulty: 'Beginner',
+        duration: '1 hour',
         estimatedMinutes: 60
       },
       {
@@ -40,6 +42,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Basics/LAB02-Command-Line-Basics',
         tags: ['command-line', 'navigation'],
+        difficulty: 'Beginner',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       },
       {
@@ -49,6 +53,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Basics/LAB03-File-Management',
         tags: ['filesystem', 'permissions'],
+        difficulty: 'Beginner',
+        duration: '1.25 hours',
         estimatedMinutes: 75
       }
     ],
@@ -90,6 +96,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Intermediate/LAB01-Advanced-Networking',
         tags: ['networking', 'troubleshooting'],
+        difficulty: 'Intermediate',
+        duration: '2 hours',
         estimatedMinutes: 120
       },
       {
@@ -99,6 +107,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Intermediate/LAB02-Security-Hardening',
         tags: ['security', 'hardening'],
+        difficulty: 'Intermediate',
+        duration: '1.75 hours',
         estimatedMinutes: 105
       },
       {
@@ -108,6 +118,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Intermediate/LAB03-Automation-Scripting',
         tags: ['automation', 'scripting'],
+        difficulty: 'Intermediate',
+        duration: '1.5 hours',
         estimatedMinutes: 90
       }
     ],
@@ -149,6 +161,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Professional/LAB01-High-Availability',
         tags: ['high-availability', 'design'],
+        difficulty: 'Advanced',
+        duration: '2.5 hours',
         estimatedMinutes: 150
       },
       {
@@ -158,6 +172,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Professional/LAB02-Disaster-Recovery',
         tags: ['disaster-recovery', 'planning'],
+        difficulty: 'Advanced',
+        duration: '2.25 hours',
         estimatedMinutes: 135
       },
       {
@@ -167,6 +183,8 @@ export const sysadminCourses: Course[] = [
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/sysadmin-labs/Professional/LAB03-Enterprise-Monitoring',
         tags: ['monitoring', 'enterprise'],
+        difficulty: 'Advanced',
+        duration: '2 hours',
         estimatedMinutes: 120
       }
     ],

@@ -52,10 +52,7 @@ const CoursePage = () => {
 
         <CourseHero course={course} />
         <CoursePrerequisites prerequisites={course.prerequisites} />
-        <ResourcesSection 
-          resources={course.resources} 
-          categories={course.resourceCategories}
-        />
+        <ResourcesSection course={course} />
       </div>
     </>
   );

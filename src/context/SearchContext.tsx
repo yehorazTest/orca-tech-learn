@@ -42,7 +42,9 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         description: path.description,
         type: 'path' as const,
         url: `/learning-path/${path.id}`,
-        tags: path.tags || []
+        tags: path.tags || [],
+        category: path.category || 'General',
+        difficulty: 'Intermediate' // Default difficulty for paths
       })),
       ...courses.map(course => ({
         id: course.id,
@@ -50,7 +52,9 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         description: course.description,
         type: 'course' as const,
         url: `/course/${course.id}`,
-        tags: course.tags || []
+        tags: course.tags || [],
+        category: course.category || 'General',
+        difficulty: course.difficulty || 'Intermediate'
       }))
     ];
 
