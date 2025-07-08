@@ -1,24 +1,21 @@
+
 export interface Resource {
   id: string;
   title: string;
   description: string;
-  type: 'lab' | 'article' | 'video' | 'other';
+  type: 'video' | 'article' | 'lab' | 'quiz' | 'project';
   url: string;
   tags: string[];
-  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced';
-  duration?: string;
-  rating?: number;
-  estimatedMinutes?: number;
-  prerequisites?: string[];
-  isExternal?: boolean;
-  lastUpdated?: Date;
-  isInteractive?: boolean;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  duration: string;
+  estimatedMinutes: number;
+  isCompleted?: boolean;
 }
 
-export interface ResourceCategory {
+export interface ResourceGroup {
   title: string;
+  description: string;
   resources: Resource[];
-  defaultOpen?: boolean;
 }
 
 export interface Course {
@@ -26,24 +23,29 @@ export interface Course {
   title: string;
   description: string;
   longDescription: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced' | 'Professional';
+  level: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced' | 'Professional';
   duration: string;
+  icon: string;
+  iconColor: string;
+  color: string;
+  gradient: string;
+  category: string;
+  isPopular?: boolean;
+  isNew?: boolean;
+  estimatedHours: number;
   topics: string[];
   prerequisites: string[];
   tags: string[];
-  resources: Resource[];
-  resourceCategories?: ResourceCategory[];
-  // Additional properties needed by components
-  icon?: string;
-  iconColor?: string;
-  difficulty?: 'Beginner' | 'Intermediate' | 'Advanced' | 'Professional';
-  color?: string;
-  gradient?: string;
-  category?: string;
-  isPopular?: boolean;
-  isNew?: boolean;
-  estimatedHours?: number;
-  lastUpdated?: Date;
+  resources?: Resource[];
+  resourceGroups?: ResourceGroup[];
+  lastUpdated: Date;
+}
+
+export interface CourseGroup {
+  title: string;
+  description: string;
+  courseIds: string[];
 }
 
 export interface LearningPath {
@@ -57,48 +59,9 @@ export interface LearningPath {
   category: string;
   estimatedHours: number;
   courseIds: string[];
-  courseGroups?: Array<{
-    title: string;
-    description: string;
-    courseIds: string[];
-  }>;
+  courseGroups?: CourseGroup[];
   tags: string[];
   isPopular?: boolean;
   isNew?: boolean;
   lastUpdated: Date;
-}
-
-// Search item interface for individual search results
-export interface SearchItem {
-  id: string;
-  title: string;
-  description: string;
-  type: 'path' | 'course';
-  url: string;
-  tags: string[];
-}
-
-// Export additional types that are imported by other files
-export interface SearchFilters {
-  category?: string;
-  difficulty?: string;
-  duration?: string;
-  tags?: string[];
-}
-
-export interface SearchResult {
-  courses: Course[];
-  learningPaths: LearningPath[];
-  totalResults: number;
-}
-
-export interface UserProgress {
-  userId: string;
-  completedCourses: string[];
-  inProgressCourses: string[];
-  completedResources: string[];
-  achievements: string[];
-  totalHoursSpent: number;
-  lastActivity: Date;
-  favorites: string[];
 }

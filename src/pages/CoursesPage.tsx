@@ -21,11 +21,11 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 const CoursesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
-    'software-development': true,
-    'web-development': true,
-    'cloud-computing': true,
-    'devops-infrastructure': true,
-    'expert-specializations': true
+    'software-development': false,
+    'web-development': false,
+    'cloud-computing': false,
+    'devops-infrastructure': false,
+    'expert-specializations': false
   });
 
   const filterCourses = (coursesToFilter: typeof courses) => {
