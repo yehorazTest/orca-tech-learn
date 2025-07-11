@@ -1,3 +1,4 @@
+
 import { LearningPath } from '../types/learningPath';
 
 export const learningPaths: LearningPath[] = [
@@ -146,8 +147,8 @@ export const learningPaths: LearningPath[] = [
     iconColor: 'text-blue-400',
     gradient: 'from-blue-500 to-purple-500',
     category: 'DevOps',
-    estimatedHours: 180,
-    courseIds: ['kubernetes-beginner', 'kubernetes-intermediate', 'kubernetes-professional'],
+    estimatedHours: 280,
+    courseIds: ['kubernetes-beginner', 'kubernetes-intermediate', 'kubernetes-professional', 'kubernetes-expert'],
     tags: ['Kubernetes', 'Container Orchestration', 'GitOps', 'Service Mesh', 'Enterprise'],
     isNew: true,
     lastUpdated: new Date('2024-01-25')
