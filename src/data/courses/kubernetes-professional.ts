@@ -1,9 +1,8 @@
-
 import { Course } from '../../types/learningPath';
 
 export const kubernetesProfessional: Course = {
   id: 'kubernetes-professional',
-  title: 'Kubernetes Expert Operations',
+  title: 'Kubernetes Advanced Operations',
   description: 'Master advanced Kubernetes operations including enterprise GitOps, service mesh, comprehensive security, and production observability',
   longDescription: 'Achieve expert-level Kubernetes operations with advanced GitOps patterns, service mesh integration, comprehensive security practices, and production-grade observability solutions.',
   level: 'Professional',
