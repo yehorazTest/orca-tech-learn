@@ -3,26 +3,6 @@ import { Course } from '../../../types/learningPath';
 
 export const devopsExpertCourses: Course[] = [
   {
-    id: 'argocd-expert',
-    title: 'ArgoCD Expert',
-    description: 'Master GitOps with ArgoCD including advanced deployment strategies and multi-environment management',
-    longDescription: 'Deep dive into GitOps practices with ArgoCD. Learn advanced deployment patterns, multi-environment management, security configurations, and enterprise GitOps workflows.',
-    icon: '🐙',
-    iconColor: 'text-orange-400',
-    level: 'Advanced',
-    difficulty: 'Advanced',
-    duration: '6-8 weeks',
-    color: 'orange',
-    gradient: 'from-orange-500 to-red-500',
-    category: 'DevOps',
-    topics: ['GitOps Patterns', 'Multi-environment Management', 'Security Configurations', 'Enterprise Workflows'],
-    prerequisites: ['Kubernetes Expert', 'Git fundamentals'],
-    estimatedHours: 80,
-    tags: ['GitOps', 'ArgoCD', 'Deployment', 'Multi-environment', 'Security'],
-    lastUpdated: new Date('2024-01-25'),
-    resources: []
-  },
-  {
     id: 'docker-expert',
     title: 'Docker Expert',
     description: 'Advanced Docker concepts including multi-stage builds, security, optimization, and enterprise patterns',
