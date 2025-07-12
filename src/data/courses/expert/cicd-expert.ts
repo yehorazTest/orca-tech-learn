@@ -40,6 +40,73 @@ export const cicdExpertCourses: Course[] = [
     estimatedHours: 90,
     tags: ['Jenkins', 'Pipeline as Code', 'Plugins', 'Distributed Builds', 'Enterprise'],
     lastUpdated: new Date('2024-01-25'),
-    resources: []
+    resources: [
+      {
+        id: 'lab11-scripted-pipelines',
+        title: 'LAB11 - Scripted Pipelines',
+        description: 'Master Jenkins scripted pipelines with advanced Groovy programming techniques',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB11-Scripted-Pipelines',
+        tags: ['scripted', 'groovy', 'advanced-pipelines'],
+        difficulty: 'Advanced',
+        duration: '120 minutes',
+        estimatedMinutes: 120
+      },
+      {
+        id: 'lab12-jenkins-architecture-admin',
+        title: 'LAB12 - Jenkins Architecture & Admin',
+        description: 'Design and manage enterprise Jenkins architecture with master-agent setups',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB12-Jenkins-Architecture-Admin',
+        tags: ['architecture', 'administration', 'master-agent', 'enterprise'],
+        difficulty: 'Advanced',
+        duration: '135 minutes',
+        estimatedMinutes: 135
+      },
+      {
+        id: 'lab13-advanced-security-rbac',
+        title: 'LAB13 - Advanced Security & RBAC',
+        description: 'Implement role-based access control and advanced security policies in Jenkins',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB13-Advanced-Security-RBAC',
+        tags: ['security', 'rbac', 'access-control', 'policies'],
+        difficulty: 'Advanced',
+        duration: '110 minutes',
+        estimatedMinutes: 110
+      },
+      {
+        id: 'lab14-performance-optimization',
+        title: 'LAB14 - Performance Optimization',
+        description: 'Optimize Jenkins performance, monitoring, and resource management',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB14-Performance-Optimization',
+        tags: ['performance', 'optimization', 'monitoring', 'resources'],
+        difficulty: 'Advanced',
+        duration: '100 minutes',
+        estimatedMinutes: 100
+      },
+      {
+        id: 'lab15-cloud-integrations',
+        title: 'LAB15 - Cloud Integrations',
+        description: 'Integrate Jenkins with cloud platforms (AWS, Azure, GCP) for scalable CI/CD',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB15-Cloud-Integrations',
+        tags: ['cloud', 'aws', 'azure', 'gcp', 'integration'],
+        difficulty: 'Advanced',
+        duration: '125 minutes',
+        estimatedMinutes: 125
+      },
+      {
+        id: 'lab16-advanced-pipeline-patterns',
+        title: 'LAB16 - Advanced Pipeline Patterns',
+        description: 'Implement complex pipeline patterns, multi-branch strategies, and GitOps workflows',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB16-Advanced-Pipeline-Patterns',
+        tags: ['pipeline-patterns', 'multi-branch', 'gitops', 'workflows'],
+        difficulty: 'Advanced',
+        duration: '140 minutes',
+        estimatedMinutes: 140
+      }
+    ]
   }
 ];
