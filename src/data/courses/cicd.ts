@@ -31,7 +31,7 @@ export const cicdCourses: Course[] = [
         title: 'Welcome and Introduction',
         description: 'Course overview and learning objectives for CI/CD fundamentals',
         type: 'article',
-        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/CI-CD-Fundamentals/00-README.md',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/CI-CD-Fundamentals/README.md',
         tags: ['introduction', 'overview'],
         difficulty: 'Beginner',
         duration: '15 minutes',
