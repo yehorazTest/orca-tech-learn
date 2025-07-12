@@ -181,7 +181,7 @@ export const cicdCourses: Course[] = [
     resources: [
       {
         id: 'lab01-first-job',
-        title: 'LAB01 - My First Jenkins Job',
+        title: 'My First Jenkins Job',
         description: 'Create and configure your first Jenkins job to understand the basics',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB01-My-First-Jenkins-Job',
@@ -192,7 +192,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab02-freestyle-python',
-        title: 'LAB02 - Freestyle Python Job',
+        title: 'Freestyle Python Job',
         description: 'Build and test a Python application using Jenkins freestyle jobs',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB02-Freestyle-Python-Job',
@@ -203,7 +203,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab03-declarative-pipeline',
-        title: 'LAB03 - Declarative Pipeline',
+        title: 'Declarative Pipeline',
         description: 'Learn declarative pipeline syntax and create your first pipeline as code',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB03-Declarative-Pipeline',
@@ -214,7 +214,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab04-scm-polling-webhooks',
-        title: 'LAB04 - SCM Polling & Webhooks',
+        title: 'SCM Polling & Webhooks',
         description: 'Integrate Jenkins with Git repositories using polling and webhook triggers',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB04-SCM-Polling-Webhooks',
@@ -225,7 +225,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab05-docker-image-build',
-        title: 'LAB05 - Docker Image Build',
+        title: 'Docker Image Build',
         description: 'Build and manage Docker images within Jenkins pipelines',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB05-Docker-Image-Build',
@@ -236,7 +236,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab06-parallel-conditional',
-        title: 'LAB06 - Parallel & Conditional Execution',
+        title: 'Parallel & Conditional Execution',
         description: 'Implement parallel stages and conditional logic in Jenkins pipelines',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB06-Parallel-And-Conditional',
@@ -247,7 +247,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab07-shared-libraries',
-        title: 'LAB07 - Shared Libraries',
+        title: 'Shared Libraries',
         description: 'Create and use Jenkins shared libraries for code reusability',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB07-Shared-Libraries',
@@ -258,7 +258,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab08-secure-credentials',
-        title: 'LAB08 - Secure Credentials',
+        title: 'Secure Credentials',
         description: 'Manage secrets and credentials securely in Jenkins pipelines',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB08-Secure-Credentials',
@@ -269,7 +269,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab09-slack-notifications',
-        title: 'LAB09 - Slack Notifications',
+        title: 'Slack Notifications',
         description: 'Integrate Jenkins with Slack for build notifications and alerts',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB09-Slack-Notifications',
@@ -280,7 +280,7 @@ export const cicdCourses: Course[] = [
       },
       {
         id: 'lab10-ssh-remote-deploy',
-        title: 'LAB10 - SSH Remote Deploy',
+        title: 'SSH Remote Deploy',
         description: 'Deploy applications to remote servers using SSH in Jenkins pipelines',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB10-SSH-Remote-Deploy',

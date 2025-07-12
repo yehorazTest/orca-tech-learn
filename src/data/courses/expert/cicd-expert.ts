@@ -43,7 +43,7 @@ export const cicdExpertCourses: Course[] = [
     resources: [
       {
         id: 'lab11-scripted-pipelines',
-        title: 'LAB11 - Scripted Pipelines',
+        title: 'Scripted Pipelines',
         description: 'Master Jenkins scripted pipelines with advanced Groovy programming techniques',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB11-Scripted-Pipelines',
@@ -54,7 +54,7 @@ export const cicdExpertCourses: Course[] = [
       },
       {
         id: 'lab12-jenkins-architecture-admin',
-        title: 'LAB12 - Jenkins Architecture & Admin',
+        title: 'Jenkins Architecture & Admin',
         description: 'Design and manage enterprise Jenkins architecture with master-agent setups',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB12-Jenkins-Architecture-Admin',
@@ -65,7 +65,7 @@ export const cicdExpertCourses: Course[] = [
       },
       {
         id: 'lab13-advanced-security-rbac',
-        title: 'LAB13 - Advanced Security & RBAC',
+        title: 'Advanced Security & RBAC',
         description: 'Implement role-based access control and advanced security policies in Jenkins',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB13-Advanced-Security-RBAC',
@@ -76,7 +76,7 @@ export const cicdExpertCourses: Course[] = [
       },
       {
         id: 'lab14-performance-optimization',
-        title: 'LAB14 - Performance Optimization',
+        title: 'Performance Optimization',
         description: 'Optimize Jenkins performance, monitoring, and resource management',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB14-Performance-Optimization',
@@ -87,7 +87,7 @@ export const cicdExpertCourses: Course[] = [
       },
       {
         id: 'lab15-cloud-integrations',
-        title: 'LAB15 - Cloud Integrations',
+        title: 'Cloud Integrations',
         description: 'Integrate Jenkins with cloud platforms (AWS, Azure, GCP) for scalable CI/CD',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB15-Cloud-Integrations',
@@ -98,7 +98,7 @@ export const cicdExpertCourses: Course[] = [
       },
       {
         id: 'lab16-advanced-pipeline-patterns',
-        title: 'LAB16 - Advanced Pipeline Patterns',
+        title: 'Advanced Pipeline Patterns',
         description: 'Implement complex pipeline patterns, multi-branch strategies, and GitOps workflows',
         type: 'lab',
         url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/Jenkins/LAB16-Advanced-Pipeline-Patterns',
