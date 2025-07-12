@@ -1,4 +1,3 @@
-
 import { Course } from '../../types/learningPath';
 
 export const cicdCourses: Course[] = [
@@ -179,6 +178,17 @@ export const cicdCourses: Course[] = [
     prerequisites: ['Git & GitHub fundamentals', 'Basic CI/CD understanding'],
     tags: ['GitHub Actions', 'CI/CD', 'Automation', 'Workflows', 'DevOps'],
     resources: [
+      {
+        id: 'installation-setup',
+        title: 'Installation and Setup',
+        description: 'Get started with GitHub Actions by learning installation and initial setup requirements',
+        type: 'article',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/GitHub-Actions/install-and-setup.md',
+        tags: ['installation', 'setup', 'getting-started'],
+        difficulty: 'Beginner',
+        duration: '30 minutes',
+        estimatedMinutes: 30
+      },
       {
         id: 'lab01-hello-world',
         title: 'Hello World',
