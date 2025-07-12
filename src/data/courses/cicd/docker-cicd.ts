@@ -35,7 +35,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'dockerfile-build-lab',
-      title: 'LAB01: Dockerfile Build Optimization',
+      title: 'Dockerfile Build Optimization',
       description: 'Learn advanced Dockerfile techniques and build optimization strategies',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB01-Dockerfile-Build',
@@ -46,7 +46,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'compose-ci-integration-lab',
-      title: 'LAB02: Compose CI Integration',
+      title: 'Compose CI Integration',
       description: 'Integrate Docker Compose with continuous integration pipelines',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB02-Compose-CI-Integration',
@@ -57,7 +57,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'compose-dev-environments-lab',
-      title: 'LAB03: Compose Development Environments',
+      title: 'Compose Development Environments',
       description: 'Create consistent development environments using Docker Compose',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB03-Compose-Dev-Environments',
@@ -68,7 +68,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'multi-stage-builds-lab',
-      title: 'LAB04: Multi-Stage Dockerfile Builds',
+      title: 'Multi-Stage Dockerfile Builds',
       description: 'Implement efficient multi-stage Docker builds for production',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB04-Multi-Stage-Dockerfile-Builds',
@@ -79,7 +79,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'secrets-volumes-lab',
-      title: 'LAB05: Secrets and Volumes Management',
+      title: 'Secrets and Volumes Management',
       description: 'Secure secrets management and data persistence in Docker containers',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB05-Secrets-And-Volumes',
@@ -90,7 +90,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'health-checks-lab',
-      title: 'LAB06: Service Health Checks',
+      title: 'Service Health Checks',
       description: 'Implement comprehensive health checks for containerized services',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB06-Service-Health-Checks',
@@ -101,7 +101,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'microservices-pipeline-lab',
-      title: 'LAB07: Microservices CI Pipeline',
+      title: 'Microservices CI Pipeline',
       description: 'Build CI pipelines for microservices architecture with Docker',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB07-Microservices-CI-Pipeline',
@@ -112,7 +112,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'deploy-ecs-lab',
-      title: 'LAB08: Deploy to AWS ECS',
+      title: 'Deploy to AWS ECS',
       description: 'Deploy containerized applications to Amazon Elastic Container Service',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB08-Deploy-To-ECS',
@@ -123,7 +123,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'dockerfile-linting-lab',
-      title: 'LAB09: Dockerfile Linting and Security',
+      title: 'Dockerfile Linting and Security',
       description: 'Implement Dockerfile linting and security scanning in CI/CD',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB09-Dockerfile-Linting',
@@ -134,7 +134,7 @@ export const dockerCICDCourse: Course = {
     },
     {
       id: 'logs-aggregation-lab',
-      title: 'LAB10: Logs Aggregation in CD',
+      title: 'Logs Aggregation in CD',
       description: 'Set up centralized logging and monitoring for containerized deployments',
       type: 'lab',
       url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Docker-CD/LAB10-Logs-Aggregation-CD',
