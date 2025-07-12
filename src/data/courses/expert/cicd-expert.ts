@@ -197,5 +197,180 @@ export const cicdExpertCourses: Course[] = [
         estimatedMinutes: 140
       }
     ]
+  },
+  {
+    id: 'argocd-expert',
+    title: 'ArgoCD Expert',
+    description: 'Master GitOps with ArgoCD including advanced deployment strategies and multi-environment management',
+    longDescription: 'Deep dive into GitOps practices with ArgoCD. Learn advanced deployment patterns, multi-environment management, security configurations, and enterprise GitOps workflows.',
+    icon: '🐙',
+    iconColor: 'text-orange-400',
+    level: 'Advanced',
+    difficulty: 'Advanced',
+    duration: '6-8 weeks',
+    color: 'orange',
+    gradient: 'from-orange-500 to-red-500',
+    category: 'DevOps',
+    topics: ['GitOps Patterns', 'Multi-environment Management', 'Security Configurations', 'Enterprise Workflows'],
+    prerequisites: ['Kubernetes Expert', 'Git fundamentals'],
+    estimatedHours: 80,
+    tags: ['GitOps', 'ArgoCD', 'Deployment', 'Multi-environment', 'Security'],
+    lastUpdated: new Date('2024-01-25'),
+    resources: [
+      {
+        id: 'lab11-app-of-apps-pattern',
+        title: 'App Of Apps Pattern',
+        description: 'Implement the App of Apps pattern for managing multiple applications with ArgoCD',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB11-App-Of-Apps-Pattern',
+        tags: ['app-of-apps', 'pattern', 'multi-app'],
+        difficulty: 'Advanced',
+        duration: '120 minutes',
+        estimatedMinutes: 120
+      },
+      {
+        id: 'lab12-multi-source-applications',
+        title: 'Multi Source Applications',
+        description: 'Configure applications with multiple Git sources and complex repository structures',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB12-Multi-Source-Applications',
+        tags: ['multi-source', 'repositories', 'complex-apps'],
+        difficulty: 'Advanced',
+        duration: '135 minutes',
+        estimatedMinutes: 135
+      },
+      {
+        id: 'lab13-multiple-values-files',
+        title: 'Multiple Values Files',
+        description: 'Manage complex Helm deployments with multiple values files and environment-specific configurations',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB13-Multiple-Values-Files',
+        tags: ['helm', 'values-files', 'environment-config'],
+        difficulty: 'Advanced',
+        duration: '110 minutes',
+        estimatedMinutes: 110
+      },
+      {
+        id: 'lab14-argocd-cli-mastery',
+        title: 'ArgoCD CLI Mastery',
+        description: 'Master the ArgoCD CLI for advanced automation and management tasks',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB14-ArgoCD-CLI-Mastery',
+        tags: ['cli', 'automation', 'management'],
+        difficulty: 'Advanced',
+        duration: '100 minutes',
+        estimatedMinutes: 100
+      },
+      {
+        id: 'lab15-custom-sync-health-checks',
+        title: 'Custom Sync Health Checks',
+        description: 'Implement custom sync and health check strategies for complex applications',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB15-Custom-Sync-Health-Checks',
+        tags: ['custom-sync', 'health-checks', 'monitoring'],
+        difficulty: 'Advanced',
+        duration: '125 minutes',
+        estimatedMinutes: 125
+      },
+      {
+        id: 'lab16-private-repositories',
+        title: 'Private Repositories',
+        description: 'Configure and manage private Git repositories with ArgoCD for secure deployments',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB16-Private-Repositories',
+        tags: ['private-repos', 'security', 'authentication'],
+        difficulty: 'Advanced',
+        duration: '115 minutes',
+        estimatedMinutes: 115
+      },
+      {
+        id: 'lab17-disaster-recovery',
+        title: 'Disaster Recovery',
+        description: 'Implement disaster recovery strategies and backup procedures for ArgoCD deployments',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB17-Disaster-Recovery',
+        tags: ['disaster-recovery', 'backup', 'resilience'],
+        difficulty: 'Advanced',
+        duration: '140 minutes',
+        estimatedMinutes: 140
+      },
+      {
+        id: 'lab18-progressive-delivery-argo-rollouts',
+        title: 'Progressive Delivery Argo Rollouts',
+        description: 'Implement progressive delivery with Argo Rollouts for advanced deployment strategies',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB18-Progressive-Delivery-Argo-Rollouts',
+        tags: ['progressive-delivery', 'argo-rollouts', 'canary', 'blue-green'],
+        difficulty: 'Advanced',
+        duration: '150 minutes',
+        estimatedMinutes: 150
+      },
+      {
+        id: 'lab19-automating-with-applicationset',
+        title: 'Automating With ApplicationSet',
+        description: 'Automate application management using ApplicationSet controller for scalable GitOps',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB19-Automating-With-ApplicationSet',
+        tags: ['applicationset', 'automation', 'scalability'],
+        difficulty: 'Advanced',
+        duration: '130 minutes',
+        estimatedMinutes: 130
+      },
+      {
+        id: 'lab20-external-secrets-integration',
+        title: 'External Secrets Integration',
+        description: 'Integrate external secret management systems with ArgoCD for secure deployments',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB20-External-Secrets-Integration',
+        tags: ['external-secrets', 'security', 'integration'],
+        difficulty: 'Advanced',
+        duration: '125 minutes',
+        estimatedMinutes: 125
+      },
+      {
+        id: 'lab21-multi-cluster-management',
+        title: 'Multi Cluster Management',
+        description: 'Manage multiple Kubernetes clusters with ArgoCD for enterprise-scale deployments',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB21-Multi-Cluster-Management',
+        tags: ['multi-cluster', 'enterprise', 'management'],
+        difficulty: 'Advanced',
+        duration: '145 minutes',
+        estimatedMinutes: 145
+      },
+      {
+        id: 'lab22-performance-optimization',
+        title: 'Performance Optimization',
+        description: 'Optimize ArgoCD performance for large-scale deployments and high-throughput environments',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB22-Performance-Optimization',
+        tags: ['performance', 'optimization', 'scale'],
+        difficulty: 'Advanced',
+        duration: '120 minutes',
+        estimatedMinutes: 120
+      },
+      {
+        id: 'lab23-advanced-configuration',
+        title: 'Advanced Configuration',
+        description: 'Configure advanced ArgoCD settings for enterprise environments and complex use cases',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB23-Advanced-Configuration',
+        tags: ['configuration', 'enterprise', 'advanced'],
+        difficulty: 'Advanced',
+        duration: '110 minutes',
+        estimatedMinutes: 110
+      },
+      {
+        id: 'lab24-troubleshooting-debugging',
+        title: 'Troubleshooting Debugging',
+        description: 'Master troubleshooting and debugging techniques for ArgoCD deployments and issues',
+        type: 'lab',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/tree/main/ArgoCD/LAB24-Troubleshooting-Debugging',
+        tags: ['troubleshooting', 'debugging', 'problem-solving'],
+        difficulty: 'Advanced',
+        duration: '135 minutes',
+        estimatedMinutes: 135
+      }
+    ]
   }
 ];
