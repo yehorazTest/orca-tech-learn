@@ -332,6 +332,17 @@ export const cicdCourses: Course[] = [
     tags: ['Jenkins', 'CI/CD', 'Automation', 'DevOps', 'Pipelines'],
     resources: [
       {
+        id: 'installation-setup',
+        title: 'Installation and Setup',
+        description: 'Get started with Jenkins by learning installation and initial setup requirements',
+        type: 'article',
+        url: 'https://github.com/study-ORCATech-cloud/cicd-labs/blob/main/Jenkins/install-and-setup.md',
+        tags: ['installation', 'setup', 'getting-started'],
+        difficulty: 'Beginner',
+        duration: '45 minutes',
+        estimatedMinutes: 45
+      },
+      {
         id: 'lab01-first-job',
         title: 'My First Jenkins Job',
         description: 'Create and configure your first Jenkins job to understand the basics',
