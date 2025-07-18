@@ -1,0 +1,144 @@
+
+import React from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Calendar, ExternalLink } from 'lucide-react';
+
+interface NewsItem {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  link?: string;
+  category: 'update' | 'new-course' | 'feature' | 'announcement';
+}
+
+const newsItems: NewsItem[] = [
+  {
+    id: '1',
+    title: 'New ArgoCD Fundamentals Course Released',
+    description: 'Master GitOps deployments with our comprehensive ArgoCD course featuring 10 hands-on labs.',
+    date: '2024-01-15',
+    category: 'new-course',
+    link: '/course/argocd-fundamentals'
+  },
+  {
+    id: '2',
+    title: 'Docker CI/CD Course Now Available',
+    description: 'Learn containerized deployment strategies with our new Docker CI/CD course covering ECS deployments and microservices.',
+    date: '2024-01-10',
+    category: 'new-course',
+    link: '/course/docker-cicd'
+  },
+  {
+    id: '3',
+    title: 'Platform Performance Improvements',
+    description: 'We\'ve optimized our learning platform for faster load times and improved user experience.',
+    date: '2024-01-05',
+    category: 'update'
+  },
+  {
+    id: '4',
+    title: 'New Practice Projects Added',
+    description: 'Expand your portfolio with our latest real-world practice projects in DevOps and Cloud Computing.',
+    date: '2023-12-28',
+    category: 'feature'
+  }
+];
+
+const getCategoryColor = (category: NewsItem['category']) => {
+  switch (category) {
+    case 'new-course':
+      return 'bg-blue-900/30 border-blue-500/30 text-blue-300';
+    case 'update':
+      return 'bg-green-900/30 border-green-500/30 text-green-300';
+    case 'feature':
+      return 'bg-purple-900/30 border-purple-500/30 text-purple-300';
+    case 'announcement':
+      return 'bg-yellow-900/30 border-yellow-500/30 text-yellow-300';
+    default:
+      return 'bg-slate-900/30 border-slate-500/30 text-slate-300';
+  }
+};
+
+const getCategoryLabel = (category: NewsItem['category']) => {
+  switch (category) {
+    case 'new-course':
+      return 'New Course';
+    case 'update':
+      return 'Update';
+    case 'feature':
+      return 'Feature';
+    case 'announcement':
+      return 'Announcement';
+    default:
+      return 'News';
+  }
+};
+
+const NewsSection = () => {
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  return (
+    <section className="py-12 md:py-16 px-4 bg-gradient-to-r from-slate-900/30 to-slate-800/30 border-y border-slate-800">
+      <div className="container mx-auto">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6">
+            Latest News & Updates
+          </h2>
+          <p className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto px-4">
+            Stay informed about new courses, platform updates, and exciting features to enhance your learning journey.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto">
+          <ScrollArea className="h-80 md:h-96 rounded-lg border border-slate-700 bg-slate-900/50 p-4">
+            <div className="space-y-4 pr-4">
+              {newsItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="p-4 md:p-6 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-slate-600 transition-colors"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
+                    <div className="flex items-center gap-2 text-slate-400 text-sm">
+                      <Calendar className="w-4 h-4" />
+                      <span>{formatDate(item.date)}</span>
+                    </div>
+                    <div className={`px-2 py-1 rounded-md text-xs font-medium border ${getCategoryColor(item.category)}`}>
+                      {getCategoryLabel(item.category)}
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2 leading-tight">
+                    {item.title}
+                  </h3>
+                  
+                  <p className="text-slate-300 text-sm md:text-base mb-3 leading-relaxed">
+                    {item.description}
+                  </p>
+                  
+                  {item.link && (
+                    <a
+                      href={item.link}
+                      className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                    >
+                      Learn more
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default NewsSection;

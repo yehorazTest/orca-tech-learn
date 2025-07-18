@@ -3,6 +3,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
+import NewsSection from '../components/home/NewsSection';
 import { learningPaths } from '../data/learningPaths';
 import { courses } from '../data/courses';
 import { allProjects } from '../data/projects';
@@ -86,6 +87,9 @@ const HomePage = () => {
             </div>
           </div>
         </section>
+
+        {/* News Section */}
+        <NewsSection />
 
         {/* Stats Section */}
         <section className="py-8 md:py-12 px-4 border-y border-slate-800">
