@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Calendar, ExternalLink } from 'lucide-react';
 
@@ -123,13 +124,13 @@ const NewsSection = () => {
                   </p>
                   
                   {item.link && (
-                    <a
-                      href={item.link}
+                    <Link
+                      to={item.link}
                       className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
                     >
                       Learn more
                       <ExternalLink className="w-3 h-3" />
-                    </a>
+                    </Link>
                   )}
                 </div>
               ))}
