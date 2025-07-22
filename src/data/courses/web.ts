@@ -20,6 +20,7 @@ export const webCourses: Course[] = [
     estimatedHours: 75,
     tags: ['React', 'Components', 'JSX', 'State', 'Props'],
     isNew: true,
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   },
@@ -40,6 +41,7 @@ export const webCourses: Course[] = [
     prerequisites: ['React Beginner'],
     estimatedHours: 95,
     tags: ['React Hooks', 'Context API', 'React Router', 'Performance'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   },
@@ -60,6 +62,7 @@ export const webCourses: Course[] = [
     prerequisites: ['React Intermediate'],
     estimatedHours: 115,
     tags: ['Advanced Patterns', 'Testing', 'State Management', 'Architecture'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   }

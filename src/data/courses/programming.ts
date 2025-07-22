@@ -1,3 +1,4 @@
+
 import { Course } from '../../types/learningPath';
 
 export const programmingCourses: Course[] = [
@@ -757,6 +758,7 @@ export const programmingCourses: Course[] = [
     prerequisites: ['Basic programming knowledge (helpful but not required)'],
     estimatedHours: 75,
     tags: ['Java', 'OOP', 'Collections', 'Programming Basics'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   },
@@ -777,6 +779,7 @@ export const programmingCourses: Course[] = [
     prerequisites: ['Java Beginner'],
     estimatedHours: 95,
     tags: ['Spring', 'REST APIs', 'Databases', 'Testing'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   },
@@ -797,6 +800,7 @@ export const programmingCourses: Course[] = [
     prerequisites: ['Java Intermediate'],
     estimatedHours: 110,
     tags: ['Microservices', 'Performance', 'Architecture', 'Scalability'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   }

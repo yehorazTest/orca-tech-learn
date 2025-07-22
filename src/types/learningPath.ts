@@ -37,6 +37,7 @@ export interface Course {
   category: string;
   isPopular?: boolean;
   isNew?: boolean;
+  isUnderMaintenance?: boolean;
   estimatedHours: number;
   topics: string[];
   prerequisites: string[];

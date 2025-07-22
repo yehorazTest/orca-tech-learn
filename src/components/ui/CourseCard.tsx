@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Clock, Star, TrendingUp } from 'lucide-react';
+import { Clock, Star, TrendingUp, Wrench } from 'lucide-react';
 import { Course } from '../../types/learningPath';
 import { Card } from '@/components/ui/card';
 
@@ -21,7 +21,8 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
     duration,
     gradient,
     isPopular,
-    isNew
+    isNew,
+    isUnderMaintenance
   } = course;
 
   const getDifficultyColor = (level: string) => {
@@ -41,6 +42,12 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
         
         {/* Badges */}
         <div className="absolute top-4 right-4 flex gap-2 z-10">
+          {isUnderMaintenance && (
+            <span className="flex items-center gap-1 px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full">
+              <Wrench className="w-3 h-3" />
+              Work In Progress
+            </span>
+          )}
           {isPopular && (
             <span className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full">
               <TrendingUp className="w-3 h-3" />

@@ -39,6 +39,7 @@ export const programmingExpertCourses: Course[] = [
     prerequisites: ['Database fundamentals', 'SQL basics'],
     estimatedHours: 85,
     tags: ['SQL', 'Database Design', 'Query Optimization', 'Performance', 'Enterprise'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   }
