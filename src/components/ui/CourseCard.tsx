@@ -40,14 +40,8 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
         {/* Background Gradient */}
         <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
         
-        {/* Badges */}
+        {/* Top Right Badges */}
         <div className="absolute top-4 right-4 flex gap-2 z-10">
-          {isUnderMaintenance && (
-            <span className="flex items-center gap-1 px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full">
-              <Wrench className="w-3 h-3" />
-              Work In Progress
-            </span>
-          )}
           {isPopular && (
             <span className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full">
               <TrendingUp className="w-3 h-3" />
@@ -61,6 +55,16 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
             </span>
           )}
         </div>
+
+        {/* Coming Soon Badge - Bottom Right */}
+        {isUnderMaintenance && (
+          <div className="absolute bottom-4 right-4 z-10">
+            <span className="flex items-center gap-1 px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full">
+              <Wrench className="w-3 h-3" />
+              Coming Soon
+            </span>
+          </div>
+        )}
 
         <div className="p-6 flex flex-col flex-1">
           {/* Header */}
