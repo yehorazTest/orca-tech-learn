@@ -91,7 +91,7 @@ export const gitExpertCourses: Course[] = [
         estimatedMinutes: 150
       }
     ],
-    icon: '🚀',
+    icon: '📚',
     iconColor: 'text-purple-400',
     difficulty: 'Advanced',
     color: 'purple',
