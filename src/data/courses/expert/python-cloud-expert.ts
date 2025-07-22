@@ -21,36 +21,6 @@ export const pythonCloudExpert: Course = {
   lastUpdated: new Date('2024-01-25'),
   resources: [
     {
-      id: 'python-distributed-systems',
-      title: 'Distributed Systems with Python',
-      description: 'Build scalable distributed systems using Python with message queues, microservices, and distributed databases',
-      type: 'lab',
-      url: 'https://github.com/study-ORCATech-cloud/python-labs/tree/main/Core-Python/LAB13-Distributed-Systems-with-Python',
-      difficulty: 'Advanced',
-      duration: '6 hours',
-      estimatedMinutes: 360,
-      tags: ['Python', 'Distributed Systems', 'Microservices', 'Message Queues'],
-      prerequisites: ['Python Professional'],
-      isExternal: true,
-      lastUpdated: new Date('2024-01-18'),
-      isInteractive: true
-    },
-    {
-      id: 'python-advanced-metaprogramming',
-      title: 'Advanced Metaprogramming and Reflection',
-      description: 'Master Python metaprogramming, decorators, metaclasses, and reflection for dynamic code generation',
-      type: 'lab',
-      url: 'https://github.com/study-ORCATech-cloud/python-labs/tree/main/Core-Python/LAB14-Advanced-Metaprogramming-and-Reflection',
-      difficulty: 'Advanced',
-      duration: '5 hours',
-      estimatedMinutes: 300,
-      tags: ['Python', 'Metaprogramming', 'Metaclasses', 'Reflection'],
-      prerequisites: ['Distributed Systems with Python'],
-      isExternal: true,
-      lastUpdated: new Date('2024-01-18'),
-      isInteractive: true
-    },
-    {
       id: 'python-custom-linters-analyzers',
       title: 'Building Custom Python Linters and Analyzers',
       description: 'Create custom code analysis tools, linters, and static analyzers for Python codebases',
@@ -60,7 +30,7 @@ export const pythonCloudExpert: Course = {
       duration: '4 hours',
       estimatedMinutes: 240,
       tags: ['Python', 'Static Analysis', 'Linters', 'Code Quality'],
-      prerequisites: ['Advanced Metaprogramming and Reflection'],
+      prerequisites: ['Python Professional'],
       isExternal: true,
       lastUpdated: new Date('2024-01-18'),
       isInteractive: true
