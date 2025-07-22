@@ -56,16 +56,6 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
           )}
         </div>
 
-        {/* Coming Soon Badge - Bottom Right */}
-        {isUnderMaintenance && (
-          <div className="absolute bottom-4 right-4 z-10">
-            <span className="flex items-center gap-1 px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full">
-              <Wrench className="w-3 h-3" />
-              Coming Soon
-            </span>
-          </div>
-        )}
-
         <div className="p-6 flex flex-col flex-1">
           {/* Header */}
           <div className="flex items-start gap-4 mb-4">
@@ -90,11 +80,17 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
             </div>
           </div>
 
-          {/* Difficulty - pushed to bottom */}
+          {/* Difficulty and Coming Soon Badge - pushed to bottom */}
           <div className="flex items-center justify-between mt-auto">
             <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(difficulty)}`}>
               {difficulty}
             </span>
+            {isUnderMaintenance && (
+              <span className="flex items-center gap-1 px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full">
+                <Wrench className="w-3 h-3" />
+                Coming Soon
+              </span>
+            )}
           </div>
         </div>
 
