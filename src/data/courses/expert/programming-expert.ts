@@ -3,26 +3,6 @@ import { Course } from '../../../types/learningPath';
 
 export const programmingExpertCourses: Course[] = [
   {
-    id: 'git-expert',
-    title: 'Git Expert',
-    description: 'Advanced Git workflows, branching strategies, and enterprise version control management',
-    longDescription: 'Master advanced Git concepts with complex branching strategies, conflict resolution, Git internals, enterprise workflows, and version control best practices for large teams.',
-    icon: '📚',
-    iconColor: 'text-orange-400',
-    level: 'Advanced',  
-    difficulty: 'Advanced',
-    duration: '4-6 weeks',
-    color: 'orange',
-    gradient: 'from-orange-500 to-red-500',
-    category: 'DevOps',
-    topics: ['Advanced Branching', 'Conflict Resolution', 'Git Internals', 'Enterprise Workflows'],
-    prerequisites: ['Basic Git knowledge', 'Command line proficiency'],
-    estimatedHours: 50,
-    tags: ['Git', 'Branching Strategies', 'Workflows', 'Version Control', 'Team Collaboration'],
-    lastUpdated: new Date('2024-01-25'),
-    resources: []
-  },
-  {
     id: 'java-cloud-expert',
     title: 'Java Cloud Expert',
     description: 'Enterprise Java development for cloud platforms with Spring Cloud, microservices, and cloud-native patterns',
