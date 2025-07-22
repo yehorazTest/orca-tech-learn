@@ -19,6 +19,7 @@ export const programmingExpertCourses: Course[] = [
     prerequisites: ['Java Professional', 'Cloud Intermediate'],
     estimatedHours: 115,
     tags: ['Java', 'Spring Cloud', 'Microservices', 'Cloud Native', 'Enterprise'],
+    isUnderMaintenance: true,
     lastUpdated: new Date('2024-01-25'),
     resources: []
   },
