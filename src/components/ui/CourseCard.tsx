@@ -34,6 +34,8 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
     }
   };
 
+  const hasTopBadges = isPopular || isNew;
+
   return (
     <Link to={`/course/${id}`} className="block group h-full">
       <Card className={`relative overflow-hidden bg-slate-900/50 border-slate-800 hover:border-slate-700 transition-all duration-300 group-hover:transform group-hover:scale-[1.02] h-full flex flex-col ${className}`}>
@@ -41,24 +43,26 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, className = '' }) => {
         <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-5 group-hover:opacity-10 transition-opacity duration-300`} />
         
         {/* Top Right Badges */}
-        <div className="absolute top-4 right-4 flex gap-2 z-10">
-          {isPopular && (
-            <span className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full">
-              <TrendingUp className="w-3 h-3" />
-              Popular
-            </span>
-          )}
-          {isNew && (
-            <span className="flex items-center gap-1 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full">
-              <Star className="w-3 h-3" />
-              New
-            </span>
-          )}
-        </div>
+        {hasTopBadges && (
+          <div className="absolute top-4 right-4 flex flex-col gap-1 z-10 max-w-[100px]">
+            {isPopular && (
+              <span className="flex items-center gap-1 px-2 py-1 bg-orange-500/20 text-orange-400 text-xs rounded-full whitespace-nowrap">
+                <TrendingUp className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate">Popular</span>
+              </span>
+            )}
+            {isNew && (
+              <span className="flex items-center gap-1 px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded-full whitespace-nowrap">
+                <Star className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate">New</span>
+              </span>
+            )}
+          </div>
+        )}
 
         <div className="p-6 flex flex-col flex-1">
           {/* Header */}
-          <div className="flex items-start gap-4 mb-4">
+          <div className={`flex items-start gap-4 mb-4 ${hasTopBadges ? 'pr-24' : ''}`}>
             <div className={`text-4xl ${iconColor} group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}>
               {icon}
             </div>
