@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
-import { Heart, Coffee, Users, Target, DollarSign, Globe } from 'lucide-react';
+import { Heart, Coffee, Users, Target, DollarSign, BookOpen } from 'lucide-react';
 
 const SupportPage = () => {
   const donationOptions = [
@@ -35,9 +34,9 @@ const SupportPage = () => {
 
   const impactAreas = [
     {
-      icon: Globe,
-      title: 'Server & Infrastructure',
-      description: 'Keep the platform running smoothly with reliable hosting and CDN services'
+      icon: BookOpen,
+      title: 'Learning Resources',
+      description: 'Create comprehensive guides, tutorials, and documentation for new technologies'
     },
     {
       icon: Target,
@@ -147,26 +146,26 @@ const SupportPage = () => {
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <strong className="text-white">Platform Infrastructure (40%)</strong> - Server hosting, CDN, domain, and technical services
+                        <strong className="text-white">Content Development (50%)</strong> - Creating new labs, courses, and learning materials
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <strong className="text-white">Content Development (35%)</strong> - Creating new labs, courses, and learning materials
+                        <strong className="text-white">Platform Development (30%)</strong> - New features, improvements, and maintenance
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
                       <div>
-                        <strong className="text-white">Platform Development (25%)</strong> - New features, improvements, and maintenance
+                        <strong className="text-white">Tools & Resources (20%)</strong> - Development tools, software licenses, and educational resources
                       </div>
                     </div>
                   </div>
                   
                   <div className="mt-8 p-4 bg-slate-800/50 rounded-lg">
                     <p className="text-slate-300 mb-2">
-                      <strong className="text-white">Our Commitment:</strong> 100% of donations go directly to platform development and maintenance. 
+                      <strong className="text-white">Our Commitment:</strong> 100% of donations go directly to platform development and content creation. 
                       We operate with complete transparency and will share regular updates on how funds are used.
                     </p>
                   </div>
