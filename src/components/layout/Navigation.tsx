@@ -40,6 +40,12 @@ const Navigation = () => {
         About
       </Link>
       <Link 
+        to="/support" 
+        className={`transition-colors ${isActive('/support') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
+      >
+        Support Us
+      </Link>
+      <Link 
         to="/contact" 
         className={`transition-colors ${isActive('/contact') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
       >

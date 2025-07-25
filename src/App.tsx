@@ -12,6 +12,7 @@ import ProjectsPage from "./pages/ProjectsPage";
 import LearningPathPage from "./pages/LearningPathPage";
 import CoursePage from "./pages/CoursePage";
 import AboutPage from "./pages/AboutPage";
+import SupportPage from "./pages/SupportPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
@@ -43,6 +44,7 @@ const App = () => (
                   <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
                   <Route path="/course/:courseId" element={<CoursePage />} />
                   <Route path="/about" element={<AboutPage />} />
+                  <Route path="/support" element={<SupportPage />} />
                   <Route path="/contact" element={<ContactPage />} />
                   <Route path="*" element={<NotFoundPage />} />
                 </Routes>

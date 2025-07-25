@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
@@ -57,11 +58,25 @@ const MobileMenu = () => {
                 Courses
               </Link>
               <Link 
+                to="/projects"
+                className={`transition-colors py-2 ${isActive('/projects') ? 'text-blue-400' : 'text-slate-300'}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Projects
+              </Link>
+              <Link 
                 to="/about"
                 className={`transition-colors py-2 ${isActive('/about') ? 'text-blue-400' : 'text-slate-300'}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </Link>
+              <Link 
+                to="/support"
+                className={`transition-colors py-2 ${isActive('/support') ? 'text-blue-400' : 'text-slate-300'}`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Support Us
               </Link>
               <Link 
                 to="/contact"
