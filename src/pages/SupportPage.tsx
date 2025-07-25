@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -133,50 +134,8 @@ const SupportPage = () => {
           </div>
         </section>
 
-        {/* Transparency Section */}
-        <section className="py-16 px-4 bg-slate-900/30">
-          <div className="container mx-auto">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl font-bold text-white mb-8 text-center">Transparency & Accountability</h2>
-              
-              <div className="bg-slate-900/50 rounded-lg border border-slate-800 p-8">
-                <div className="prose prose-invert max-w-none">
-                  <h3 className="text-2xl font-semibold text-white mb-4">How We Use Your Donations</h3>
-                  <div className="space-y-4 text-slate-300">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <strong className="text-white">Content Development (50%)</strong> - Creating new labs, courses, and learning materials
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <strong className="text-white">Platform Development (30%)</strong> - New features, improvements, and maintenance
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                      <div>
-                        <strong className="text-white">Tools & Resources (20%)</strong> - Development tools, software licenses, and educational resources
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-8 p-4 bg-slate-800/50 rounded-lg">
-                    <p className="text-slate-300 mb-2">
-                      <strong className="text-white">Our Commitment:</strong> 100% of donations go directly to platform development and content creation. 
-                      We operate with complete transparency and will share regular updates on how funds are used.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Alternative Support */}
-        <section className="py-16 px-4">
+        <section className="py-16 px-4 bg-slate-900/30">
           <div className="container mx-auto">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl font-bold text-white mb-8">Other Ways to Support</h2>
