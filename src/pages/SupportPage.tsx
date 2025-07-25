@@ -10,15 +10,15 @@ const SupportPage = () => {
       name: 'PayPal',
       description: 'One-time or recurring donations',
       icon: DollarSign,
-      url: '#', // Replace with actual PayPal link
+      url: 'https://paypal.me/ORCATechCloud',
       bgColor: 'from-blue-500 to-blue-600',
       hoverColor: 'hover:from-blue-600 hover:to-blue-700'
     },
     {
       name: 'Patreon',
-      description: 'Monthly support with exclusive updates',
+      description: 'One-time or recurring donations',
       icon: Users,
-      url: '#', // Replace with actual Patreon link
+      url: 'https://patreon.com/ORCATechCloud',
       bgColor: 'from-orange-500 to-red-500',
       hoverColor: 'hover:from-orange-600 hover:to-red-600'
     },
@@ -26,7 +26,7 @@ const SupportPage = () => {
       name: 'Ko-fi',
       description: 'Buy us a coffee to fuel development',
       icon: Coffee,
-      url: '#', // Replace with actual Ko-fi link
+      url: 'https://ko-fi.com/orcatechcloud',
       bgColor: 'from-cyan-500 to-blue-500',
       hoverColor: 'hover:from-cyan-600 hover:to-blue-600'
     }
