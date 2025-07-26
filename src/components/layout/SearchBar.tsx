@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, BookOpen, Target } from 'lucide-react';
@@ -43,7 +42,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="relative flex-1 max-w-md" ref={searchRef}>
+    <div className="relative w-full max-w-md" ref={searchRef}>
       <form onSubmit={handleSearch}>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
