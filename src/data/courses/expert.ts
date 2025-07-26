@@ -6,6 +6,7 @@ import { devopsExpertCourses } from './expert/devops-expert';
 import { cicdExpertCourses } from './expert/cicd-expert';
 import { programmingExpertCourses } from './expert/programming-expert';
 import { gitExpertCourses } from './expert/git-expert';
+import { dockerExpertCourse } from './expert/docker-expert';
 
 export const expertCourses: Course[] = [
   kubernetesExpert,
@@ -13,5 +14,6 @@ export const expertCourses: Course[] = [
   ...cicdExpertCourses,
   pythonCloudExpert,
   ...programmingExpertCourses,
-  ...gitExpertCourses
+  ...gitExpertCourses,
+  dockerExpertCourse
 ];
