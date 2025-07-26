@@ -223,7 +223,7 @@ const SearchBar = () => {
     <input
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      placeholder="Search courses..."
+      placeholder="Filter courses..."
     />
   );
 };
