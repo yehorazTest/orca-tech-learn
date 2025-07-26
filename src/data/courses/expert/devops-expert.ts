@@ -3,26 +3,6 @@ import { Course } from '../../../types/learningPath';
 
 export const devopsExpertCourses: Course[] = [
   {
-    id: 'docker-expert',
-    title: 'Docker Expert',
-    description: 'Advanced Docker concepts including multi-stage builds, security, optimization, and enterprise patterns',
-    longDescription: 'Master advanced Docker techniques with multi-stage builds, security best practices, image optimization, Docker Compose advanced features, and enterprise containerization strategies.',
-    icon: '🐳',
-    iconColor: 'text-blue-500',
-    level: 'Advanced',
-    difficulty: 'Advanced',
-    duration: '6-8 weeks',
-    color: 'blue',
-    gradient: 'from-blue-600 to-cyan-600',
-    category: 'DevOps',
-    topics: ['Multi-stage Builds', 'Security Best Practices', 'Image Optimization', 'Enterprise Patterns'],
-    prerequisites: ['DevOps Beginner', 'Container fundamentals'],
-    estimatedHours: 75,
-    tags: ['Docker', 'Multi-stage Builds', 'Security', 'Optimization', 'Enterprise'],
-    lastUpdated: new Date('2024-01-25'),
-    resources: []
-  },
-  {
     id: 'terraform-expert',
     title: 'Terraform Expert',
     description: 'Infrastructure as Code mastery with Terraform including modules, state management, and enterprise patterns',
