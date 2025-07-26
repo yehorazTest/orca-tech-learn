@@ -1,57 +1,62 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
   const location = useLocation();
   
   const isActive = (path: string) => location.pathname === path;
 
+  const navigationItems = [
+    { path: '/', label: 'Home' },
+    { path: '/learning-paths', label: 'Learning Paths' },
+    { path: '/courses', label: 'Courses' },
+    { path: '/projects', label: 'Projects' },
+    { path: '/about', label: 'About' },
+    { path: '/support', label: 'Support Us' },
+    { path: '/contact', label: 'Contact' },
+  ];
+
   return (
-    <nav className="hidden md:flex items-center space-x-8">
-      <Link 
-        to="/" 
-        className={`transition-colors ${isActive('/') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button 
+          variant="outline" 
+          size="sm"
+          className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700 flex items-center gap-2"
+        >
+          <Menu className="w-4 h-4" />
+          Menu
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent 
+        align="start" 
+        className="w-56 bg-slate-800 border-slate-700 z-50"
       >
-        Home
-      </Link>
-      <Link 
-        to="/learning-paths" 
-        className={`transition-colors ${isActive('/learning-paths') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
-      >
-        Learning Paths
-      </Link>
-      <Link 
-        to="/courses" 
-        className={`transition-colors ${isActive('/courses') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
-      >
-        Courses
-      </Link>
-      <Link 
-        to="/projects" 
-        className={`transition-colors ${isActive('/projects') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
-      >
-        Projects
-      </Link>
-      <Link 
-        to="/about" 
-        className={`transition-colors ${isActive('/about') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
-      >
-        About
-      </Link>
-      <Link 
-        to="/support" 
-        className={`transition-colors ${isActive('/support') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
-      >
-        Support Us
-      </Link>
-      <Link 
-        to="/contact" 
-        className={`transition-colors ${isActive('/contact') ? 'text-blue-400' : 'text-slate-300 hover:text-white'}`}
-      >
-        Contact
-      </Link>
-    </nav>
+        {navigationItems.map((item) => (
+          <DropdownMenuItem key={item.path} asChild className="focus:bg-slate-700">
+            <Link
+              to={item.path}
+              className={`w-full px-3 py-2 text-sm transition-colors ${
+                isActive(item.path) 
+                  ? 'text-blue-400 bg-slate-700/50' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-700'
+              }`}
+            >
+              {item.label}
+            </Link>
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

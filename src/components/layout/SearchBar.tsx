@@ -43,7 +43,7 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="hidden md:block relative flex-1 max-w-md mx-4" ref={searchRef}>
+    <div className="relative flex-1 max-w-md" ref={searchRef}>
       <form onSubmit={handleSearch}>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
