@@ -13,12 +13,11 @@ const Header = () => {
             <Navigation />
             <Logo />
           </div>
-          {/* Desktop: centered search, Mobile: right-aligned search */}
-          <div className="flex-1 flex justify-center md:justify-center justify-end">
+          <div className="flex-1 flex justify-center">
             <SearchBar />
           </div>
-          <div className="w-32 hidden md:block">
-            {/* Reserved space for future login/user button - only show on desktop */}
+          <div className="w-32">
+            {/* Reserved space for future login/user button */}
           </div>
         </div>
       </div>
