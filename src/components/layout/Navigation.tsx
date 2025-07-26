@@ -34,7 +34,6 @@ const Navigation = () => {
           className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700 flex items-center gap-2"
         >
           <Menu className="w-4 h-4" />
-          Menu
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 
