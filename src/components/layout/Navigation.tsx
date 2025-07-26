@@ -22,7 +22,7 @@ const Navigation = () => {
     { path: '/projects', label: 'Projects' },
     { path: '/about', label: 'About' },
     { path: '/support', label: 'Support Us' },
-    { path: '/contact', label: 'Contact' },
+    { path: '/contact', label: 'Contact Us' },
   ];
 
   return (
