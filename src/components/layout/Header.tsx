@@ -10,8 +10,8 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center h-16 gap-4">
           <div className="flex items-center gap-4">
-            <Logo />
             <Navigation />
+            <Logo />
           </div>
           <div className="flex-1 flex justify-center">
             <SearchBar />
