@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Calendar, ExternalLink } from 'lucide-react';
 
 interface NewsItem {
-  id: string;
   title: string;
   description: string | React.ReactNode;
   date: string;
@@ -15,14 +13,12 @@ interface NewsItem {
 
 const newsItems: NewsItem[] = [
   {
-    id: '4',
     title: 'Course Structure & Learning Paths Finalized',
     description: 'We\'ve completed the design of our comprehensive learning paths covering Beginner, Intermediate, and Professional levels across all major technology stacks.',
     date: '2025-06-05',
     category: 'feature'
   },
   {
-    id: '3',
     title: 'Join Our Early Community',
     description: (
       <>
@@ -42,14 +38,12 @@ const newsItems: NewsItem[] = [
     category: 'update'
   },
   {
-    id: '2',
     title: 'Beta Testing Phase in Progress',
     description: 'We\'re currently in beta testing phase, fine-tuning our platform and course content based on early user feedback. Thank you to our beta testers for helping us create the best learning experience possible.',
     date: '2025-07-10',
     category: 'feature'
   },
   {
-    id: '1',
     title: 'Platform Going Live - August 2025',
     description: 'We\'re excited to announce that ORCATech Learning Platform will be going live in August 2025. Get ready for comprehensive hands-on learning experiences in DevOps, Cloud Computing, and Programming.',
     date: '2025-07-26',
@@ -111,9 +105,9 @@ const NewsSection = () => {
         <div className="max-w-4xl mx-auto">
           <ScrollArea className="h-80 md:h-96 rounded-lg border border-slate-700 bg-slate-900/50 p-4">
             <div className="space-y-4 pr-4">
-              {newsItems.slice().reverse().map((item) => (
+              {newsItems.slice().reverse().map((item, index) => (
                 <div
-                  key={item.id}
+                  key={index}
                   className="p-4 md:p-6 rounded-lg bg-slate-800/50 border border-slate-700 hover:border-slate-600 transition-colors"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-3">
