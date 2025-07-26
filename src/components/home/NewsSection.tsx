@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -7,7 +6,7 @@ import { Calendar, ExternalLink } from 'lucide-react';
 interface NewsItem {
   id: string;
   title: string;
-  description: string;
+  description: string | React.ReactNode;
   date: string;
   link?: string;
   category: 'update' | 'new-course' | 'feature' | 'announcement';
@@ -16,32 +15,43 @@ interface NewsItem {
 const newsItems: NewsItem[] = [
   {
     id: '1',
-    title: 'New ArgoCD Fundamentals Course Released',
-    description: 'Master GitOps deployments with our comprehensive ArgoCD course featuring 10 hands-on labs.',
-    date: '2024-01-15',
-    category: 'new-course',
-    link: '/course/argocd-fundamentals'
+    title: 'Platform Going Live - August 2025',
+    description: 'We\'re excited to announce that ORCATech Learning Platform will be going live in August 2025. Get ready for comprehensive hands-on learning experiences in DevOps, Cloud Computing, and Programming.',
+    date: '2025-07-26',
+    category: 'announcement'
   },
   {
     id: '2',
-    title: 'Docker CI/CD Course Now Available',
-    description: 'Learn containerized deployment strategies with our new Docker CI/CD course covering ECS deployments and microservices.',
-    date: '2024-01-10',
-    category: 'new-course',
-    link: '/course/docker-cicd'
+    title: 'Beta Testing Phase in Progress',
+    description: 'We\'re currently in beta testing phase, fine-tuning our platform and course content based on early user feedback. Thank you to our beta testers for helping us create the best learning experience possible.',
+    date: '2025-07-10',
+    category: 'feature'
   },
   {
     id: '3',
-    title: 'Platform Performance Improvements',
-    description: 'We\'ve optimized our learning platform for faster load times and improved user experience.',
-    date: '2024-01-05',
+    title: 'Join Our Early Community',
+    description: (
+      <>
+        Connect with fellow learners and contribute to our growing community. Check out our{' '}
+        <a 
+          href="https://github.com/study-ORCATech-cloud" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:text-blue-300 underline font-medium"
+        >
+          ORCATech Study
+        </a>
+        {' '}organization on GitHub for practice repositories and community discussions.
+      </>
+    ),
+    date: '2025-06-20',
     category: 'update'
   },
   {
     id: '4',
-    title: 'New Practice Projects Added',
-    description: 'Expand your portfolio with our latest real-world practice projects in DevOps and Cloud Computing.',
-    date: '2023-12-28',
+    title: 'Course Structure & Learning Paths Finalized',
+    description: 'We\'ve completed the design of our comprehensive learning paths covering Beginner, Intermediate, and Professional levels across all major technology stacks.',
+    date: '2025-06-05',
     category: 'feature'
   }
 ];
@@ -119,9 +129,9 @@ const NewsSection = () => {
                     {item.title}
                   </h3>
                   
-                  <p className="text-slate-300 text-sm md:text-base mb-3 leading-relaxed">
+                  <div className="text-slate-300 text-sm md:text-base mb-3 leading-relaxed">
                     {item.description}
-                  </p>
+                  </div>
                   
                   {item.link && (
                     <Link
