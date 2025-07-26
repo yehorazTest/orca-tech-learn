@@ -21,8 +21,8 @@ const Navigation = () => {
     { path: '/courses', label: 'Courses' },
     { path: '/projects', label: 'Projects' },
     { path: '/about', label: 'About' },
-    { path: '/support', label: 'Support Us' },
     { path: '/contact', label: 'Contact Us' },
+    { path: '/support', label: 'Support Us' },
   ];
 
   return (
