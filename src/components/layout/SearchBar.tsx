@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Search, BookOpen, Target, X } from 'lucide-react';
 import { useSearch } from '../../context/SearchContext';
 
@@ -93,11 +94,10 @@ const SearchBar = () => {
               </div>
             ) : searchResults.length > 0 ? (
               searchResults.map((result) => (
-                <Link
+                <button
                   key={result.id}
-                  to={result.url}
-                  className="block px-4 py-3 hover:bg-slate-700 transition-colors border-b border-slate-700 last:border-b-0"
-                  onClick={handleResultClick}
+                  onClick={() => handleResultClick(result.url)}
+                  className="block w-full text-left px-4 py-3 hover:bg-slate-700 transition-colors border-b border-slate-700 last:border-b-0"
                 >
                   <div className="flex items-center space-x-3">
                     <div className="flex-shrink-0">
@@ -112,7 +112,7 @@ const SearchBar = () => {
                       <div className="text-slate-400 text-sm">{result.type === 'path' ? 'Learning Path' : 'Course'}</div>
                     </div>
                   </div>
-                </Link>
+                </button>
               ))
             ) : (
               <div className="px-4 py-3 text-slate-400 text-center">
