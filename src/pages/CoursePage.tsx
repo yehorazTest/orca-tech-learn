@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft } from 'lucide-react';
 import Header from '../components/layout/Header';
@@ -11,6 +11,7 @@ import { courses } from '../data/courses';
 
 const CoursePage = () => {
   const { courseId } = useParams<{ courseId: string }>();
+  const location = useLocation();
   const course = courses.find(c => c.id === courseId);
 
   if (!course) {
@@ -32,6 +33,7 @@ const CoursePage = () => {
         <title>{course.title} - ORCATech Learning Platform</title>
         <meta name="description" content={course.longDescription} />
         <meta name="keywords" content={course.tags.join(', ')} />
+        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">

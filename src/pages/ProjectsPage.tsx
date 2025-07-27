@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import ProjectCard from '../components/ui/ProjectCard';
 import { projectsByCategory } from '../data/projects';
@@ -11,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 
 const ProjectsPage = () => {
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [sectionStates, setSectionStates] = useState({
@@ -53,6 +55,7 @@ const ProjectsPage = () => {
       <Helmet>
         <title>Projects & Exercises - ORCATech Learning Platform</title>
         <meta name="description" content="Practice your skills with real-world projects and exercises. Build solutions across Python, Docker, Kubernetes, CI/CD, and Infrastructure as Code." />
+        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">

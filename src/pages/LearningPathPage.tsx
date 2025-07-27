@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import CourseCard from '../components/ui/CourseCard';
@@ -14,6 +15,7 @@ import { Search } from 'lucide-react';
 
 const LearningPathPage = () => {
   const { pathId } = useParams<{ pathId: string }>();
+  const location = useLocation();
   const learningPath = learningPaths.find(path => path.id === pathId);
   const [openSections, setOpenSections] = React.useState<{ [key: number]: boolean }>({});
   const [searchTerm, setSearchTerm] = useState('');
@@ -50,6 +52,7 @@ const LearningPathPage = () => {
       <Helmet>
         <title>{learningPath.title} - ORCATech Learning Platform</title>
         <meta name="description" content={learningPath.longDescription} />
+        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">

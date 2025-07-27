@@ -1,16 +1,19 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Home, Search } from 'lucide-react';
 import Header from '../components/layout/Header';
 
 const NotFoundPage = () => {
+  const location = useLocation();
+
   return (
     <>
       <Helmet>
         <title>Page Not Found - ORCATech Learning Platform</title>
         <meta name="description" content="The page you're looking for doesn't exist. Explore our learning paths instead." />
+        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">

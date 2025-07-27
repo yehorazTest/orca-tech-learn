@@ -1,10 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import { Target, Users, Award, Zap } from 'lucide-react';
 
 const AboutPage = () => {
+  const location = useLocation();
   const values = [
     {
       icon: Target,
@@ -33,6 +34,7 @@ const AboutPage = () => {
       <Helmet>
         <title>About ORCATech - Transforming Tech Education</title>
         <meta name="description" content="Learn about ORCATech's mission to democratize tech education through cutting-edge learning platforms and industry-focused curricula." />
+        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">

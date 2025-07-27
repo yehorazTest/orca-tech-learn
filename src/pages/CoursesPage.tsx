@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import CourseCard from '../components/ui/CourseCard';
 import { courses } from '../data/courses';
@@ -19,6 +20,7 @@ import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 const CoursesPage = () => {
+  const location = useLocation();
   const [searchTerm, setSearchTerm] = useState('');
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     'software-development': false,
@@ -88,6 +90,7 @@ const CoursesPage = () => {
       <Helmet>
         <title>Courses - ORCATech Learning Platform</title>
         <meta name="description" content="Focus on specific technologies and skills with our comprehensive course catalog. From beginner fundamentals to expert-level specializations." />
+        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">
