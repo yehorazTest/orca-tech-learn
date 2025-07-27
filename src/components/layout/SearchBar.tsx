@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, BookOpen, Target, X } from 'lucide-react';
@@ -161,7 +160,7 @@ const SearchBar = () => {
 
           {/* Mobile Search Results */}
           {query.trim() !== '' && (
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto bg-slate-900">
               {isLoading ? (
                 <div className="px-4 py-8 text-slate-400 text-center">
                   Searching...
@@ -172,7 +171,7 @@ const SearchBar = () => {
                     <Link
                       key={result.id}
                       to={result.url}
-                      className="block px-4 py-4 hover:bg-slate-800 transition-colors"
+                      className="block px-4 py-4 bg-slate-800 hover:bg-slate-700 transition-colors"
                       onClick={handleResultClick}
                     >
                       <div className="flex items-center space-x-3">
@@ -192,7 +191,7 @@ const SearchBar = () => {
                   ))}
                 </div>
               ) : (
-                <div className="px-4 py-8 text-slate-400 text-center">
+                <div className="px-4 py-8 text-slate-400 text-center bg-slate-800">
                   No results found for "{query}"
                 </div>
               )}
