@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
@@ -90,7 +89,7 @@ const CoursesPage = () => {
       <Helmet>
         <title>Courses - ORCATech Learning Platform</title>
         <meta name="description" content="Focus on specific technologies and skills with our comprehensive course catalog. From beginner fundamentals to expert-level specializations." />
-        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
+        <link rel="canonical" href={`https://learn-and-earn.online${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">
