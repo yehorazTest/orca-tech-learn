@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, BookOpen, Target, X } from 'lucide-react';
@@ -136,9 +135,9 @@ const SearchBar = () => {
 
       {/* Mobile Expanded Search Overlay */}
       {isMobileExpanded && (
-        <div className="fixed inset-0 bg-slate-900 z-50 md:hidden">
+        <div className="fixed inset-0 bg-slate-900 z-50 md:hidden" ref={searchRef}>
           <div className="flex items-center p-4 border-b border-slate-700">
-            <div className="flex-1 relative" ref={searchRef}>
+            <div className="flex-1 relative">
               <form onSubmit={handleSearch}>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
