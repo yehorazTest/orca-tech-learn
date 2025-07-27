@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -33,7 +32,7 @@ const CoursePage = () => {
         <title>{course.title} - ORCATech Learning Platform</title>
         <meta name="description" content={course.longDescription} />
         <meta name="keywords" content={course.tags.join(', ')} />
-        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
+        <link rel="canonical" href={`https://learn-and-earn.online${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">
