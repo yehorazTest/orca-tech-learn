@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, BookOpen, Target, X } from 'lucide-react';
 import { useSearch } from '../../context/SearchContext';
 
@@ -11,6 +10,7 @@ const SearchBar = () => {
   const { search, searchResults, isLoading } = useSearch();
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   // Close search results when clicking outside
   useEffect(() => {
@@ -47,10 +47,13 @@ const SearchBar = () => {
     }
   };
 
-  const handleResultClick = () => {
+  const handleResultClick = (url: string) => {
+    // Close all search states
     setIsOpen(false);
     setQuery('');
     setIsMobileExpanded(false);
+    // Navigate programmatically to ensure it works
+    navigate(url);
   };
 
   const handleMobileSearchClick = () => {
@@ -169,11 +172,10 @@ const SearchBar = () => {
               ) : searchResults.length > 0 ? (
                 <div className="divide-y divide-slate-700">
                   {searchResults.map((result) => (
-                    <Link
+                    <button
                       key={result.id}
-                      to={result.url}
-                      className="block px-4 py-4 bg-slate-800 hover:bg-slate-700 transition-colors"
-                      onClick={handleResultClick}
+                      onClick={() => handleResultClick(result.url)}
+                      className="block w-full text-left px-4 py-4 bg-slate-800 hover:bg-slate-700 transition-colors"
                     >
                       <div className="flex items-center space-x-3">
                         <div className="flex-shrink-0">
@@ -188,7 +190,7 @@ const SearchBar = () => {
                           <div className="text-slate-400 text-sm mt-1">{result.type === 'path' ? 'Learning Path' : 'Course'}</div>
                         </div>
                       </div>
-                    </Link>
+                    </button>
                   ))}
                 </div>
               ) : (
