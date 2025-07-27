@@ -52,7 +52,7 @@ const LearningPathPage = () => {
       <Helmet>
         <title>{learningPath.title} - ORCATech Learning Platform</title>
         <meta name="description" content={learningPath.longDescription} />
-        <link rel="canonical" href={`https://orcatech.dev${location.pathname}`} />
+        <link rel="canonical" href={`https://learn-and-earn.online${location.pathname}`} />
       </Helmet>
 
       <div className="min-h-screen bg-slate-950">
