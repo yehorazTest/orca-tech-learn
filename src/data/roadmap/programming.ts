@@ -60,7 +60,7 @@ export const programmingRoadmap: RoadmapItem[] = [
     iconColor: 'text-cyan-400',
     gradient: 'from-cyan-400 to-blue-500',
     lastUpdated: new Date(),
-    developmentProgress: 25
+    developmentProgress: 0
   },
   {
     id: 'react-advanced',
