@@ -1,4 +1,3 @@
-
 export interface Resource {
   id: string;
   title: string;
@@ -102,4 +101,25 @@ export interface UserProgress {
     interests: string[];
     notifications: boolean;
   };
+}
+
+export interface RoadmapItem {
+  id: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  category: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  estimatedHours: number;
+  plannedReleaseDate: string; // Quarter format: "Q1 2024"
+  priority: 'High' | 'Medium' | 'Low';
+  status: 'Planned' | 'In Development' | 'Review' | 'Testing';
+  votingCount: number;
+  tags: string[];
+  prerequisites: string[];
+  icon: string;
+  iconColor: string;
+  gradient: string;
+  lastUpdated: Date;
+  developmentProgress: number; // 0-100
 }

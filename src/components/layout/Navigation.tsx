@@ -20,6 +20,7 @@ const Navigation = () => {
     { path: '/learning-paths', label: 'Learning Paths' },
     { path: '/courses', label: 'Courses' },
     { path: '/projects', label: 'Projects' },
+    { path: '/roadmap', label: 'Roadmap' },
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact Us' },
     { path: '/support', label: 'Support Us' },

@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/toaster";
@@ -18,6 +17,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
+import RoadmapPage from "./pages/RoadmapPage";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +41,7 @@ const App = () => (
                   <Route path="/learning-paths" element={<LearningPathsPage />} />
                   <Route path="/courses" element={<CoursesPage />} />
                   <Route path="/projects" element={<ProjectsPage />} />
+                  <Route path="/roadmap" element={<RoadmapPage />} />
                   <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
                   <Route path="/course/:courseId" element={<CoursePage />} />
                   <Route path="/about" element={<AboutPage />} />
