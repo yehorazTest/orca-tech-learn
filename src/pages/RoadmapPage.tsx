@@ -86,7 +86,7 @@ const RoadmapPage = () => {
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
                 <Input
-                  placeholder="Search roadmap items..."
+                  placeholder="Filter roadmap items..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10 bg-slate-800/50 border-slate-700 text-white placeholder-slate-400"
