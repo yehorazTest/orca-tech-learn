@@ -35,8 +35,8 @@ const RoadmapPage = () => {
     return matchesCategory && matchesSearch && matchesPriority && matchesStatus;
   });
 
-  const totalVotes = roadmapItems.reduce((sum, item) => sum + item.votingCount, 0);
   const inDevelopment = roadmapItems.filter(item => item.status === 'In Development').length;
+  const highPriority = roadmapItems.filter(item => item.priority === 'High').length;
 
   return (
     <>
@@ -71,8 +71,8 @@ const RoadmapPage = () => {
                 <div className="text-sm text-slate-400">In Development</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-purple-400">{totalVotes}</div>
-                <div className="text-sm text-slate-400">Community Votes</div>
+                <div className="text-2xl font-bold text-orange-400">{highPriority}</div>
+                <div className="text-sm text-slate-400">High Priority</div>
               </div>
             </div>
           </div>
