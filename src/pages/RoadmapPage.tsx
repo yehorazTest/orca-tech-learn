@@ -37,7 +37,7 @@ const RoadmapPage = () => {
 
   const inDevelopment = roadmapItems.filter(item => item.status === 'In Development').length;
   const highPriority = roadmapItems.filter(item => item.priority === 'High').length;
-  const totalTopics = roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
+  const totalEstimatedTopics = roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
 
   return (
     <>
@@ -72,8 +72,8 @@ const RoadmapPage = () => {
                 <div className="text-sm text-slate-400">In Development</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-purple-400">{totalTopics}</div>
-                <div className="text-sm text-slate-400">Total Topics</div>
+                <div className="text-2xl font-bold text-purple-400">{totalEstimatedTopics}</div>
+                <div className="text-sm text-slate-400">Total Estimated Topics</div>
               </div>
             </div>
           </div>

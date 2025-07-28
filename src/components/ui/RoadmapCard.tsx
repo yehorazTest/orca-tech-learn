@@ -85,7 +85,7 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({ item, className = '' }) => {
         <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
           <div className="flex items-center gap-1">
             <BookOpen className="w-4 h-4" />
-            {topicCount} topics
+            {topicCount} estimated topics
           </div>
           <div className="flex items-center gap-1">
             <Calendar className="w-4 h-4" />
