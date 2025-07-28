@@ -1,3 +1,4 @@
+
 export interface Resource {
   id: string;
   title: string;
@@ -110,7 +111,7 @@ export interface RoadmapItem {
   longDescription: string;
   category: string;
   difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
-  estimatedHours: number;
+  topicCount: number;
   plannedReleaseDate: string; // Quarter format: "Q1 2024"
   priority: 'High' | 'Medium' | 'Low';
   status: 'Planned' | 'In Development' | 'Review' | 'Testing';

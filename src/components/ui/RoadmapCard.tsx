@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Heart, Calendar, TrendingUp } from 'lucide-react';
+import { Clock, Heart, Calendar, TrendingUp, BookOpen } from 'lucide-react';
 import { RoadmapItem } from '../../types/learningPath';
 import { Card } from '@/components/ui/card';
 
@@ -16,7 +16,7 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({ item, className = '' }) => {
     icon,
     iconColor,
     difficulty,
-    estimatedHours,
+    topicCount,
     plannedReleaseDate,
     priority,
     status,
@@ -84,8 +84,8 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({ item, className = '' }) => {
         {/* Stats */}
         <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
           <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            {estimatedHours}h
+            <BookOpen className="w-4 h-4" />
+            {topicCount} topics
           </div>
           <div className="flex items-center gap-1">
             <Calendar className="w-4 h-4" />

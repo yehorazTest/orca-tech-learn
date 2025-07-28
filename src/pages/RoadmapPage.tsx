@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
-import { Filter, Search, Calendar, TrendingUp } from 'lucide-react';
+import { Filter, Search, Calendar, TrendingUp, BookOpen } from 'lucide-react';
 import Header from '../components/layout/Header';
 import RoadmapCard from '../components/ui/RoadmapCard';
 import { roadmapItems, roadmapCategories } from '../data/roadmap';
@@ -37,6 +37,7 @@ const RoadmapPage = () => {
 
   const inDevelopment = roadmapItems.filter(item => item.status === 'In Development').length;
   const highPriority = roadmapItems.filter(item => item.priority === 'High').length;
+  const totalTopics = roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
 
   return (
     <>
@@ -71,8 +72,8 @@ const RoadmapPage = () => {
                 <div className="text-sm text-slate-400">In Development</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-orange-400">{highPriority}</div>
-                <div className="text-sm text-slate-400">High Priority</div>
+                <div className="text-2xl font-bold text-purple-400">{totalTopics}</div>
+                <div className="text-sm text-slate-400">Total Topics</div>
               </div>
             </div>
           </div>
@@ -98,7 +99,7 @@ const RoadmapPage = () => {
                 <SelectTrigger className="w-[180px] bg-slate-800/50 border-slate-700 text-white">
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                <SelectContent className="bg-slate-800 border-slate-700">
                   <SelectItem value="all" className="text-white hover:bg-slate-700">All Categories</SelectItem>
                   {roadmapCategories.map(category => (
                     <SelectItem key={category.id} value={category.id} className="text-white hover:bg-slate-700">
@@ -113,7 +114,7 @@ const RoadmapPage = () => {
                 <SelectTrigger className="w-[140px] bg-slate-800/50 border-slate-700 text-white">
                   <SelectValue placeholder="Priority" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                <SelectContent className="bg-slate-800 border-slate-700">
                   <SelectItem value="all" className="text-white hover:bg-slate-700">All Priorities</SelectItem>
                   <SelectItem value="High" className="text-white hover:bg-slate-700">High</SelectItem>
                   <SelectItem value="Medium" className="text-white hover:bg-slate-700">Medium</SelectItem>
@@ -126,7 +127,7 @@ const RoadmapPage = () => {
                 <SelectTrigger className="w-[140px] bg-slate-800/50 border-slate-700 text-white">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                <SelectContent className="bg-slate-800 border-slate-700">
                   <SelectItem value="all" className="text-white hover:bg-slate-700">All Status</SelectItem>
                   <SelectItem value="Planned" className="text-white hover:bg-slate-700">Planned</SelectItem>
                   <SelectItem value="In Development" className="text-white hover:bg-slate-700">In Development</SelectItem>
