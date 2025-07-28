@@ -98,10 +98,10 @@ const RoadmapPage = () => {
                 <SelectTrigger className="w-[180px] bg-slate-800/50 border-slate-700 text-white">
                   <SelectValue placeholder="Category" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  <SelectItem value="all">All Categories</SelectItem>
+                <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                  <SelectItem value="all" className="text-white hover:bg-slate-700">All Categories</SelectItem>
                   {roadmapCategories.map(category => (
-                    <SelectItem key={category.id} value={category.id}>
+                    <SelectItem key={category.id} value={category.id} className="text-white hover:bg-slate-700">
                       {category.name} ({category.count})
                     </SelectItem>
                   ))}
@@ -113,11 +113,11 @@ const RoadmapPage = () => {
                 <SelectTrigger className="w-[140px] bg-slate-800/50 border-slate-700 text-white">
                   <SelectValue placeholder="Priority" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  <SelectItem value="all">All Priorities</SelectItem>
-                  <SelectItem value="High">High</SelectItem>
-                  <SelectItem value="Medium">Medium</SelectItem>
-                  <SelectItem value="Low">Low</SelectItem>
+                <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                  <SelectItem value="all" className="text-white hover:bg-slate-700">All Priorities</SelectItem>
+                  <SelectItem value="High" className="text-white hover:bg-slate-700">High</SelectItem>
+                  <SelectItem value="Medium" className="text-white hover:bg-slate-700">Medium</SelectItem>
+                  <SelectItem value="Low" className="text-white hover:bg-slate-700">Low</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -126,12 +126,12 @@ const RoadmapPage = () => {
                 <SelectTrigger className="w-[140px] bg-slate-800/50 border-slate-700 text-white">
                   <SelectValue placeholder="Status" />
                 </SelectTrigger>
-                <SelectContent className="bg-slate-800 border-slate-700">
-                  <SelectItem value="all">All Status</SelectItem>
-                  <SelectItem value="Planned">Planned</SelectItem>
-                  <SelectItem value="In Development">In Development</SelectItem>
-                  <SelectItem value="Review">Review</SelectItem>
-                  <SelectItem value="Testing">Testing</SelectItem>
+                <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                  <SelectItem value="all" className="text-white hover:bg-slate-700">All Status</SelectItem>
+                  <SelectItem value="Planned" className="text-white hover:bg-slate-700">Planned</SelectItem>
+                  <SelectItem value="In Development" className="text-white hover:bg-slate-700">In Development</SelectItem>
+                  <SelectItem value="Review" className="text-white hover:bg-slate-700">Review</SelectItem>
+                  <SelectItem value="Testing" className="text-white hover:bg-slate-700">Testing</SelectItem>
                 </SelectContent>
               </Select>
             </div>
