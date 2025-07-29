@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
@@ -39,10 +38,7 @@ const RoadmapPage = () => {
 
   const inDevelopment = data.roadmapItems.filter(item => item.status === 'In Development').length;
   const highPriority = data.roadmapItems.filter(item => item.priority === 'High').length;
-  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => {
-    const topicCount = typeof item.topicCount === 'number' ? item.topicCount : 0;
-    return sum + topicCount;
-  }, 0);
+  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
 
   if (isLoading) {
     return (
@@ -89,15 +85,15 @@ const RoadmapPage = () => {
             {/* Stats */}
             <div className="flex justify-center gap-8 text-center">
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.length || 0}</div>
+                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.length}</div>
                 <div className="text-sm text-slate-400">Planned Items</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-green-400">{inDevelopment || 0}</div>
+                <div className="text-2xl font-bold text-green-400">{inDevelopment}</div>
                 <div className="text-sm text-slate-400">In Development</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-purple-400">{totalEstimatedTopics || 0}</div>
+                <div className="text-2xl font-bold text-purple-400">{totalEstimatedTopics}</div>
                 <div className="text-sm text-slate-400">Total Estimated Topics</div>
               </div>
             </div>
