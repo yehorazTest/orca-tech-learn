@@ -37,10 +37,11 @@ class ApiService {
       };
     } catch (error) {
       console.error('Failed to fetch backend data:', error);
-      throw new ApiError({
+      const apiError: ApiError = {
         message: error instanceof Error ? error.message : 'Failed to fetch data',
         timestamp: new Date().toISOString()
-      });
+      };
+      throw new Error(apiError.message);
     }
   }
 
@@ -50,15 +51,3 @@ class ApiService {
 }
 
 export const apiService = new ApiService();
-
-class ApiError extends Error {
-  status?: number;
-  timestamp: string;
-
-  constructor({ message, status, timestamp }: { message: string; status?: number; timestamp: string }) {
-    super(message);
-    this.name = 'ApiError';
-    this.status = status;
-    this.timestamp = timestamp;
-  }
-}
