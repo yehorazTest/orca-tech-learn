@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
@@ -30,8 +29,8 @@ const RoadmapPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
-  const [coursesExpanded, setCoursesExpanded] = useState(true);
-  const [projectsExpanded, setProjectsExpanded] = useState(true);
+  const [coursesExpanded, setCoursesExpanded] = useState(false);
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
 
   const filteredCourses = data.roadmapItems.filter(item => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
