@@ -1,8 +1,7 @@
 
 import React, { createContext, useContext, useState } from 'react';
 import { SearchFilters, SearchItem } from '../types/learningPath';
-import { learningPaths } from '../data/learningPaths';
-import { courses } from '../data/courses';
+import { useBackendData } from './BackendDataContext';
 
 interface SearchContextType {
   searchQuery: string;
@@ -29,6 +28,8 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
   const [filters, setFilters] = useState<SearchFilters>({});
   const [isLoading, setIsLoading] = useState(false);
+  
+  const { data } = useBackendData();
 
   const search = (query: string) => {
     setSearchQuery(query);
@@ -36,7 +37,7 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     
     // Convert learning paths and courses to search-friendly format
     const allItems: SearchItem[] = [
-      ...learningPaths.map(path => ({
+      ...data.learningPaths.map(path => ({
         id: path.id,
         title: path.title,
         description: path.description,
@@ -46,7 +47,7 @@ export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         category: path.category || 'General',
         difficulty: 'Intermediate' // Default difficulty for paths
       })),
-      ...courses.map(course => ({
+      ...data.courses.map(course => ({
         id: course.id,
         title: course.title,
         description: course.description,

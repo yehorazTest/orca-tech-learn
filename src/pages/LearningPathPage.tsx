@@ -4,8 +4,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../components/layout/Header';
 import CourseCard from '../components/ui/CourseCard';
-import { learningPaths } from '../data/learningPaths';
-import { courses } from '../data/courses';
+import { useBackendData } from '../context/BackendDataContext';
 import LearningPathHero from '../components/learning-path/LearningPathHero';
 import LearningPathSidebar from '../components/learning-path/LearningPathSidebar';
 import CourseGroupSection from '../components/learning-path/CourseGroupSection';
@@ -16,21 +15,38 @@ import { Search } from 'lucide-react';
 const LearningPathPage = () => {
   const { pathId } = useParams<{ pathId: string }>();
   const location = useLocation();
-  const learningPath = learningPaths.find(path => path.id === pathId);
+  const { data, isLoading } = useBackendData();
   const [openSections, setOpenSections] = React.useState<{ [key: number]: boolean }>({});
   const [searchTerm, setSearchTerm] = useState('');
+
+  const learningPath = data.learningPaths.find(path => path.id === pathId);
+
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-300">Loading learning path...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Handle case where learning path is not found
   if (!learningPath) {
     return <LearningPathNotFound />;
   }
 
-  const pathCourses = courses.filter(course => 
+  const pathCourses = data.courses.filter(course => 
     learningPath.courseIds.includes(course.id)
   );
 
   // Simple filter function like courses page
-  const filterCourses = (coursesToFilter: typeof courses) => {
+  const filterCourses = (coursesToFilter: typeof data.courses) => {
     if (!searchTerm) return coursesToFilter;
     
     return coursesToFilter.filter(course =>
@@ -102,7 +118,7 @@ const LearningPathPage = () => {
               // Render grouped courses with collapsible sections
               <CourseGroupSection 
                 groups={learningPath.courseGroups}
-                courses={courses}
+                courses={data.courses}
                 openSections={openSections}
                 onToggleSection={toggleSection}
                 filterCourses={filterCourses}

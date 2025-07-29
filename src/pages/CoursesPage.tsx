@@ -1,25 +1,17 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import CourseCard from '../components/ui/CourseCard';
-import { courses } from '../data/courses';
-import { programmingCourses } from '../data/courses/programming';
-import { webCourses } from '../data/courses/web';
-import { cloudCourses } from '../data/courses/cloud';
-import { kubernetesCourses } from '../data/courses/kubernetes';
-import { dockerCourses } from '../data/courses/docker';
-import { gitCourses } from '../data/courses/git';
-import { sysadminCourses } from '../data/courses/sysadmin';
-import { cicdCourses } from '../data/courses/cicd';
-import { iacCourses } from '../data/courses/iac';
-import { expertCourses } from '../data/courses/expert';
+import { useBackendData } from '../context/BackendDataContext';
 import { Input } from '@/components/ui/input';
 import { Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 const CoursesPage = () => {
   const location = useLocation();
+  const { data, isLoading, error } = useBackendData();
   const [searchTerm, setSearchTerm] = useState('');
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>({
     'software-development': false,
@@ -29,7 +21,7 @@ const CoursesPage = () => {
     'expert-specializations': false
   });
 
-  const filterCourses = (coursesToFilter: typeof courses) => {
+  const filterCourses = (coursesToFilter: typeof data.courses) => {
     if (!searchTerm) return coursesToFilter;
     
     return coursesToFilter.filter(course =>
@@ -46,43 +38,58 @@ const CoursesPage = () => {
     }));
   };
 
+  // Group courses by category
   const courseCategories = [
     {
       id: 'software-development',
       title: 'Software Development',
       description: 'Master programming languages and software development fundamentals',
-      courses: programmingCourses,
+      courses: data.courses.filter(course => ['Python', 'Java', 'Programming'].includes(course.category)),
       icon: '💻'
     },
     {
       id: 'web-development',
       title: 'Web Development',
       description: 'Build modern web applications with React and frontend technologies',
-      courses: webCourses,
+      courses: data.courses.filter(course => course.category === 'Web'),
       icon: '🌐'
     },
     {
       id: 'cloud-computing',
       title: 'Cloud Computing',
       description: 'Learn cloud platforms, services, and cloud-native architectures',
-      courses: cloudCourses,
+      courses: data.courses.filter(course => course.category === 'Cloud'),
       icon: '☁️'
     },
     {
       id: 'devops-infrastructure',
       title: 'DevOps & Infrastructure',
       description: 'Master containerization, orchestration, CI/CD, and infrastructure automation',
-      courses: [...dockerCourses, ...kubernetesCourses, ...gitCourses, ...sysadminCourses, ...cicdCourses, ...iacCourses],
+      courses: data.courses.filter(course => ['DevOps', 'Docker', 'Kubernetes', 'Git', 'System Administration', 'CI/CD', 'IaC'].includes(course.category)),
       icon: '🔧'
     },
     {
       id: 'expert-specializations',
       title: 'Expert Specializations',
       description: 'Advanced courses for specialized skills and deep expertise',
-      courses: expertCourses,
+      courses: data.courses.filter(course => course.difficulty === 'Professional' || course.category === 'Expert'),
       icon: '🎯'
     }
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-300">Loading courses...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -117,6 +124,12 @@ const CoursesPage = () => {
                 className="pl-10 bg-slate-800 border-slate-700 text-white placeholder:text-slate-400"
               />
             </div>
+
+            {error && (
+              <div className="mt-4 text-red-400 text-sm">
+                Backend connection failed - showing fallback data
+              </div>
+            )}
           </div>
         </section>
 

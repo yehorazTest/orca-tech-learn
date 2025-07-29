@@ -1,11 +1,11 @@
-
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { Filter, Search, Calendar, TrendingUp, BookOpen } from 'lucide-react';
 import Header from '../components/layout/Header';
 import RoadmapCard from '../components/ui/RoadmapCard';
-import { roadmapItems, roadmapCategories } from '../data/roadmap';
+import { useBackendData } from '../context/BackendDataContext';
+import { roadmapCategories } from '../data/roadmap';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -18,12 +18,13 @@ import {
 
 const RoadmapPage = () => {
   const location = useLocation();
+  const { data, isLoading, error } = useBackendData();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
 
-  const filteredItems = roadmapItems.filter(item => {
+  const filteredItems = data.roadmapItems.filter(item => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch = !searchTerm || 
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -35,9 +36,23 @@ const RoadmapPage = () => {
     return matchesCategory && matchesSearch && matchesPriority && matchesStatus;
   });
 
-  const inDevelopment = roadmapItems.filter(item => item.status === 'In Development').length;
-  const highPriority = roadmapItems.filter(item => item.priority === 'High').length;
-  const totalEstimatedTopics = roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
+  const inDevelopment = data.roadmapItems.filter(item => item.status === 'In Development').length;
+  const highPriority = data.roadmapItems.filter(item => item.priority === 'High').length;
+  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-300">Loading roadmap...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -60,11 +75,17 @@ const RoadmapPage = () => {
               Discover what's coming next to the ORCATech Learning Platform. Vote on upcoming courses and features, 
               and help us prioritize what matters most to you.
             </p>
+
+            {error && (
+              <div className="mb-4 text-red-400 text-sm">
+                Backend connection failed - showing fallback data
+              </div>
+            )}
             
             {/* Stats */}
             <div className="flex justify-center gap-8 text-center">
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-blue-400">{roadmapItems.length}</div>
+                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.length}</div>
                 <div className="text-sm text-slate-400">Planned Items</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">

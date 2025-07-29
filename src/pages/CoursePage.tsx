@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
@@ -6,12 +7,28 @@ import Header from '../components/layout/Header';
 import CourseHero from '../components/course/CourseHero';
 import CoursePrerequisites from '../components/course/CoursePrerequisites';
 import ResourcesSection from '../components/course/ResourcesSection';
-import { courses } from '../data/courses';
+import { useBackendData } from '../context/BackendDataContext';
 
 const CoursePage = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const location = useLocation();
-  const course = courses.find(c => c.id === courseId);
+  const { data, isLoading } = useBackendData();
+  
+  const course = data.courses.find(c => c.id === courseId);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-300">Loading course...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!course) {
     return (

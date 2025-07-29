@@ -1,3 +1,4 @@
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/toaster";
@@ -16,6 +17,7 @@ import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
+import { BackendDataProvider } from "./context/BackendDataContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
 import RoadmapPage from "./pages/RoadmapPage";
 
@@ -29,31 +31,33 @@ const ScrollToTopWrapper = ({ children }: { children: React.ReactNode }) => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
-      <UserProgressProvider>
-        <SearchProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <Router>
-              <ScrollToTopWrapper>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/learning-paths" element={<LearningPathsPage />} />
-                  <Route path="/courses" element={<CoursesPage />} />
-                  <Route path="/projects" element={<ProjectsPage />} />
-                  <Route path="/roadmap" element={<RoadmapPage />} />
-                  <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
-                  <Route path="/course/:courseId" element={<CoursePage />} />
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/support" element={<SupportPage />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                  <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-              </ScrollToTopWrapper>
-            </Router>
-          </TooltipProvider>
-        </SearchProvider>
-      </UserProgressProvider>
+      <BackendDataProvider>
+        <UserProgressProvider>
+          <SearchProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Sonner />
+              <Router>
+                <ScrollToTopWrapper>
+                  <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/learning-paths" element={<LearningPathsPage />} />
+                    <Route path="/courses" element={<CoursesPage />} />
+                    <Route path="/projects" element={<ProjectsPage />} />
+                    <Route path="/roadmap" element={<RoadmapPage />} />
+                    <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
+                    <Route path="/course/:courseId" element={<CoursePage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/support" element={<SupportPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
+                  </Routes>
+                </ScrollToTopWrapper>
+              </Router>
+            </TooltipProvider>
+          </SearchProvider>
+        </UserProgressProvider>
+      </BackendDataProvider>
     </HelmetProvider>
   </QueryClientProvider>
 );
