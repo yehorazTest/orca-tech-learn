@@ -22,8 +22,9 @@ class ApiService {
 
   async getAllData(): Promise<BackendResponse> {
     try {
-      const response = await this.fetchWithRetry(`${BASE_URL}/api/data`);
-      const data = await response.json();
+      const response = await this.fetchWithRetry(`${BASE_URL}/api/v1/data`);
+      const responseData = await response.json();
+      const data = responseData.data;
       
       return {
         learningPaths: data.learningPaths || [],
