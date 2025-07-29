@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import { Filter, Search, Calendar, TrendingUp, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 import Header from '../components/layout/Header';
 import RoadmapCard from '../components/ui/RoadmapCard';
-import ProjectRoadmapCard from '../components/ui/ProjectRoadmapCard';
 import { useBackendData } from '../context/BackendDataContext';
 import { roadmapCategories } from '../data/roadmap';
 import { Button } from '@/components/ui/button';
@@ -41,21 +40,24 @@ const RoadmapPage = () => {
     const matchesPriority = priorityFilter === 'all' || item.priority === priorityFilter;
     const matchesStatus = statusFilter === 'all' || item.status === statusFilter;
     
-    return matchesCategory && matchesSearch && matchesPriority && matchesStatus;
+    return matchesCategory && matchesSearch && matchesPriority && matchesStatus && item.type === 'course';
   });
 
-  const filteredProjects = data.projects.filter(project => {
+  const filteredProjects = data.roadmapItems.filter(item => {
+    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch = !searchTerm || 
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesPriority = priorityFilter === 'all' || item.priority === priorityFilter;
+    const matchesStatus = statusFilter === 'all' || item.status === statusFilter;
     
-    return matchesSearch;
+    return matchesCategory && matchesSearch && matchesPriority && matchesStatus && item.type === 'project';
   });
 
   const inDevelopment = data.roadmapItems.filter(item => item.status === 'In Development').length || 0;
   const highPriority = data.roadmapItems.filter(item => item.priority === 'High').length || 0;
-  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + (item.topicCount || 0), 0) || 0;
+  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + (item.type === 'course' ? item.topicCount : 0), 0) || 0;
 
   if (isLoading) {
     return (
@@ -102,11 +104,11 @@ const RoadmapPage = () => {
             {/* Stats */}
             <div className="flex justify-center gap-8 text-center">
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.length || 0}</div>
+                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.filter(item => item.type === 'course').length || 0}</div>
                 <div className="text-sm text-slate-400">Planned Courses</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-green-400">{data.projects.length || 0}</div>
+                <div className="text-2xl font-bold text-green-400">{data.roadmapItems.filter(item => item.type === 'project').length || 0}</div>
                 <div className="text-sm text-slate-400">Planned Projects</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
@@ -252,7 +254,7 @@ const RoadmapPage = () => {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredProjects.map((project) => (
-                      <ProjectRoadmapCard key={project.id} project={project} />
+                      <RoadmapCard key={project.id} item={project} />
                     ))}
                   </div>
                 )}
