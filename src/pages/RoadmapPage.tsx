@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
-import { Filter, Search, Calendar, TrendingUp, BookOpen } from 'lucide-react';
+import { Filter, Search, Calendar, TrendingUp, BookOpen, ChevronDown, ChevronUp } from 'lucide-react';
 import Header from '../components/layout/Header';
 import RoadmapCard from '../components/ui/RoadmapCard';
+import ProjectRoadmapCard from '../components/ui/ProjectRoadmapCard';
 import { useBackendData } from '../context/BackendDataContext';
 import { roadmapCategories } from '../data/roadmap';
 import { Button } from '@/components/ui/button';
@@ -15,6 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@/components/ui/collapsible';
 
 const RoadmapPage = () => {
   const location = useLocation();
@@ -23,8 +30,10 @@ const RoadmapPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [coursesExpanded, setCoursesExpanded] = useState(true);
+  const [projectsExpanded, setProjectsExpanded] = useState(true);
 
-  const filteredItems = data.roadmapItems.filter(item => {
+  const filteredCourses = data.roadmapItems.filter(item => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch = !searchTerm || 
       item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -36,9 +45,18 @@ const RoadmapPage = () => {
     return matchesCategory && matchesSearch && matchesPriority && matchesStatus;
   });
 
-  const inDevelopment = data.roadmapItems.filter(item => item.status === 'In Development').length;
-  const highPriority = data.roadmapItems.filter(item => item.priority === 'High').length;
-  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + item.topicCount, 0);
+  const filteredProjects = data.projects.filter(project => {
+    const matchesSearch = !searchTerm || 
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    return matchesSearch;
+  });
+
+  const inDevelopment = data.roadmapItems.filter(item => item.status === 'In Development').length || 0;
+  const highPriority = data.roadmapItems.filter(item => item.priority === 'High').length || 0;
+  const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + (item.topicCount || 0), 0) || 0;
 
   if (isLoading) {
     return (
@@ -72,7 +90,7 @@ const RoadmapPage = () => {
               Development Roadmap
             </h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
-              Discover what's coming next to the ORCATech Learning Platform. Vote on upcoming courses and features, 
+              Discover what's coming next to the ORCATech Learning Platform. See our planned courses and projects,
               and help us prioritize what matters most to you.
             </p>
 
@@ -85,12 +103,12 @@ const RoadmapPage = () => {
             {/* Stats */}
             <div className="flex justify-center gap-8 text-center">
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.length}</div>
-                <div className="text-sm text-slate-400">Planned Items</div>
+                <div className="text-2xl font-bold text-blue-400">{data.roadmapItems.length || 0}</div>
+                <div className="text-sm text-slate-400">Planned Courses</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
-                <div className="text-2xl font-bold text-green-400">{inDevelopment}</div>
-                <div className="text-sm text-slate-400">In Development</div>
+                <div className="text-2xl font-bold text-green-400">{data.projects.length || 0}</div>
+                <div className="text-sm text-slate-400">Planned Projects</div>
               </div>
               <div className="bg-slate-800/50 rounded-lg p-4 min-w-[120px]">
                 <div className="text-2xl font-bold text-purple-400">{totalEstimatedTopics}</div>
@@ -162,18 +180,86 @@ const RoadmapPage = () => {
 
         {/* Roadmap Items */}
         <section className="py-16 px-4">
-          <div className="container mx-auto">
-            {filteredItems.length === 0 ? (
-              <div className="text-center py-12">
-                <div className="text-slate-400 text-lg">No items found matching your filters.</div>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredItems.map((item) => (
-                  <RoadmapCard key={item.id} item={item} />
-                ))}
-              </div>
-            )}
+          <div className="container mx-auto space-y-8">
+            
+            {/* Courses Section */}
+            <Collapsible open={coursesExpanded} onOpenChange={setCoursesExpanded}>
+              <CollapsibleTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className="flex items-center justify-between w-full p-6 bg-slate-900/50 border border-slate-800 rounded-lg hover:bg-slate-800/50 text-left"
+                >
+                  <div className="flex items-center gap-4">
+                    <BookOpen className="w-6 h-6 text-blue-400" />
+                    <div>
+                      <h2 className="text-2xl font-bold text-white">Planned Courses</h2>
+                      <p className="text-slate-400 text-sm">
+                        {filteredCourses.length} course{filteredCourses.length !== 1 ? 's' : ''} planned for development
+                      </p>
+                    </div>
+                  </div>
+                  {coursesExpanded ? (
+                    <ChevronUp className="w-5 h-5 text-slate-400" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-slate-400" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+              
+              <CollapsibleContent className="mt-6">
+                {filteredCourses.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="text-slate-400 text-lg">No courses found matching your filters.</div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {filteredCourses.map((item) => (
+                      <RoadmapCard key={item.id} item={item} />
+                    ))}
+                  </div>
+                )}
+              </CollapsibleContent>
+            </Collapsible>
+
+            {/* Projects Section */}
+            <Collapsible open={projectsExpanded} onOpenChange={setProjectsExpanded}>
+              <CollapsibleTrigger asChild>
+                <Button 
+                  variant="ghost" 
+                  className="flex items-center justify-between w-full p-6 bg-slate-900/50 border border-slate-800 rounded-lg hover:bg-slate-800/50 text-left"
+                >
+                  <div className="flex items-center gap-4">
+                    <TrendingUp className="w-6 h-6 text-green-400" />
+                    <div>
+                      <h2 className="text-2xl font-bold text-white">Planned Projects</h2>
+                      <p className="text-slate-400 text-sm">
+                        {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''} planned for development
+                      </p>
+                    </div>
+                  </div>
+                  {projectsExpanded ? (
+                    <ChevronUp className="w-5 h-5 text-slate-400" />
+                  ) : (
+                    <ChevronDown className="w-5 h-5 text-slate-400" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+              
+              <CollapsibleContent className="mt-6">
+                {filteredProjects.length === 0 ? (
+                  <div className="text-center py-12">
+                    <div className="text-slate-400 text-lg">No projects found matching your filters.</div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {filteredProjects.map((project) => (
+                      <ProjectRoadmapCard key={project.id} project={project} />
+                    ))}
+                  </div>
+                )}
+              </CollapsibleContent>
+            </Collapsible>
+
           </div>
         </section>
       </div>
