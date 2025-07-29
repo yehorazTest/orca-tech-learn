@@ -1,4 +1,3 @@
-
 import { BackendResponse, ApiError } from '../types/backend';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_PATH || 'http://localhost:5000';
@@ -31,6 +30,7 @@ class ApiService {
         courses: data.courses || [],
         projects: data.projects || [],
         roadmapItems: data.roadmapItems || [],
+        roadmapProjects: data.roadmapProjects || [],
         metadata: data.metadata || {
           lastUpdated: new Date().toISOString(),
           version: '1.0.0'

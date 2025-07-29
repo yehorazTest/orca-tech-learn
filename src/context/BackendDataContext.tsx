@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 import { apiService } from '../services/apiService';
@@ -18,6 +17,7 @@ interface BackendDataContextType {
     courses: Course[];
     projects: Project[];
     roadmapItems: RoadmapItem[];
+    roadmapProjects: Project[];
   };
   isLoading: boolean;
   error: Error | null;
@@ -57,6 +57,7 @@ export const BackendDataProvider: React.FC<BackendDataProviderProps> = ({ childr
     courses: backendData?.courses || fallbackCourses,
     projects: backendData?.projects || fallbackProjects,
     roadmapItems: backendData?.roadmapItems || fallbackRoadmapItems,
+    roadmapProjects: backendData?.roadmapProjects || [],
   };
 
   const contextValue: BackendDataContextType = {

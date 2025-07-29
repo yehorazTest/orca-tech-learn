@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Clock, Heart, Calendar, TrendingUp, BookOpen } from 'lucide-react';
 import { RoadmapItem } from '../../types/learningPath';
@@ -17,6 +16,7 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({ item, className = '' }) => {
     iconColor,
     difficulty,
     topicCount,
+    type,
     plannedReleaseDate,
     priority,
     status,
@@ -85,7 +85,7 @@ const RoadmapCard: React.FC<RoadmapCardProps> = ({ item, className = '' }) => {
         <div className="flex items-center gap-4 mb-4 text-sm text-slate-400">
           <div className="flex items-center gap-1">
             <BookOpen className="w-4 h-4" />
-            {topicCount} estimated topics
+            {type === 'course' ? `${topicCount} Estimated topics` : `${topicCount} Estimated deliverables`}
           </div>
           <div className="flex items-center gap-1">
             <Calendar className="w-4 h-4" />
