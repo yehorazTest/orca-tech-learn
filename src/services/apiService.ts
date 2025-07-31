@@ -1,4 +1,6 @@
+
 import { BackendResponse, ApiError } from '../types/backend';
+import { LabContentResponse } from '../types/lab';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_PATH || 'http://localhost:5000';
 
@@ -48,6 +50,36 @@ class ApiService {
         timestamp: new Date().toISOString()
       };
       throw new Error(apiError.message);
+    }
+  }
+
+  async getLabContent(labFullName: string): Promise<LabContentResponse> {
+    try {
+      const encodedLabName = encodeURIComponent(labFullName);
+      const response = await this.fetchWithRetry(`${BASE_URL}/api/v1/lab/${encodedLabName}/content`);
+      const data = await response.json();
+      
+      return {
+        success: true,
+        data: data.data || data,
+        error: undefined
+      };
+    } catch (error) {
+      console.error('Failed to fetch lab content:', error);
+      return {
+        success: false,
+        data: {
+          labName: '',
+          description: '',
+          files: [],
+          metadata: {
+            lastUpdated: '',
+            totalFiles: 0,
+            mainInstruction: ''
+          }
+        },
+        error: error instanceof Error ? error.message : 'Failed to fetch lab content'
+      };
     }
   }
 
