@@ -2,6 +2,11 @@ import { BackendResponse, ApiError } from '../types/backend';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_PATH || 'http://localhost:5000';
 
+// Log the base URL in development for debugging
+if (import.meta.env.DEV) {
+  console.log('API Base URL:', BASE_URL);
+}
+
 class ApiService {
   private async fetchWithRetry(url: string, retries = 3): Promise<Response> {
     for (let i = 0; i < retries; i++) {
