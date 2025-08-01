@@ -9,9 +9,18 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { apiService } from '../services/apiService';
 import { LabContent, LabFile } from '../types/lab';
 import { sampleLabData } from '../data/sampleLabData';
+import { useBackendData } from '../context/BackendDataContext';
 
 const LabViewerPage: React.FC = () => {
-  const { labName } = useParams<{ labName: string }>();
+  const { courseId, labId } = useParams<{ courseId: string; labId: string }>();
+  const { data } = useBackendData();
+  
+  // Find the course and lab resource
+  const course = data.courses.find(c => c.id === courseId);
+  const labResource = course?.resources?.find(r => r.id === labId && r.type === 'lab') ||
+                     course?.resourceGroups?.flatMap(g => g.resources).find(r => r.id === labId && r.type === 'lab');
+  
+  const labUrl = labResource?.url || '';
   const navigate = useNavigate();
   const [labContent, setLabContent] = useState<LabContent | null>(null);
   const [selectedFile, setSelectedFile] = useState<LabFile | null>(null);
@@ -22,8 +31,8 @@ const LabViewerPage: React.FC = () => {
 
   useEffect(() => {
     const fetchLabContent = async () => {
-      if (!labName) {
-        setError('Lab name is required');
+      if (!labUrl || !labResource) {
+        setError('Lab not found or invalid lab configuration');
         setIsLoading(false);
         return;
       }
@@ -31,7 +40,7 @@ const LabViewerPage: React.FC = () => {
       try {
         setIsLoading(true);
         setError(null);
-        const response = await apiService.getLabContent(labName);
+        const response = await apiService.getLabContent(labUrl);
         
         if (response.success) {
           setLabContent(response.data);
@@ -73,7 +82,7 @@ const LabViewerPage: React.FC = () => {
     };
 
     fetchLabContent();
-  }, [labName]);
+  }, [labUrl, labResource]);
 
   const toggleFolder = (path: string) => {
     setExpandedFolders(prev => {
@@ -214,11 +223,11 @@ const LabViewerPage: React.FC = () => {
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <button 
-                onClick={() => navigate(-1)}
+                onClick={() => navigate(`/course/${courseId}`)}
                 className="inline-flex items-center text-slate-400 hover:text-white transition-colors"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Course
+                Back to {course?.title || 'Course'}
               </button>
               
               <div className="flex items-center gap-4 text-sm text-slate-400">
@@ -239,6 +248,13 @@ const LabViewerPage: React.FC = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Lab Info */}
           <div className="mb-8">
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 text-sm text-slate-400 mb-4">
+              <span>{course?.title}</span>
+              <span>›</span>
+              <span>{labResource?.title || 'Lab'}</span>
+            </div>
+            
             <div className="flex items-center gap-3 mb-4">
               <h1 className="text-3xl font-bold text-white">{labContent.labName}</h1>
               {usingFallback && (

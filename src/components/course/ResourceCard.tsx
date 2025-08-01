@@ -4,20 +4,22 @@ import { Clock, Play, ExternalLink } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Resource } from '../../types/learningPath';
+import { Resource, Course } from '../../types/learningPath';
 
 interface ResourceCardProps {
   resource: Resource;
+  course: Course;
 }
 
-const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
+const ResourceCard: React.FC<ResourceCardProps> = ({ resource, course }) => {
   const navigate = useNavigate();
 
   const handleLabStart = () => {
     if (resource.type === 'lab') {
-      // Extract lab name from URL or use title as fallback
-      const labName = resource.url.split('/').pop() || resource.title.toLowerCase().replace(/\s+/g, '-');
-      navigate(`/lab/${encodeURIComponent(labName)}`);
+      // Navigate to the new lab path structure
+      const courseId = course.id;
+      const labId = resource.id;
+      navigate(`/course/${courseId}/lab/${labId}`);
     } else {
       // For non-lab resources, open external link
       window.open(resource.url, '_blank', 'noopener,noreferrer');
