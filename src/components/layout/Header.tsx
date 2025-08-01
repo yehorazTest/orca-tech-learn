@@ -37,11 +37,11 @@ const Header = () => {
       <div className="flex items-center justify-end w-32">
         <Button
           onClick={() => setShowLoginModal(true)}
-          variant="ghost"
+          variant="outline"
           size="sm"
-          className="text-slate-300 hover:text-white hover:bg-slate-800"
+          className="bg-slate-800 border-slate-700 text-white hover:bg-slate-700 flex items-center gap-2"
         >
-          <LogIn className="w-4 h-4 mr-2" />
+          <LogIn className="w-4 h-4" />
           <span className="hidden sm:inline">Sign In</span>
         </Button>
       </div>
