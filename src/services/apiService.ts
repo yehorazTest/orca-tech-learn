@@ -106,23 +106,17 @@ class ApiService {
     return this.getAllData();
   }
 
-  // Authentication helpers
+  // Authentication helpers - Updated for cookie-based auth
   private enhanceRequestWithAuth(options?: RequestInit): RequestInit {
-    const token = authService.getToken();
-    
     const defaultHeaders = {
       'Content-Type': 'application/json',
     };
     
-    const authHeaders = token ? {
-      'Authorization': `Bearer ${token}`,
-    } : {};
-    
     return {
       ...options,
+      credentials: 'include', // CRITICAL: Include cookies for authentication
       headers: {
         ...defaultHeaders,
-        ...authHeaders,
         ...options?.headers,
       },
     };

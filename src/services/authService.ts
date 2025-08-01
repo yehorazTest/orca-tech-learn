@@ -53,6 +53,23 @@ class AuthService {
     }
   }
 
+  // Check if user is authenticated by verifying with backend
+  async isAuthenticated(): Promise<boolean> {
+    try {
+      const response = await fetch(`${this.baseUrl}/verify`, {
+        method: 'GET',
+        credentials: 'include', // Include cookies for authentication
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return response.ok;
+    } catch (error) {
+      console.error('Auth verification failed:', error);
+      return false;
+    }
+  }
+
   decodeToken(): TokenPayload | null {
     const token = this.getToken();
     if (!token) return null;
@@ -120,51 +137,40 @@ class AuthService {
   }
 
   async logout(): Promise<void> {
-    const token = this.getToken();
-    
-    // Call backend logout endpoint if token exists
-    if (token) {
-      try {
-        await fetch(`${this.baseUrl}/logout`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
-        });
-      } catch (error) {
-        console.error('Backend logout failed:', error);
-        // Continue with local logout even if backend fails
-      }
+    try {
+      await fetch(`${this.baseUrl}/logout`, {
+        method: 'POST',
+        credentials: 'include', // Include cookies for authentication
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    } catch (error) {
+      console.error('Backend logout failed:', error);
+      // Continue with local cleanup even if backend fails
     }
 
-    // Always clear local storage
-    this.removeToken();
-    
     // Clear any OAuth state
     sessionStorage.removeItem('oauth_state');
+    
+    // Clear legacy localStorage token if it exists (cleanup)
+    this.removeToken();
   }
 
-  // User Management
+  // User Management - Updated for cookie-based auth
   async getCurrentUser(): Promise<User | null> {
-    const token = this.getToken();
-    if (!token || !this.isTokenValid()) {
-      return null;
-    }
-
     try {
       const response = await fetch(`${this.baseUrl}/me`, {
         method: 'GET',
+        credentials: 'include', // Include cookies for authentication
         headers: {
-          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
 
       if (!response.ok) {
         if (response.status === 401) {
-          // Token is invalid, remove it
-          this.removeToken();
+          // Not authenticated
           return null;
         }
         throw new Error(`Failed to get user: ${response.statusText}`);
@@ -174,53 +180,24 @@ class AuthService {
       return data.user || null;
     } catch (error) {
       console.error('Failed to get current user:', error);
-      
-      // Fall back to token data if backend is unavailable
-      const tokenPayload = this.decodeToken();
-      if (tokenPayload) {
-        return {
-          id: tokenPayload.user_id,
-          email: tokenPayload.email,
-          name: tokenPayload.name,
-          avatar: tokenPayload.avatar,
-          provider: tokenPayload.provider,
-          createdAt: new Date(tokenPayload.iat * 1000).toISOString()
-        };
-      }
-      
       return null;
     }
   }
 
-  async refreshToken(): Promise<string | null> {
-    const currentToken = this.getToken();
-    if (!currentToken) return null;
-
+  async refreshToken(): Promise<boolean> {
     try {
       const response = await fetch(`${this.baseUrl}/refresh`, {
         method: 'POST',
+        credentials: 'include', // Include cookies for authentication
         headers: {
-          'Authorization': `Bearer ${currentToken}`,
           'Content-Type': 'application/json'
         }
       });
 
-      if (!response.ok) {
-        throw new Error('Token refresh failed');
-      }
-
-      const data: LoginResponse = await response.json();
-      if (data.token) {
-        this.setToken(data.token);
-        return data.token;
-      }
-
-      return null;
+      return response.ok;
     } catch (error) {
       console.error('Token refresh failed:', error);
-      // Remove invalid token
-      this.removeToken();
-      return null;
+      return false;
     }
   }
 

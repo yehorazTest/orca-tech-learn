@@ -45,15 +45,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           return;
         }
 
-        // Check for existing valid token
-        if (authService.isTokenValid()) {
-          const token = authService.getToken();
+        // Check authentication status via cookie-based API call
+        const isAuthenticated = await authService.isAuthenticated();
+        
+        if (isAuthenticated) {
           const user = await authService.getCurrentUser();
 
-          if (user && token) {
+          if (user) {
             setAuthState({
               user,
-              token,
+              token: 'cookie-based', // We don't have direct access to the cookie token
               isAuthenticated: true,
               isLoading: false,
               error: null,
@@ -90,13 +91,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initializeAuth();
   }, []);
 
-  // Handle authentication callback (for OAuth redirects)
+  // Handle authentication callback (for cookie-based OAuth redirects)
   useEffect(() => {
     const handleAuthCallback = async () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get('token');
       const error = urlParams.get('error');
-      const state = urlParams.get('state');
 
       if (error) {
         setAuthState(prev => ({
@@ -110,46 +109,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return;
       }
 
-      if (token) {
-        try {
-          setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
-          
-          const user = await authService.handleAuthCallback(token, state || undefined);
-          
-          setAuthState({
-            user,
-            token,
-            isAuthenticated: true,
-            isLoading: false,
-            error: null,
-          });
-
-          // Setup automatic token refresh
-          authService.setupTokenRefresh();
-
-          // Clean up URL
-          window.history.replaceState({}, document.title, window.location.pathname);
-
-        } catch (error) {
-          console.error('Auth callback failed:', error);
-          setAuthState(prev => ({
-            ...prev,
-            error: error instanceof Error ? error.message : 'Authentication failed',
-            isLoading: false,
-            isAuthenticated: false,
-            user: null,
-            token: null,
-          }));
-
-          // Clean up URL
-          window.history.replaceState({}, document.title, window.location.pathname);
-        }
+      // For cookie-based auth, we don't need to handle tokens from URL
+      // The authentication state will be checked via the API on page load
+      // Clean up URL if it has old token parameters (legacy cleanup)
+      if (urlParams.has('token')) {
+        window.history.replaceState({}, document.title, window.location.pathname);
       }
     };
 
-    // Only handle callback if we're on the callback route or have auth params
+    // Only handle callback if we have error params
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('token') || urlParams.has('error')) {
+    if (urlParams.has('error')) {
       handleAuthCallback();
     }
   }, []);
@@ -207,15 +177,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const refreshToken = async () => {
     try {
-      const newToken = await authService.refreshToken();
+      const refreshSuccess = await authService.refreshToken();
       
-      if (newToken) {
+      if (refreshSuccess) {
         const user = await authService.getCurrentUser();
         
         if (user) {
           setAuthState(prev => ({
             ...prev,
-            token: newToken,
+            token: 'cookie-based',
             user,
             isAuthenticated: true,
             error: null,
@@ -231,12 +201,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  // Method to refresh auth state (useful for callback page)
+  const refreshAuthState = async () => {
+    try {
+      const isAuthenticated = await authService.isAuthenticated();
+      
+      if (isAuthenticated) {
+        const user = await authService.getCurrentUser();
+        
+        if (user) {
+          setAuthState(prev => ({
+            ...prev,
+            user,
+            token: 'cookie-based',
+            isAuthenticated: true,
+            error: null,
+          }));
+        }
+      } else {
+        setAuthState(prev => ({
+          ...prev,
+          user: null,
+          token: null,
+          isAuthenticated: false,
+        }));
+      }
+    } catch (error) {
+      console.error('Auth state refresh failed:', error);
+    }
+  };
+
   const contextValue: AuthContextType = {
     ...authState,
     login,
     logout,
     clearError,
     refreshToken,
+    refreshAuthState,
   };
 
   return (
