@@ -215,7 +215,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let isAuthenticated = skipVerification;
       
       if (!skipVerification) {
-        
+        isAuthenticated = await authService.isAuthenticated();
       }
       
       if (isAuthenticated) {

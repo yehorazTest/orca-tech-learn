@@ -20,7 +20,7 @@ export interface AuthContextType extends AuthState {
   logout: () => Promise<void>;
   clearError: () => void;
   refreshToken: () => Promise<void>;
-  refreshAuthState: () => Promise<void>;
+  refreshAuthState: (skipVerification?: boolean) => Promise<void>;
 }
 
 export interface TokenPayload {
