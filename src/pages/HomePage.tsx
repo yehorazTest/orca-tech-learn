@@ -4,19 +4,33 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import NewsSection from '../components/home/NewsSection';
-import { learningPaths } from '../data/learningPaths';
-import { courses } from '../data/courses';
-import { allProjects } from '../data/projects';
-import { BookOpen, Star, TrendingUp, Target, Users, Award, Code, Zap } from 'lucide-react';
+import { useBackendData } from '../context/BackendDataContext';
+import { BookOpen, TrendingUp, Target, Users, Award, Code, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const HomePage = () => {
+  const { data, isLoading } = useBackendData();
+
   const stats = [
-    { label: 'Learning Paths', value: learningPaths.length.toString(), icon: BookOpen },
-    { label: 'Individual Courses', value: courses.length.toString(), icon: Target },
-    { label: 'Practice Projects', value: allProjects.length.toString(), icon: Code },
+    { label: 'Learning Paths', value: data.learningPaths.length.toString(), icon: BookOpen },
+    { label: 'Individual Courses', value: data.courses.length.toString(), icon: Target },
+    { label: 'Practice Projects', value: data.projects.length.toString(), icon: Code },
     { label: 'Industry Focus', value: '100%', icon: TrendingUp },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-300">Loading...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const features = [
     {
