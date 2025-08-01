@@ -29,6 +29,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Initialize authentication state
   useEffect(() => {
+    // Skip initialization if we're on the callback page - let the callback handle auth
+    if (window.location.pathname === '/auth/callback') {
+      setAuthState(prev => ({ ...prev, isLoading: false }));
+      return;
+    }
+
     const initializeAuth = async () => {
       try {
         setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -202,9 +208,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   // Method to refresh auth state (useful for callback page)
-  const refreshAuthState = async () => {
+  const refreshAuthState = async (skipVerification = false) => {
     try {
-      const isAuthenticated = await authService.isAuthenticated();
+      // If skipVerification is true, we assume auth is already verified
+      // This avoids duplicate /verify calls from callback page
+      let isAuthenticated = skipVerification;
+      
+      if (!skipVerification) {
+        
+      }
       
       if (isAuthenticated) {
         const user = await authService.getCurrentUser();

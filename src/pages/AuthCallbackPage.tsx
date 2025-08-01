@@ -11,24 +11,19 @@ const AuthCallbackPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let hasRun = false;
+    
     const handleCallback = async () => {
+      if (hasRun) return; // Prevent multiple executions
+      hasRun = true;
+      
       try {
         const errorParam = searchParams.get('error');
-        const userParam = searchParams.get('user');
 
         if (errorParam) {
           setError(decodeURIComponent(errorParam));
           setStatus('error');
           return;
-        }
-
-        // With cookie-based auth, the backend should have already set the cookie
-        // We just need to verify the authentication worked
-        
-        if (userParam) {
-          // Optional: Parse user data from URL if backend provides it
-          const userData = JSON.parse(decodeURIComponent(userParam));
-          console.log('User data from callback:', userData);
         }
 
         // Verify authentication by making a test API call
@@ -43,10 +38,12 @@ const AuthCallbackPage: React.FC = () => {
 
         if (response.ok) {
           setStatus('success');
-          // Refresh auth state to update the context
-          await refreshAuthState();
           
-          // Redirect to home after brief success display
+          // Update auth state - skip verification since we already verified
+          // This prevents duplicate /verify calls while updating the context
+          await refreshAuthState(true); // true = skip verification, just get user data
+          
+          // Redirect to home after brief success display  
           setTimeout(() => {
             navigate('/', { replace: true });
           }, 1500);
@@ -62,7 +59,7 @@ const AuthCallbackPage: React.FC = () => {
     };
 
     handleCallback();
-  }, [navigate, searchParams, refreshAuthState]);
+  }, []); // Empty dependency array - only run once on mount
 
   return (
     <div className="min-h-screen bg-slate-950 flex items-center justify-center">
