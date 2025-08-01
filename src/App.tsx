@@ -19,6 +19,7 @@ import LabViewerPage from "./pages/LabViewerPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
 import { BackendDataProvider } from "./context/BackendDataContext";
+import { AuthProvider } from "./context/AuthContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
 import RoadmapPage from "./pages/RoadmapPage";
 
@@ -32,10 +33,11 @@ const ScrollToTopWrapper = ({ children }: { children: React.ReactNode }) => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
-      <BackendDataProvider>
-        <UserProgressProvider>
-          <SearchProvider>
-            <TooltipProvider>
+      <AuthProvider>
+        <BackendDataProvider>
+          <UserProgressProvider>
+            <SearchProvider>
+              <TooltipProvider>
               <Toaster />
               <Sonner />
               <Router>
@@ -56,10 +58,11 @@ const App = () => (
                   </Routes>
                 </ScrollToTopWrapper>
               </Router>
-            </TooltipProvider>
-          </SearchProvider>
-        </UserProgressProvider>
-      </BackendDataProvider>
+              </TooltipProvider>
+            </SearchProvider>
+          </UserProgressProvider>
+        </BackendDataProvider>
+      </AuthProvider>
     </HelmetProvider>
   </QueryClientProvider>
 );
