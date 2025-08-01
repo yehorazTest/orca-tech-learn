@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { apiService } from '../services/apiService';
 import { LabContent, LabFile } from '../types/lab';
+import { sampleLabData } from '../data/sampleLabData';
 
 const LabViewerPage: React.FC = () => {
   const { labName } = useParams<{ labName: string }>();
@@ -16,6 +17,7 @@ const LabViewerPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<LabFile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [usingFallback, setUsingFallback] = useState(false);
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -33,6 +35,7 @@ const LabViewerPage: React.FC = () => {
         
         if (response.success) {
           setLabContent(response.data);
+          setUsingFallback(false);
           // Auto-select the main instruction file if it exists
           const mainFile = response.data.files.find(f => 
             f.name.toLowerCase().includes('readme') || 
@@ -42,10 +45,28 @@ const LabViewerPage: React.FC = () => {
             setSelectedFile(mainFile);
           }
         } else {
-          setError(response.error || 'Failed to load lab content');
+          // Use fallback sample data when backend fails
+          console.warn('Backend failed, using sample lab data');
+          setLabContent(sampleLabData);
+          setUsingFallback(true);
+          setError(null);
+          // Auto-select README from sample data
+          const readmeFile = sampleLabData.files.find(f => f.name === 'README.md');
+          if (readmeFile) {
+            setSelectedFile(readmeFile);
+          }
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load lab content');
+        // Use fallback sample data when request fails
+        console.warn('Network error, using sample lab data:', err);
+        setLabContent(sampleLabData);
+        setUsingFallback(true);
+        setError(null);
+        // Auto-select README from sample data
+        const readmeFile = sampleLabData.files.find(f => f.name === 'README.md');
+        if (readmeFile) {
+          setSelectedFile(readmeFile);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -218,8 +239,22 @@ const LabViewerPage: React.FC = () => {
         <div className="container mx-auto px-4 py-8">
           {/* Lab Info */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-white mb-4">{labContent.labName}</h1>
+            <div className="flex items-center gap-3 mb-4">
+              <h1 className="text-3xl font-bold text-white">{labContent.labName}</h1>
+              {usingFallback && (
+                <span className="px-3 py-1 bg-orange-900/30 border border-orange-500/30 text-orange-300 text-sm rounded-full">
+                  Demo Mode
+                </span>
+              )}
+            </div>
             <p className="text-slate-300 text-lg mb-4">{labContent.description}</p>
+            {usingFallback && (
+              <div className="bg-orange-900/20 border border-orange-500/30 rounded-lg p-4 mb-4">
+                <p className="text-orange-300 text-sm">
+                  ⚠️ This is sample lab content shown because the backend is not available. In production, this would load actual lab files from your backend service.
+                </p>
+              </div>
+            )}
             {labContent.metadata.mainInstruction && (
               <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
                 <p className="text-blue-300">{labContent.metadata.mainInstruction}</p>
