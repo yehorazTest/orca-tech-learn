@@ -15,6 +15,7 @@ import AboutPage from "./pages/AboutPage";
 import SupportPage from "./pages/SupportPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import LabViewerPage from "./pages/LabViewerPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
 import { BackendDataProvider } from "./context/BackendDataContext";
@@ -47,6 +48,7 @@ const App = () => (
                     <Route path="/roadmap" element={<RoadmapPage />} />
                     <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
                     <Route path="/course/:courseId" element={<CoursePage />} />
+                    <Route path="/course/:courseId/lab/:labId" element={<LabViewerPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/support" element={<SupportPage />} />
                     <Route path="/contact" element={<ContactPage />} />

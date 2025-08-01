@@ -10,10 +10,10 @@ if (import.meta.env.DEV) {
 }
 
 class ApiService {
-  private async fetchWithRetry(url: string, retries = 3): Promise<Response> {
+  private async fetchWithRetry(url: string, options?: RequestInit, retries = 3): Promise<Response> {
     for (let i = 0; i < retries; i++) {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url, options);
         if (response.ok) {
           return response;
         }
@@ -53,10 +53,18 @@ class ApiService {
     }
   }
 
-  async getLabContent(labFullName: string): Promise<LabContentResponse> {
+  async getLabContent(labUrl: string): Promise<LabContentResponse> {
     try {
-      const encodedLabName = encodeURIComponent(labFullName);
-      const response = await this.fetchWithRetry(`${BASE_URL}/api/v1/lab/${encodedLabName}/content`);
+      const response = await this.fetchWithRetry(
+        `${BASE_URL}/api/v1/lab/content`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Lab-Url': labUrl
+          }
+        }
+      );
       const data = await response.json();
       
       return {

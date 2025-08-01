@@ -1,15 +1,30 @@
 
 import React from 'react';
 import { Clock, Play, ExternalLink } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Resource } from '../../types/learningPath';
+import { Resource, Course } from '../../types/learningPath';
 
 interface ResourceCardProps {
   resource: Resource;
+  course: Course;
 }
 
-const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
+const ResourceCard: React.FC<ResourceCardProps> = ({ resource, course }) => {
+  const navigate = useNavigate();
+
+  const handleLabStart = () => {
+    if (resource.type === 'lab') {
+      // Navigate to the new lab path structure
+      const courseId = course.id;
+      const labId = resource.id;
+      navigate(`/course/${courseId}/lab/${labId}`);
+    } else {
+      // For non-lab resources, open external link
+      window.open(resource.url, '_blank', 'noopener,noreferrer');
+    }
+  };
   const getDifficultyColor = (level: string) => {
     switch (level) {
       case 'Beginner': return 'text-green-400 bg-green-400/10 border-green-400/30';
@@ -68,19 +83,12 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource }) => {
           )}
 
           <Button 
-            asChild
+            onClick={handleLabStart}
             className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
           >
-            <a 
-              href={resource.url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2"
-            >
-              <Play className="w-4 h-4" />
-              Start {resource.type}
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            <Play className="w-4 h-4" />
+            Start {resource.type}
+            {resource.type !== 'lab' && <ExternalLink className="w-4 h-4" />}
           </Button>
         </div>
       </div>
