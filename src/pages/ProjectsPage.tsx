@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import ProjectCard from '../components/ui/ProjectCard';
-import { projectsByCategory } from '../data/projects';
+import { useBackendData } from '../context/BackendDataContext';
 import { Input } from '@/components/ui/input';
 import { Search, ChevronDown, ChevronUp, Filter } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 
 const ProjectsPage = () => {
   const location = useLocation();
+  const { data, isLoading } = useBackendData();
   const [searchTerm, setSearchTerm] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState('all');
   const [sectionStates, setSectionStates] = useState({
@@ -21,6 +22,16 @@ const ProjectsPage = () => {
     'CI/CD': true,
     IaC: true
   });
+
+  // Group projects by category
+  const projectsByCategory = data.projects.reduce((acc: any, project: any) => {
+    const category = project.category || 'Other';
+    if (!acc[category]) {
+      acc[category] = [];
+    }
+    acc[category].push(project);
+    return acc;
+  }, {});
 
   const toggleSection = (category: string) => {
     setSectionStates(prev => ({
@@ -43,11 +54,25 @@ const ProjectsPage = () => {
     });
   };
 
-  const categories = Object.keys(projectsByCategory) as Array<keyof typeof projectsByCategory>;
-  const totalProjects = Object.values(projectsByCategory).flat().length;
+  const categories = Object.keys(projectsByCategory);
+  const totalProjects = data.projects.length;
   const filteredTotalProjects = categories.reduce((acc, category) => {
-    return acc + filterProjects(projectsByCategory[category]).length;
+    return acc + filterProjects(projectsByCategory[category] || []).length;
   }, 0);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950">
+        <Header />
+        <div className="flex items-center justify-center py-20">
+          <div className="text-center">
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-slate-300">Loading projects...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

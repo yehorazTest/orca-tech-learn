@@ -5,7 +5,6 @@ import { Filter, Search, Calendar, TrendingUp, BookOpen, ChevronDown, ChevronUp 
 import Header from '../components/layout/Header';
 import RoadmapCard from '../components/ui/RoadmapCard';
 import { useBackendData } from '../context/BackendDataContext';
-import { roadmapCategories } from '../data/roadmap';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -55,9 +54,18 @@ const RoadmapPage = () => {
     return matchesCategory && matchesSearch && matchesPriority && matchesStatus && item.type === 'project';
   });
 
-  const inDevelopment = data.roadmapItems.filter(item => item.status === 'In Development').length || 0;
-  const highPriority = data.roadmapItems.filter(item => item.priority === 'High').length || 0;
   const totalEstimatedTopics = data.roadmapItems.reduce((sum, item) => sum + (item.type === 'course' ? item.topicCount : 0), 0) || 0;
+
+  // Generate roadmap categories from data
+  const roadmapCategories = data.roadmapItems.reduce((acc: any[], item) => {
+    const existing = acc.find(cat => cat.id === item.category);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      acc.push({ id: item.category, name: item.category, count: 1 });
+    }
+    return acc;
+  }, []);
 
   if (isLoading) {
     return (
@@ -141,7 +149,7 @@ const RoadmapPage = () => {
                 </SelectTrigger>
                 <SelectContent className="bg-slate-800 border-slate-700">
                   <SelectItem value="all" className="text-white hover:bg-slate-700">All Categories</SelectItem>
-                  {roadmapCategories.map(category => (
+                  {roadmapCategories.map((category: any) => (
                     <SelectItem key={category.id} value={category.id} className="text-white hover:bg-slate-700">
                       {category.name} ({category.count})
                     </SelectItem>

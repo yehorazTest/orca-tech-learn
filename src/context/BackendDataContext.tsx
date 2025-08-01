@@ -5,11 +5,6 @@ import { BackendResponse } from '../types/backend';
 import { LearningPath, Course, RoadmapItem } from '../types/learningPath';
 import { Project } from '../types/project';
 
-// Fallback imports for development
-import { learningPaths as fallbackLearningPaths } from '../data/learningPaths';
-import { courses as fallbackCourses } from '../data/courses';
-import { allProjects as fallbackProjects } from '../data/projects';
-import { roadmapItems as fallbackRoadmapItems } from '../data/roadmap';
 
 interface BackendDataContextType {
   data: {
@@ -51,12 +46,12 @@ export const BackendDataProvider: React.FC<BackendDataProviderProps> = ({ childr
 
   const { data: backendData, isLoading, error, refetch } = queryResult;
 
-  // Use backend data if available, otherwise fallback to static data
+  // Use backend data
   const data = {
-    learningPaths: backendData?.learningPaths || fallbackLearningPaths,
-    courses: backendData?.courses || fallbackCourses,
-    projects: backendData?.projects || fallbackProjects,
-    roadmapItems: backendData?.roadmapItems || fallbackRoadmapItems,
+    learningPaths: backendData?.learningPaths || [],
+    courses: backendData?.courses || [],
+    projects: backendData?.projects || [],
+    roadmapItems: backendData?.roadmapItems || [],
     roadmapProjects: backendData?.roadmapProjects || [],
   };
 
