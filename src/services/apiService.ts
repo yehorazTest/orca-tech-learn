@@ -1,6 +1,7 @@
 
 import { BackendResponse, ApiError } from '../types/backend';
 import { LabContentResponse } from '../types/lab';
+import { authService } from './authService';
 
 const BASE_URL = import.meta.env.VITE_BACKEND_BASE_PATH || 'http://localhost:5000';
 
@@ -11,9 +12,19 @@ if (import.meta.env.DEV) {
 
 class ApiService {
   private async fetchWithRetry(url: string, options?: RequestInit, retries = 3): Promise<Response> {
+    // Add authentication headers if user is logged in
+    const enhancedOptions = this.enhanceRequestWithAuth(options);
+    
     for (let i = 0; i < retries; i++) {
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, enhancedOptions);
+        
+        // Handle authentication errors
+        if (response.status === 401) {
+          await this.handleAuthError();
+          throw new Error('Authentication failed');
+        }
+        
         if (response.ok) {
           return response;
         }
@@ -93,6 +104,72 @@ class ApiService {
 
   async refreshData(): Promise<BackendResponse> {
     return this.getAllData();
+  }
+
+  // Authentication helpers - Updated for cookie-based auth
+  private enhanceRequestWithAuth(options?: RequestInit): RequestInit {
+    const defaultHeaders = {
+      'Content-Type': 'application/json',
+    };
+    
+    return {
+      ...options,
+      credentials: 'include', // CRITICAL: Include cookies for authentication
+      headers: {
+        ...defaultHeaders,
+        ...options?.headers,
+      },
+    };
+  }
+
+  private async handleAuthError(): Promise<void> {
+    try {
+      // Try to refresh the token
+      const newToken = await authService.refreshToken();
+      
+      if (!newToken) {
+        // Refresh failed, logout user
+        await authService.logout();
+        
+        // Optionally redirect to login or show notification
+        // This could be handled by the auth context
+        console.warn('Session expired. Please login again.');
+      }
+    } catch (error) {
+      console.error('Token refresh failed:', error);
+      await authService.logout();
+    }
+  }
+
+  // Optional: Methods for user-specific data
+  async getUserProgress(): Promise<any> {
+    if (!authService.isTokenValid()) {
+      throw new Error('Authentication required');
+    }
+
+    try {
+      const response = await this.fetchWithRetry(`${BASE_URL}/api/v1/user/progress`);
+      return await response.json();
+    } catch (error) {
+      console.error('Failed to fetch user progress:', error);
+      throw error;
+    }
+  }
+
+  async saveUserProgress(progressData: any): Promise<void> {
+    if (!authService.isTokenValid()) {
+      throw new Error('Authentication required');
+    }
+
+    try {
+      await this.fetchWithRetry(`${BASE_URL}/api/v1/user/progress`, {
+        method: 'POST',
+        body: JSON.stringify(progressData),
+      });
+    } catch (error) {
+      console.error('Failed to save user progress:', error);
+      throw error;
+    }
   }
 }
 

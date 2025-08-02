@@ -1,9 +1,12 @@
 
-import React from 'react';
-import { Clock, Play, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { Clock, Play, ExternalLink, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useAuth } from '../../context/AuthContext';
+import { LoginModal } from '../auth/LoginModal';
 import { Resource, Course } from '../../types/learningPath';
 
 interface ResourceCardProps {
@@ -13,9 +16,17 @@ interface ResourceCardProps {
 
 const ResourceCard: React.FC<ResourceCardProps> = ({ resource, course }) => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleLabStart = () => {
     if (resource.type === 'lab') {
+      // Check authentication for labs
+      if (!isAuthenticated) {
+        setShowLoginModal(true);
+        return;
+      }
+      
       // Navigate to the new lab path structure
       const courseId = course.id;
       const labId = resource.id;
@@ -82,16 +93,43 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ resource, course }) => {
             </div>
           )}
 
-          <Button 
-            onClick={handleLabStart}
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
-          >
-            <Play className="w-4 h-4" />
-            Start {resource.type}
-            {resource.type !== 'lab' && <ExternalLink className="w-4 h-4" />}
-          </Button>
+          {resource.type === 'lab' && !isAuthenticated ? (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div className="inline-block">
+                    <Button 
+                      onClick={handleLabStart}
+                      className="bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 cursor-pointer"
+                    >
+                      <Lock className="w-4 h-4 mr-1" />
+                      <Play className="w-4 h-4" />
+                      Start {resource.type}
+                    </Button>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent className="bg-slate-800 border-slate-700">
+                  <p className="text-slate-200">Please sign in to access labs</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ) : (
+            <Button 
+              onClick={handleLabStart}
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
+            >
+              <Play className="w-4 h-4" />
+              Start {resource.type}
+              {resource.type !== 'lab' && <ExternalLink className="w-4 h-4" />}
+            </Button>
+          )}
         </div>
       </div>
+      
+      <LoginModal 
+        isOpen={showLoginModal} 
+        onClose={() => setShowLoginModal(false)} 
+      />
     </Card>
   );
 };

@@ -10,10 +10,12 @@ import { apiService } from '../services/apiService';
 import { LabContent, LabFile } from '../types/lab';
 import { sampleLabData } from '../data/sampleLabData';
 import { useBackendData } from '../context/BackendDataContext';
+import { useAuth } from '../context/AuthContext';
 
 const LabViewerPage: React.FC = () => {
   const { courseId, labId } = useParams<{ courseId: string; labId: string }>();
   const { data } = useBackendData();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   
   // Find the course and lab resource
   const course = data.courses.find(c => c.id === courseId);
@@ -29,6 +31,15 @@ const LabViewerPage: React.FC = () => {
   const [usingFallback, setUsingFallback] = useState(false);
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(new Set());
 
+  // Check authentication and redirect if not authenticated
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated && courseId) {
+      console.log('User not authenticated, redirecting to course page');
+      navigate(`/course/${courseId}`, { replace: true });
+    }
+  }, [isAuthenticated, authLoading, courseId, navigate]);
+
+  // Fetch lab content (must be before any conditional returns)
   useEffect(() => {
     const fetchLabContent = async () => {
       if (!labUrl || !labResource) {
@@ -81,8 +92,16 @@ const LabViewerPage: React.FC = () => {
       }
     };
 
-    fetchLabContent();
-  }, [labUrl, labResource]);
+    // Only fetch content if user is authenticated
+    if (!authLoading && isAuthenticated) {
+      fetchLabContent();
+    }
+  }, [labUrl, labResource, authLoading, isAuthenticated]);
+
+  // Early return for non-authenticated users (after all hooks)
+  if (!authLoading && !isAuthenticated) {
+    return null;
+  }
 
   const toggleFolder = (path: string) => {
     setExpandedFolders(prev => {
@@ -175,7 +194,8 @@ const LabViewerPage: React.FC = () => {
     return languageMap[ext || ''] || 'text';
   };
 
-  if (isLoading) {
+  // Show loading while checking authentication or loading lab content
+  if (authLoading || isLoading) {
     return (
       <div className="min-h-screen bg-slate-950">
         <Header />
@@ -188,6 +208,7 @@ const LabViewerPage: React.FC = () => {
       </div>
     );
   }
+
 
   if (error || !labContent) {
     return (

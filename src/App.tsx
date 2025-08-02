@@ -16,9 +16,11 @@ import SupportPage from "./pages/SupportPage";
 import ContactPage from "./pages/ContactPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import LabViewerPage from "./pages/LabViewerPage";
+import AuthCallbackPage from "./pages/AuthCallbackPage";
 import { UserProgressProvider } from "./context/UserProgressContext";
 import { SearchProvider } from "./context/SearchContext";
 import { BackendDataProvider } from "./context/BackendDataContext";
+import { AuthProvider } from "./context/AuthContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
 import RoadmapPage from "./pages/RoadmapPage";
 
@@ -32,10 +34,11 @@ const ScrollToTopWrapper = ({ children }: { children: React.ReactNode }) => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
-      <BackendDataProvider>
-        <UserProgressProvider>
-          <SearchProvider>
-            <TooltipProvider>
+      <AuthProvider>
+        <BackendDataProvider>
+          <UserProgressProvider>
+            <SearchProvider>
+              <TooltipProvider>
               <Toaster />
               <Sonner />
               <Router>
@@ -49,6 +52,7 @@ const App = () => (
                     <Route path="/learning-path/:pathId" element={<LearningPathPage />} />
                     <Route path="/course/:courseId" element={<CoursePage />} />
                     <Route path="/course/:courseId/lab/:labId" element={<LabViewerPage />} />
+                    <Route path="/auth/callback" element={<AuthCallbackPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/support" element={<SupportPage />} />
                     <Route path="/contact" element={<ContactPage />} />
@@ -56,10 +60,11 @@ const App = () => (
                   </Routes>
                 </ScrollToTopWrapper>
               </Router>
-            </TooltipProvider>
-          </SearchProvider>
-        </UserProgressProvider>
-      </BackendDataProvider>
+              </TooltipProvider>
+            </SearchProvider>
+          </UserProgressProvider>
+        </BackendDataProvider>
+      </AuthProvider>
     </HelmetProvider>
   </QueryClientProvider>
 );
